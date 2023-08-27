@@ -1,0 +1,59 @@
+.NobucaPanel {
+    background-color: rgb(35, 35, 35);
+    position: absolute;
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    text-shadow: var(--text-shadow);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .NobucaPanelHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgb(59, 59, 59);
+    background-color: rgb(59, 59, 59);
+    min-height: 25px;
+    max-height: 25px;
+    padding-left: 10px;
+    color: rgb(201, 201, 201);
+  }
+  
+  .NobucaPanelStaticHorizontalDivider {
+    background-color: rgb(45, 45, 45);
+    position: absolute;
+    box-sizing: border-box;
+    width: 1px;
+  }
+  
+  .NobucaPanelDynamicHorizontalDivider {
+    background-color: rgb(45, 45, 45);
+    position: absolute;
+    box-sizing: border-box;
+    cursor: col-resize;
+    width: 1px;
+  }
+  
+  .NobucaPanelDynamicHorizontalDivider:hover {
+    background-color: rgb(59, 89, 137);
+  }
+  
+  .NobucaPanelDynamicHorizontalDivider.dragging {
+    background-color: rgb(81, 119, 178);
+  }
+  
+  .NobucaPanelStaticVerticalDivider {
+    background-color: rgb(35, 35, 35);
+    position: absolute;
+    box-sizing: border-box;
+    height: 1px;
+  }
+  
+  .NobucaPanelDynamicVerticalDivider {
+    background-color: rgb(35, 35, 35);
+    position: absolute;
+    box-sizing: border-box;
+    cursor: row-resize;
+    height: 1px;
+  }

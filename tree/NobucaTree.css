@@ -1,0 +1,110 @@
+.NobucaTree {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.NobucaTreeNodes {
+    flex-grow: 1;
+    margin: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--component-border-color);
+    border-radius: var(--component-border-radius);
+    overflow: auto;
+}
+
+.NobucaTreeNode {
+    display: flex;
+    flex-direction: column;
+    justify-items: left;
+    cursor: default;
+    flex-grow: 1;
+}
+
+.NobucaTreeNodeWithoutChildren {
+    display: flex;
+    flex-direction: row;
+    padding-left: 7px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.NobucaTreeNodeWithChildren {
+    display: flex;
+    flex-direction: column;
+}
+
+.NobucaTreeNodeIndent {
+    width: 15px;
+}
+
+.NobucaTreeNodeExpandCollapseButton {
+    color: rgb(201, 201, 201);
+    align-self: center;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    min-width: 15px;
+    max-width: 15px;
+    box-sizing: border-box;
+}
+
+.NobucaTreeNodeIcon {
+    color: rgb(198, 134, 82);
+    font-size: 8pt;
+    align-self: center;
+    justify-self: center;
+    width: 20px;
+    height: 15px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 2px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.NobucaTreeNodeIcon img {
+    border-style: none;
+    image-rendering: pixelated;
+    height: 13px;
+}
+
+.NobucaTreeNodeExpandCollapseButton.collapse {
+    background-image: url(../../../application/ui-library/tree/nobuca-tree-node-collapse.png);
+}
+
+.NobucaTreeNodeExpandCollapseButton.expand {
+    background-image: url(../../../application/ui-library/tree/nobuca-tree-node-collapse.png);
+}
+
+.NobucaTreeNodeText {
+    padding-left: 5px;
+    color: rgb(201, 201, 201);
+    height: 20px;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    padding-top: 2px;
+}
+
+.NobucaTreeNode.selected>.NobucaTreeNodeWithoutChildren {
+    background-color: rgb(59, 89, 137);
+}
+
+.NobucaTreeNode.selected>.NobucaTreeNodeWithoutChildren:hover {
+    background-color: rgb(85, 108, 152);
+}
+
+.NobucaTreeNodeWithoutChildren:hover {
+    background-color: rgb(68, 68, 68);
+}
+
+.NobucaTreeNodeChildren {
+    display: flex;
+    flex-direction: column;
+}

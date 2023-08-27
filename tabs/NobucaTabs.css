@@ -1,0 +1,96 @@
+.NobucaTabs {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.NobucaTabsHeadersContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    overflow: hidden;
+}
+
+.NobucaTabHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    cursor: default;
+    min-width: 80px;
+    user-select: none;
+    padding-top: 5px;
+    min-height: 22px;
+    max-height: 22px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--component-border-color);
+    border-radius: var(--component-border-radius);
+    border-bottom: none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-bottom: -1px;
+    margin-right: 4px;
+}
+
+.NobucaTabHeader.inactive {
+    color: rgb(147, 147, 147);
+    background-color: rgb(55, 55, 55);
+    border-color: rgb(55, 55, 55);
+    cursor: pointer;
+}
+
+.NobucaTabHeader.inactive:hover {
+    color: rgb(186, 186, 186);
+    background-color: rgb(52, 52, 52);
+}
+
+.NobucaTabHeader.active {
+    color: rgb(186, 186, 186);
+    background-color: var(--base-background-color);
+    z-index: 0;
+}
+
+.NobucaTabHeaderText {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+
+.NobucaTabHeaderCloseButton {
+    display: flex;
+    margin-left: 8px;
+    margin-right: 6px;
+    max-width: 16px;
+    max-height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    justify-content: center;
+    align-content: center;
+    line-height: 1;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: rgb(92, 92, 92, .35);
+}
+
+.NobucaTabHeaderCloseButton:hover {
+    background-color: rgb(112, 112, 112);
+}
+
+.NobucaTabsBodiesContainer {
+    color: rgb(247, 247, 247);
+    background-color: var(--base-background-color);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--component-border-color);
+    border-radius: var(--component-border-radius);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: 3px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+}

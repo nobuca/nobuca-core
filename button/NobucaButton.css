@@ -1,0 +1,32 @@
+.NobucaButton {
+    display: flex;
+    flex-direction: row;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: default;
+    border-radius: 4px;
+    color: rgb(237, 237, 237);
+    border: 1px solid rgb(55, 55, 55);
+    background-color: rgb(86, 128, 194);
+    min-width: 80px;
+    justify-content: center;
+    user-select: none;
+    box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 40%);
+    cursor: pointer;
+    outline: none;
+}
+
+.NobucaButton.enabled:hover {
+    border: 1px solid rgb(63, 63, 63);
+    background-color: rgb(121, 158, 215);
+}
+
+.NobucaButton.disabled {
+    opacity: 0.4;
+}
+
+.NobucaButton.enabled:focus {
+    border: 2px solid rgb(121, 158, 215);
+}

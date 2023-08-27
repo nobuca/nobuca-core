@@ -1,0 +1,62 @@
+@import "normalize.css";
+@import "text/NobucaText.css";
+@import "text-area/NobucaTextArea.css";
+@import "html/NobucaHtml.css";
+@import "select/NobucaSelect.css";
+@import "label/NobucaLabel.css";
+@import "link/NobucaLink.css";
+@import "fieldset/NobucaFieldset.css";
+@import "button/NobucaButton.css";
+@import "context-menu/NobucaContextMenu.css";
+@import "tabs/NobucaTabs.css";
+@import "dialog/NobucaDialog.css";
+@import "tree/NobucaTree.css";
+@import "menubar/NobucaMenubar.css";
+@import "panel/NobucaPanel.css";
+@import "cards/NobucaCards.css";
+:root {
+    --base-background-color: rgb(66, 66, 66);
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --font-size: 14px;
+    --font-color: rgb(201, 201, 201);
+    --text-shadow: none;
+    --component-border-color: rgb(66, 66, 66);
+    --component-border-radius: 6px;
+}
+
+.NobucaGraphicEngine svg {
+    position: absolute;
+    background-color: var(--base-background-color);
+    color: white;
+    box-sizing: border-box;
+    text-shadow: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family);
+    text-shadow: var(--text-shadow);
+    color: var(--font-color);
+}
+
+p {
+    font-family: var(--font-family);
+    text-shadow: var(--text-shadow);
+    color: var(--font-color);
+}
+
+.NobucaHtmlCode {
+    background-color: rgb(60, 60, 60);
+    color: var(--font-color);
+    padding: 10px;
+}
+
+.NobucaHtmlCodeLine {
+    background-color: transparent;
+    color: var(--font-color);
+    padding: 0px;
+}

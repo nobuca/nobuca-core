@@ -1,0 +1,15 @@
+.NobucaLink {
+    color: rgb(237, 237, 237);
+    max-height: 24px;
+    min-height: 24px;
+    padding-top: 6px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: rgb(155, 201, 255);
+    outline: none;
+    cursor: pointer;
+}
+
+.NobucaLink:hover {
+    text-decoration: underline;
+}

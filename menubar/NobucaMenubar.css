@@ -1,0 +1,74 @@
+.NobucaMenubar {
+    position: absolute;
+    display: flex;
+    background-color: var(--base-background-color);
+    align-items: center;
+  }
+  
+  .NobucaMenubarItem {
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    margin: 4px;
+
+    cursor: pointer;
+  }
+  
+  .NobucaMenubarItemSeparator {
+    height: 1px;
+    border-bottom: 1px solid rgb(55, 55, 55);
+  }
+  
+  .NobucaMenubarItemText {
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    border-radius: 4px;
+    color: rgb(201, 201, 201);
+  }
+  
+  .NobucaMenubarItemText:hover {
+    background-color: rgb(81, 119, 178);
+  }
+  
+  .NobucaMenubarItem.expanded > .NobucaMenubarItemText {
+    background-color: rgb(81, 119, 178);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  
+  .NobucaMenubarChildMenuItems {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 23px;
+    min-width: 200px;
+    background-color: rgb(35, 35, 36);
+    border: 1px solid rgb(25, 25, 26);
+    opacity: 0.9;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.88);
+  }
+  
+  .NobucaMenubarChildMenuItems .NobucaMenubarItem {
+    flex-grow: 1;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .NobucaMenubarChildMenuItems .NobucaMenubarItem .NobucaMenubarItemText {
+    flex-grow: 1;
+    margin: 0;
+    border-radius: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  
+  .NobucaMenubarChildMenuItems .NobucaMenubarItem:hover .NobucaMenubarItemText {
+    background-color: rgb(81, 119, 178);
+  }
+  
+  

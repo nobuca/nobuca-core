@@ -1,0 +1,39 @@
+import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaDialogModel from './NobucaDialogModel.js';
+import NobucaLabelModel from '../label/NobucaLabelModel.js';
+
+export default class NobucaConfirmDialogModel {
+
+    constructor(message) {
+
+        this.resultYesEventEmitter = new NobucaUiEventEmitter();
+
+        this.dialog = new NobucaDialogModel(600, 170, "Confirm");
+
+        let label = new NobucaLabelModel(message);
+        this.getDialog().addChild(label);
+
+        let yesButton = this.getDialog().addYesButton();
+        yesButton.getClickEventEmitter().subscribe(() => {
+            this.getDialog().close();
+            this.getResultYesEventEmitter().emit();
+        });
+        yesButton.focus();
+
+        this.getDialog().addNoButton().getClickEventEmitter().subscribe(() => {
+            this.getDialog().close();
+        });
+    }
+
+    getResultYesEventEmitter() {
+        return this.resultYesEventEmitter;
+    }
+
+    getDialog() {
+        return this.dialog;
+    }
+
+    close() {
+        this.getDialog().close();
+    }
+}

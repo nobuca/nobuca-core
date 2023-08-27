@@ -1,0 +1,27 @@
+.NobucaCards {
+  padding: 20px;
+  display: flex;
+}
+
+.NobucaCard {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--font-color);
+  width: 100px;
+  height: 100px;
+  margin: 4px;
+}
+
+
+.NobucaCard:hover {
+    border-color: var(--font-color);
+}
+
+.NobucaCardImage {
+}
+
+.NobucaCardTitle {
+}
+
+.NobucaCardDescription {
+}

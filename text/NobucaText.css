@@ -1,0 +1,23 @@
+.NobucaText {
+    border: 1px solid rgb(68, 68, 68);
+    outline: none;
+    border-radius: 3px;
+    background-color: rgb(29, 29, 29);
+    color: rgb(237, 237, 237);
+    padding-right: 8px;
+    padding-left: 8px;
+    max-height: 28px;
+    min-height: 28px;
+    box-sizing: border-box;
+    margin-left: -1px;
+    margin-bottom: 8px;
+    box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 40%);
+}
+
+.NobucaText:hover {
+    border: 1px solid rgb(78, 78, 78);
+}
+
+.NobucaText:focus {
+    border: 1px solid rgb(68, 68, 68);
+}
