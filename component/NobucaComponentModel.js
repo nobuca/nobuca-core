@@ -1,4 +1,3 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
 
 export default class NobucaComponentModel {
 

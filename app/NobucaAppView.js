@@ -24,15 +24,14 @@ export default class NobucaAppView {
 
     addRootPanelToDocumentBody(rootPanelView) {
         document.body.appendChild(rootPanelView.getNativeElement());
-        rootPanelView.resizeToWindow();
     }
 
     listenAppModel() {
         this.getAppModel().getShowDialogEventEmitter().subscribe((dialogModel) => {
             let dialogView = new NobucaDialogView(dialogModel);
         });
-        window.addEventListener("resize", (event) => {
-            this.getRootPanelView().resizeToWindow();
+        this.getAppModel().getTitleChangedEventEmitter().subscribe(() => {
+            document.title = this.getAppModel().getTitle();
         });
     }
 }

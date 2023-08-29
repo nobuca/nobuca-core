@@ -1,14 +1,14 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaTextAreaModel {
 
     constructor() {
         this.enabled = true;
         this.value = null;
-        this.focusEventEmitter = new NobucaUiEventEmitter();
-        this.valueChangeEventEmitter = new NobucaUiEventEmitter();
-        this.enabledChangedEventEmitter = new NobucaUiEventEmitter();
-        this.selectEventEmitter = new NobucaUiEventEmitter();
+        this.focusEventEmitter = new NobucaEventEmitter();
+        this.valueChangeEventEmitter = new NobucaEventEmitter();
+        this.enabledChangedEventEmitter = new NobucaEventEmitter();
+        this.selectEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {

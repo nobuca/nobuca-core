@@ -7,7 +7,7 @@ export default class NobucaMenubarItemView {
 
         this.menuItemModel = menuItemModel;
 
-        if (menuItemModel.id === "separator") {
+        if (menuItemModel.getSeparator()) {
             this.nativeElement = this.createSeparatorDiv();
         } else {
             this.nativeElement = this.createDiv();
@@ -23,7 +23,7 @@ export default class NobucaMenubarItemView {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItem";
 
-        div.appendChild(this.createMenuItemText());
+        div.appendChild(this.createMenuItemContents());
 
         div.addEventListener("click", () => {
             this.expandCollapse();
@@ -33,10 +33,43 @@ export default class NobucaMenubarItemView {
         return div;
     }
 
+    createMenuItemContents() {
+        let div = document.createElement("div");
+        div.className = "NobucaMenubarItemContents";
+        div.appendChild(this.createMenuItemIcon());
+        div.appendChild(this.createMenuItemText());
+        div.appendChild(this.createMenuItemShortcut());
+        return div;
+    }
+
+    createMenuItemIcon() {
+        let div = document.createElement("div");
+        div.className = "NobucaMenubarItemIcon";
+
+        if (this.getMenuItemModel().getIconImageSrc() != null) {
+            let img = document.createElement("img");
+            img.src = this.getMenuItemModel().getIconImageSrc();
+            div.appendChild(img);
+        } 
+
+        return div;
+    }
+
     createMenuItemText() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemText";
-        div.innerHTML = this.menuItemModel.text;
+        if (this.getMenuItemModel().getText() != null) {
+            div.innerHTML = this.getMenuItemModel().getText();
+            div.style.display = "";
+        } else {
+            div.style.display = "none";
+        }
+        return div;
+    }
+
+    createMenuItemShortcut() {
+        let div = document.createElement("div");
+        div.className = "NobucaMenubarItemShortcut";
         return div;
     }
 

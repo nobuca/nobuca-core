@@ -1,4 +1,4 @@
-export default class NobucaUiEventEmitter {
+export default class NobucaEventEmitter {
 
     constructor() {
         this.subscribers = [];

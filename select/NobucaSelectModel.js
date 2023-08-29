@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaSelectOptionModel from "./NobucaSelectOptionModel.js";
 
 export default class NobucaSelectModel {
@@ -9,9 +9,9 @@ export default class NobucaSelectModel {
         this.value = null;
         this.options = new Array();
         this.selectedOption = null;
-        this.addOptionEventEmitter = new NobucaUiEventEmitter();
-        this.focusEventEmitter = new NobucaUiEventEmitter();
-        this.enabledChangedEventEmitter = new NobucaUiEventEmitter();
+        this.addOptionEventEmitter = new NobucaEventEmitter();
+        this.focusEventEmitter = new NobucaEventEmitter();
+        this.enabledChangedEventEmitter = new NobucaEventEmitter();
     }
 
     getEnabled() {

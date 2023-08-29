@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from '../event/NobucaUiEventEmitter.js';
+import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 import NobucaDialogModel from './NobucaDialogModel.js';
 import NobucaLabelModel from '../label/NobucaLabelModel.js';
 
@@ -6,7 +6,7 @@ export default class NobucaLoadingDialogModel {
 
     constructor() {
 
-        this.result = new NobucaUiEventEmitter();
+        this.result = new NobucaEventEmitter();
 
         this.dialog = new NobucaDialogModel(600, 170);
 

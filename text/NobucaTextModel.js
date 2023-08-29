@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaTextModel {
 
@@ -7,9 +7,9 @@ export default class NobucaTextModel {
         this.value = value;
         this.password = false;
         this.focused = false;
-        this.focusEventEmitter = new NobucaUiEventEmitter();
-        this.valueChangedEventEmitter = new NobucaUiEventEmitter();
-        this.enabledChangedEventEmitter = new NobucaUiEventEmitter();
+        this.focusEventEmitter = new NobucaEventEmitter();
+        this.valueChangedEventEmitter = new NobucaEventEmitter();
+        this.enabledChangedEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {

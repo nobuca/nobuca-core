@@ -1,5 +1,5 @@
 import NobucaContextMenuModel from '../context-menu/NobucaContextMenuModel.js';
-import NobucaUiEventEmitter from '../event/NobucaUiEventEmitter.js';
+import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
 export default class NobucaTreeNodeModel {
 
@@ -15,19 +15,19 @@ export default class NobucaTreeNodeModel {
         this.dragAttributes = [];
         this.nodes = [];
         this.createContextMenu();
-        this.contextMenuItemClickEventEmitter = new NobucaUiEventEmitter();
-        this.doubleClickEventEmitter = new NobucaUiEventEmitter();
-        this.textChangeEventEmitter = new NobucaUiEventEmitter();
-        this.selectEventEmitter = new NobucaUiEventEmitter();
-        this.childNodeSelectEventEmitter = new NobucaUiEventEmitter();
-        this.deselectEventEmitter = new NobucaUiEventEmitter();
-        this.addedToSelectionEventEmitter = new NobucaUiEventEmitter();
-        this.removedToSelectionEventEmitter = new NobucaUiEventEmitter();
-        this.expandEventEmitter = new NobucaUiEventEmitter();
-        this.collapseEventEmitter = new NobucaUiEventEmitter();
-        this.addNodeEventEmitter = new NobucaUiEventEmitter();
-        this.childNodeAddNodeEventEmitter = new NobucaUiEventEmitter();
-        this.clearNodesEventEmitter = new NobucaUiEventEmitter();
+        this.contextMenuItemClickEventEmitter = new NobucaEventEmitter();
+        this.doubleClickEventEmitter = new NobucaEventEmitter();
+        this.textChangeEventEmitter = new NobucaEventEmitter();
+        this.selectEventEmitter = new NobucaEventEmitter();
+        this.childNodeSelectEventEmitter = new NobucaEventEmitter();
+        this.deselectEventEmitter = new NobucaEventEmitter();
+        this.addedToSelectionEventEmitter = new NobucaEventEmitter();
+        this.removedToSelectionEventEmitter = new NobucaEventEmitter();
+        this.expandEventEmitter = new NobucaEventEmitter();
+        this.collapseEventEmitter = new NobucaEventEmitter();
+        this.addNodeEventEmitter = new NobucaEventEmitter();
+        this.childNodeAddNodeEventEmitter = new NobucaEventEmitter();
+        this.clearNodesEventEmitter = new NobucaEventEmitter();
     }
 
     createContextMenu() {

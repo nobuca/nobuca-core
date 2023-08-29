@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaFieldsetModel {
 
@@ -9,9 +9,9 @@ export default class NobucaFieldsetModel {
         this.radioValue = radioValue;
         this.radioChecked = radioChecked;
         this.children = new Array();
-        this.addChildEventEmitter = new NobucaUiEventEmitter();
-        this.radioCheckEventListener = new NobucaUiEventEmitter();
-        this.radioUncheckEventListener = new NobucaUiEventEmitter();
+        this.addChildEventEmitter = new NobucaEventEmitter();
+        this.radioCheckEventListener = new NobucaEventEmitter();
+        this.radioUncheckEventListener = new NobucaEventEmitter();
     }
 
     getClassName() {

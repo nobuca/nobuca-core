@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaDialogModel from './NobucaDialogModel.js';
 import NobucaLabelModel from '../label/NobucaLabelModel.js';
 

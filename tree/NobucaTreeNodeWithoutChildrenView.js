@@ -3,7 +3,7 @@ import NobucaTreeNodeIndentView from './NobucaTreeNodeIndentView.js';
 import NobucaTreeNodeExpandCollapseButtonView from './NobucaTreeNodeExpandCollapseButtonView.js';
 import NobucaTreeNodeIconView from './NobucaTreeNodeIconView.js';
 import NobucaContextMenuView from '../context-menu/NobucaContextMenuView.js';
-import NobucaUiEventEmitter from '../event/NobucaUiEventEmitter.js';
+import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
 export default class NobucaTreeNodeWithoutChildrenView {
 
@@ -88,7 +88,7 @@ export default class NobucaTreeNodeWithoutChildrenView {
 
     createContextMenuView() {
         this.contextMenuView = new NobucaContextMenuView(this.nodeModel.getContextMenu());
-        this.contextMenuItemClicked = new NobucaUiEventEmitter();
+        this.contextMenuItemClicked = new NobucaEventEmitter();
         this.nodeModel.getContextMenuItemClickEventEmitter().subscribe(event => {
             this.contextMenuItemClicked.emit({ nodeModel: this.nodeModel, menuItemModel: event });
         });

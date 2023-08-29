@@ -1,6 +1,6 @@
 export default class NobucaDynamicPanelVerticalDividerModel {
     constructor() {
-        this.draggedEventEmiiter = new NobucaUiEventEmitter();
+        this.draggedEventEmiiter = new NobucaEventEmitter();
     }
 
     getClassName() {

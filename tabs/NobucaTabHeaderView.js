@@ -1,23 +1,18 @@
-import NobucaUiEventEmitter from '../event/NobucaUiEventEmitter.js';
+import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
 export default class NobucaTabHeaderView {
 
-    constructor(tabModel, bodyView) {
+    constructor(tabModel) {
         this.tabModel = tabModel;
-        this.bodyView = bodyView;
         this.nativeElement = this.createDivTabHeader();
         this.deactivate();
-        this.clickEventEmitter = new NobucaUiEventEmitter();
-        this.closeEventEmitter = new NobucaUiEventEmitter();
+        this.clickEventEmitter = new NobucaEventEmitter();
+        this.closeEventEmitter = new NobucaEventEmitter();
         this.listenTabModelEvents(this.tabModel);
     }
 
     getTabModel() {
         return this.tabModel;
-    }
-
-    getBodyView() {
-        return this.bodyView;
     }
 
     getClickEventEmitter() {
@@ -78,20 +73,11 @@ export default class NobucaTabHeaderView {
     deactivate() {
         this.nativeElement.classList.remove('active');
         this.nativeElement.classList.add('inactive');
-        this.getBodyView().nativeElement.style.display = 'none';
     }
 
     activate() {
         this.nativeElement.classList.add('active');
         this.nativeElement.classList.remove('inactive');
-        this.getBodyView().nativeElement.style.display = '';
-        if (this.getBodyView().setSize != null) {
-            let parentNode = this.getBodyView().nativeElement.parentNode;
-            let margin = 6;
-            let width = parentNode.offsetWidth - margin * 2;
-            let height = parentNode.offsetHeight - margin * 2;
-            this.getBodyView().setSize(width, height);
-        }
     }
 
     listenTabModelEvents(tabModel) {

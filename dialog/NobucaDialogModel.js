@@ -1,6 +1,6 @@
 import NobucaAppModel from "../app/NobucaAppModel.js";
 import NobucaButtonModel from "../button/NobucaButtonModel.js";
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaDialogModel {
 
@@ -14,11 +14,11 @@ export default class NobucaDialogModel {
         }
         this.children = new Array();
         this.buttons = new Array();
-        this.closeEventEmitter = new NobucaUiEventEmitter();
-        this.addChildEventEmitter = new NobucaUiEventEmitter();
-        this.clearChildrenEventEmitter = new NobucaUiEventEmitter();
-        this.addButtonEventEmitter = new NobucaUiEventEmitter();
-        this.clearButtonsEventEmitter = new NobucaUiEventEmitter();
+        this.closeEventEmitter = new NobucaEventEmitter();
+        this.addChildEventEmitter = new NobucaEventEmitter();
+        this.clearChildrenEventEmitter = new NobucaEventEmitter();
+        this.addButtonEventEmitter = new NobucaEventEmitter();
+        this.clearButtonsEventEmitter = new NobucaEventEmitter();
         NobucaAppModel.showDialog(this);
     }
 

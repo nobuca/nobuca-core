@@ -1,8 +1,8 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaPosition {
     constructor() {
-        this.changeEventEmitter = new NobucaUiEventEmitter();
+        this.changeEventEmitter = new NobucaEventEmitter();
         this.top = null;
         this.left = null;
     }

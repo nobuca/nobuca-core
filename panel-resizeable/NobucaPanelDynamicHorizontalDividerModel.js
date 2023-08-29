@@ -1,5 +1,5 @@
 import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeModel.js";
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaPanelDynamicHorizontalDividerModel extends NobucaPositionAndSizeModel {
     static dragging = null;
@@ -9,7 +9,7 @@ export default class NobucaPanelDynamicHorizontalDividerModel extends NobucaPosi
         this.getSize().setFixedWidth(6);
         this.leftPanel = null;
         this.rightPanel = null;
-        this.draggedEventEmitter = new NobucaUiEventEmitter();
+        this.draggedEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {

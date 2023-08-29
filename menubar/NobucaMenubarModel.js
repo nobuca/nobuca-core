@@ -1,11 +1,11 @@
 import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeModel.js";
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaMenubarModel extends NobucaPositionAndSizeModel {
     constructor() {
         super();
         this.getSize().setFixedHeight(27);
-        this.menuItemClickEventEmitter = new NobucaUiEventEmitter();
+        this.menuItemClickEventEmitter = new NobucaEventEmitter();
         this.menuItems = [];
         this.listenMenuItems();
     }
@@ -25,6 +25,7 @@ export default class NobucaMenubarModel extends NobucaPositionAndSizeModel {
     addMenuItem(menuItem) {
         this.menuItems.push(menuItem);
         this.listenMenuItem(menuItem);
+        return menuItem;
     }
 
     listenMenuItems() {

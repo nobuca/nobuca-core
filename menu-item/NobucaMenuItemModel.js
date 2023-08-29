@@ -1,20 +1,19 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
-export default class NobucaMenuItemModel {
+export default class NobucaMenuItemModel extends NobucaComponentModel {
 
     constructor(id, text, shortcut, iconClassName, iconImageSrc) {
-        this.id = id;
+        super();
+        this.setId(id);
         this.text = text;
         this.shortcut = shortcut;
         this.iconClassName = iconClassName;
         this.iconImageSrc = iconImageSrc;
         this.menuItems = [];
-        this.clickEventEmitter = new NobucaUiEventEmitter();
+        this.clickEventEmitter = new NobucaEventEmitter();
     }
 
-    getId() {
-        return this.id;
-    }
 
     getText() {
         return this.text;
@@ -32,8 +31,13 @@ export default class NobucaMenuItemModel {
         return this.iconImageSrc;
     }
 
+    setIconImageSrc(iconImageSrc) {
+        this.iconImageSrc = iconImageSrc;
+    }
+
     addMenuItem(menuItemModel) {
         this.menuItems.push(menuItemModel);
+        return menuItemModel;
     }
 
     getClickEventEmitter() {

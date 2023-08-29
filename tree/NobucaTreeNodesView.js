@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaTreeNodeView from "./NobucaTreeNodeView.js";
 
 export default class NobucaTreeNodesView {
@@ -6,10 +6,10 @@ export default class NobucaTreeNodesView {
         this.treeModel = treeModel;
         this.nativeElement = this.createDiv();
         this.nodeViewList = [];
-        this.nodeSelected = new NobucaUiEventEmitter();
-        this.nodeAddedToSelection = new NobucaUiEventEmitter();
-        this.nodeRemovedToSelection = new NobucaUiEventEmitter();
-        this.contextMenuItemClicked = new NobucaUiEventEmitter();
+        this.nodeSelected = new NobucaEventEmitter();
+        this.nodeAddedToSelection = new NobucaEventEmitter();
+        this.nodeRemovedToSelection = new NobucaEventEmitter();
+        this.contextMenuItemClicked = new NobucaEventEmitter();
 
         this.treeModel.getNodes().forEach((nodeModel) => {
             this.createNode(nodeModel);

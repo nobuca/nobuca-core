@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from '../event/NobucaUiEventEmitter.js';
+import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 import NobucaMenuItemSeparatorModel from '../menu-item/NobucaMenuItemSeparatorModel.js';
 
 export default class NobucaContextMenuModel {
@@ -6,7 +6,7 @@ export default class NobucaContextMenuModel {
     constructor() {
         this.title = null;
         this.menuItems = [];
-        this.menuItemClickEventEmitter = new NobucaUiEventEmitter()
+        this.menuItemClickEventEmitter = new NobucaEventEmitter()
     }
 
     setTitle(title) {

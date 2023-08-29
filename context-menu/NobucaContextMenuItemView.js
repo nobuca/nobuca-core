@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from '../event/NobucaUiEventEmitter.js';
+import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
 export default class NobucaContextMenuItemView {
 
@@ -6,7 +6,7 @@ export default class NobucaContextMenuItemView {
         this.menuItemModel = menuItemModel;
         this.nativeElement = this.createDiv();
 
-        this.menuItemClickEventEmitter = new NobucaUiEventEmitter()
+        this.menuItemClickEventEmitter = new NobucaEventEmitter()
 
         this.nativeElement.addEventListener('click', event => {
             this.getMenuItemClickEventEmitter().emit(this.menuItemModel);

@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaContextMenuModel from "../context-menu/NobucaContextMenuModel.js";
 import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeModel.js";
 
@@ -8,11 +8,11 @@ export default class NobucaTreeModel extends NobucaPositionAndSizeModel {
         this.nodes = [];
         this.selectedNode = null;
         this.createContextMenu();
-        this.contextMenuItemClickEventEmitter = new NobucaUiEventEmitter();
-        this.addNodeEventEmitter = new NobucaUiEventEmitter();
-        this.removeNodeEventEmitter = new NobucaUiEventEmitter();
-        this.childNodeAddNodeEventEmitter = new NobucaUiEventEmitter();
-        this.clearNodesEventEmitter = new NobucaUiEventEmitter();
+        this.contextMenuItemClickEventEmitter = new NobucaEventEmitter();
+        this.addNodeEventEmitter = new NobucaEventEmitter();
+        this.removeNodeEventEmitter = new NobucaEventEmitter();
+        this.childNodeAddNodeEventEmitter = new NobucaEventEmitter();
+        this.clearNodesEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {

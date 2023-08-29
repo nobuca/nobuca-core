@@ -1,13 +1,13 @@
 import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaPanelModel from "../panel/NobucaPanelModel.js";
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
-import NobucaAppView from "../app/NobucaAppView.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaAppModel {
 
     constructor() {
-        this.rootPanel = this.createRootPanel();
-        this.showDialogEventEmitter = new NobucaUiEventEmitter();
+        this.createRootPanel();
+        this.showDialogEventEmitter = new NobucaEventEmitter();
+        this.titleChangedEventEmitter = new NobucaEventEmitter();
         
         NobucaFactory.registerDefaultViewConstructors();
         NobucaFactory.createNewViewForModel(this);
@@ -17,8 +17,22 @@ export default class NobucaAppModel {
         return "NobucaAppModel";
     }
 
+    setTitle(title) {
+        this.title = title;
+        this.getTitleChangedEventEmitter().emit();
+    }
+
+    getTitle() {
+        return this.title;
+    }
+
+    getTitleChangedEventEmitter() {
+        return this.titleChangedEventEmitter;
+    }
+
     createRootPanel() {
-        return new NobucaPanelModel("vertical");
+        this.rootPanel = new NobucaPanelModel("vertical");
+        this.rootPanel.setId("rootPanel");
     }
 
     getRootPanel() {

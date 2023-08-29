@@ -1,4 +1,4 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaComponentModel from "../component/NobucaComponentModel.js";
 
 export default class NobucaLabelModel extends NobucaComponentModel {
@@ -9,7 +9,7 @@ export default class NobucaLabelModel extends NobucaComponentModel {
         if(this.text == null) {
             this.text = "";
         }
-        this.textChangedEventEmitter = new NobucaUiEventEmitter();
+        this.textChangedEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {

@@ -2,7 +2,7 @@ import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeMo
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaTabModel from "./NobucaTabModel.js";
 
-export default class NobucaTabsModel extends NobucaPositionAndSizeModel {
+export default class NobucaTabsHeaderModel extends NobucaPositionAndSizeModel {
     constructor() {
         super();
         this.tabs = [];
@@ -14,7 +14,7 @@ export default class NobucaTabsModel extends NobucaPositionAndSizeModel {
     }
 
     getClassName() {
-        return "NobucaTabsModel";
+        return "NobucaTabsHeaderModel";
     }
 
     getTabs() {
@@ -44,11 +44,14 @@ export default class NobucaTabsModel extends NobucaPositionAndSizeModel {
         this.getActiveTabChangeEventEmitter().emit(tab);
     }
 
-    createTab(text, body, data) {
+    createTab(text, data) {
         let tab = new NobucaTabModel();
         tab.setText(text);
-        tab.setBody(body);
         tab.setData(data);
+        return addTab(tab);
+    }
+
+    addTab(tab) {
         this.getTabs().push(tab);
         this.getCreateTabEventEmitter().emit(tab);
         if (this.currentActivatedTab == null) {

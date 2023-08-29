@@ -1,10 +1,10 @@
-import NobucaUiEventEmitter from "../event/NobucaUiEventEmitter.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaHtmlModel {
 
     constructor(html) {
         this.html = html;
-        this.htmlChangeEventEmitter = new NobucaUiEventEmitter();
+        this.htmlChangeEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {
