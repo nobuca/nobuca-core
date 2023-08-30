@@ -8,6 +8,7 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
         this.setId(id);
         this.text = text;
         this.shortcut = shortcut;
+        this.disabled = false;
         this.iconClassName = iconClassName;
         this.iconImageSrc = iconImageSrc;
         this.menuItems = [];
@@ -23,6 +24,18 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
         return this.shortcut;
     }
 
+    setShortcut(shortcut) {
+        this.shortcut = shortcut;
+    }
+
+    getDisabled() {
+        return this.disabled;
+    }
+
+    setDisabled(disabled) {
+        this.disabled = disabled;
+    }
+
     getIconClassName() {
         return this.iconClassName;
     }
@@ -36,8 +49,12 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
     }
 
     addMenuItem(menuItemModel) {
-        this.menuItems.push(menuItemModel);
+        this.getMenuItems().push(menuItemModel);
         return menuItemModel;
+    }
+
+    getMenuItems() {
+        return this.menuItems;
     }
 
     getClickEventEmitter() {

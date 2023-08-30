@@ -47,26 +47,30 @@ export default class NobucaMenubarView {
             });
     }
 
+    getMenuItemViewList() {
+        return this.menuItemViewList;
+    }
+
     creaMenuItemView(menuItemModel) {
-        let menuItemView = new NobucaMenubarItemView(menuItemModel);
+        let menuItemView = new NobucaMenubarItemView(menuItemModel, this, null);
         this.nativeElement.appendChild(menuItemView.nativeElement);
-        this.menuItemViewList.push(menuItemView);
+        this.getMenuItemViewList().push(menuItemView);
         menuItemView
             .getMenuItemModel()
             .getClickEventEmitter()
             .subscribe(() => {
-                this.collapseAllButeMenuItem(menuItemView);
+                this.collapseAllButTheMenuItem(menuItemView);
             });
     }
 
     collapseAll() {
-        this.menuItemViewList.forEach((menuItemView) => {
+        this.getMenuItemViewList().forEach((menuItemView) => {
             menuItemView.collapse();
         });
     }
 
-    collapseAllButeMenuItem(excludedMenuItemView) {
-        this.menuItemViewList.forEach((menuItemView) => {
+    collapseAllButTheMenuItem(excludedMenuItemView) {
+        this.getMenuItemViewList().forEach((menuItemView) => {
             if (menuItemView !== excludedMenuItemView) {
                 menuItemView.collapse();
             }
