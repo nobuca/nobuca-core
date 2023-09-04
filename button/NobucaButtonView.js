@@ -1,43 +1,43 @@
-export default class NobucaButtonView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
+
+export default class NobucaButtonView extends NobucaComponentView {
     
-    constructor(buttonModel) {
-        this.buttonModel = buttonModel;
-        this.nativeElement = this.createDiv();
-        this.updateView();
-        this.listenButtonModel();
+    getClassName() {
+        return "NobucaButtton";
     }
 
-    getButtonModel() {
-        return this.buttonModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
-        div.className = "NobucaButton";
-        div.innerHTML = this.getButtonModel().getText();
+        div.className = this.getClassName();
+        div.innerHTML = this.getModel().getText();
         div.tabIndex = 0;
-        div.addEventListener("click", (event) => {
+        this.nativeElement = div;
+        this.listenNativeElement();
+        this.updateView();
+    }
+
+    listenNativeElement() {
+        this.getNativeElement().addEventListener("click", (event) => {
             this.emitClickEvent();
         });
-        div.addEventListener("keypress", (event) => {
+        this.getNativeElement().addEventListener("keypress", (event) => {
             console.log("keypress", event)
             if (event.code == "Space" || event.code == "Enter" || event.code == "NumpadEnter") {
                 this.emitClickEvent();
             }
         });
-        return div;
     }
 
     emitClickEvent() {
-        if (this.getButtonModel().getEnabled()) {
-            this.getButtonModel()
+        if (this.getModel().getEnabled()) {
+            this.getModel()
                 .getClickEventEmitter()
                 .emit();
         }
     }
 
     updateView() {
-        if (this.getButtonModel().getEnabled()) {
+        if (this.getModel().getEnabled()) {
             this.nativeElement.classList.remove("disabled");
             this.nativeElement.classList.add("enabled");
         } else {
@@ -46,11 +46,11 @@ export default class NobucaButtonView {
         }
     }
 
-    listenButtonModel() {
-        this.getButtonModel().getEnabledChangedEventEmitter().subscribe(() => {
+    listenModel() {
+        this.getModel().getEnabledChangedEventEmitter().subscribe(() => {
             this.updateView();
         });
-        this.getButtonModel().getRequestFocusEventEmitter().subscribe(() => {
+        this.getModel().getRequestFocusEventEmitter().subscribe(() => {
             this.nativeElement.focus();
         });
     }

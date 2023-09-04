@@ -3,7 +3,7 @@ import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeMo
 import NobucaPanelDynamicHorizontalDividerModel from "./NobucaPanelDynamicHorizontalDividerModel.js";
 import NobucaPanelDynamicVerticalDividerModel from "./NobucaPanelDynamicVerticalDividerModel.js";
 
-export default class NobucaPanelModel extends NobucaPositionAndSizeModel {
+export default class NobucaPanelResizableModel extends NobucaPositionAndSizeModel {
     constructor(direction) {
         super();
         this.children = [];

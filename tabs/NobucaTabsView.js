@@ -1,20 +1,16 @@
 import NobucaTabHeaderView from "./NobucaTabHeaderView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaTabsView {
-    constructor(tabsModel) {
-        this.tabsModel = tabsModel;
+export default class NobucaTabsView extends NobucaComponentView {
+    constructor(model) {
+        super(mode);
         this.nativeElement = this.createDiv();
         this.divTabHeadersContainer = this.createDivTabHeadersContainer();
         this.divTabBodiesContainer = this.createDivTabBodiesContainer();
         this.tabHeaderViewCollection = [];
         this.updatePositionFromModel();
         this.updateSizeFromModel();
-        this.listenTabsModelEvents();
-    }
-
-    getTabsModel() {
-        return this.tabsModel;
     }
 
     createDiv() {
@@ -87,11 +83,11 @@ export default class NobucaTabsView {
         this.divTabBodiesContainer.appendChild(tabBodyView.nativeElement);
 
         tabHeaderView.getClickEventEmitter().subscribe((tabModel) => {
-            this.getTabsModel().setActiveTab(tabModel);
+            this.getModel().setActiveTab(tabModel);
         });
 
         tabHeaderView.getCloseEventEmitter().subscribe((tabModel) => {
-            this.getTabsModel().removeTab(tabModel);
+            this.getModel().removeTab(tabModel);
         });
 
         this.getTabHeaderViewCollection().push(tabHeaderView);
@@ -126,15 +122,15 @@ export default class NobucaTabsView {
 
     updatePositionFromModel() {
         this.setPosition(
-            this.getTabsModel().getPosition().getTop(),
-            this.getTabsModel().getPosition().getLeft()
+            this.getModel().getPosition().getTop(),
+            this.getModel().getPosition().getLeft()
         );
     }
 
     updateSizeFromModel() {
         this.setSize(
-            this.getTabsModel().getSize().getWidth(),
-            this.getTabsModel().getSize().getHeight()
+            this.getModel().getSize().getWidth(),
+            this.getModel().getSize().getHeight()
         );
     }
 
@@ -153,35 +149,35 @@ export default class NobucaTabsView {
         this.activeTabHeaderView = tabHeaderView;
     }
 
-    listenTabsModelEvents() {
+    listenModel() {
 
-        this.getTabsModel()
+        this.getModel()
             .getCreateTabEventEmitter()
             .subscribe((tabModel) => {
                 this.createTab(tabModel);
             });
 
-        this.getTabsModel()
+        this.getModel()
             .getActiveTabChangeEventEmitter()
             .subscribe((tabModel) => {
                 this.activateTab(tabModel);
             });
 
 
-        this.getTabsModel()
+        this.getModel()
             .getRemoveTabEventEmitter()
             .subscribe((tabModel) => {
                 this.removeTab(tabModel);
             });
 
-        this.getTabsModel()
+        this.getModel()
             .getSize()
             .getChangeEventEmitter()
             .subscribe(() => {
                 this.updateSizeFromModel();
             });
 
-        this.getTabsModel()
+        this.getModel()
             .getPosition()
             .getChangeEventEmitter()
             .subscribe(() => {

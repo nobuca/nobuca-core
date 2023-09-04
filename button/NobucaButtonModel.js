@@ -1,7 +1,9 @@
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
-export default class NobucaButtonModel {
+export default class NobucaButtonModel extends NobucaComponentModel {
     constructor(text, enabled) {
+        super();
         this.text = text;
         if(this.text == null) {
             this.text = "Button";     
@@ -10,6 +12,7 @@ export default class NobucaButtonModel {
         if(this.enabled == null) {
             this.enabled = true;     
         }
+        this.children = [];
         this.clickEventEmitter = new NobucaEventEmitter();
         this.enabledChangedEventEmitter = new NobucaEventEmitter();
         this.requestFocusEventEmitter = new NobucaEventEmitter();

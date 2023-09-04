@@ -1,27 +1,26 @@
-export default class NobucaTextView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-    constructor(textModel) {
-        this.textModel = textModel;
+export default class NobucaTextView extends NobucaComponentView {
+
+    constructor(model) {
+        super(model);
         this.nativeElement = this.createInput();
         this.updateView();
-        this.listenTextModelEvents();
-    }
-
-    getTextModel() {
-        return this.textModel;
     }
 
     createInput() {
         let input = document.createElement('input');
         input.className = 'NobucaText';
         input.type = 'text';
-        input.value = this.getTextModel().getValue();
+        if (this.getModel().getValue() != null) {
+            input.value = this.getModel().getValue();
+        }
 
-        if (this.getTextModel().getPassword()) {
+        if (this.getModel().getPassword()) {
             input.type = 'password';
         }
 
-        if (this.getTextModel().getFocus()) {
+        if (this.getModel().getFocus()) {
             setTimeout(() => {
                 input.focus();
             });
@@ -32,7 +31,7 @@ export default class NobucaTextView {
         });
 
         input.addEventListener('input', event => {
-            this.getTextModel().setValue(input.value);
+            this.getModel().setValue(input.value);
         });
 
         return input;
@@ -51,7 +50,7 @@ export default class NobucaTextView {
     }
 
     updateView() {
-        if (this.getTextModel().getEnabled()) {
+        if (this.getModel().getEnabled()) {
             this.nativeElement.removeAttribute('readonly');
             this.nativeElement.classList.remove('disabled');
             this.nativeElement.classList.add('enabled');
@@ -66,20 +65,20 @@ export default class NobucaTextView {
         this.nativeElement.setAttribute('readonly', '');
     }
 
-    listenTextModelEvents() {
-        this.getTextModel()
+    listenModel() {
+        this.getModel()
             .getFocusEventEmitter()
             .subscribe(() => {
                 this.nativeElement.focus();
             });
 
-        this.getTextModel()
+        this.getModel()
             .getValueChangedEventEmitter()
             .subscribe((value) => {
                 this.setValue(value);
             });
 
-        this.getTextModel()
+        this.getModel()
             .getEnabledChangedEventEmitter()
             .subscribe(() => {
                 this.updateView();

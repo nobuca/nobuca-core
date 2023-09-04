@@ -1,9 +1,9 @@
 import NobucaAppView from "../app/NobucaAppView.js";
 import NobucaMenubarView from "../menubar/NobucaMenubarView.js";
 import NobucaPanelView from "../panel/NobucaPanelView.js";
-import NobucaPanelResizableView from "../panel-resizeable/NobucaPanelResizableView.js";
-import NobucaPanelDynamicVerticalDividerView from "../panel-resizeable/NobucaPanelDynamicVerticalDividerView.js";
-import NobucaPanelDynamicHorizontalDividerView from "../panel-resizeable/NobucaPanelDynamicHorizontalDividerView.js";
+import NobucaPanelResizableView from "../panel-resizable/NobucaPanelResizableView.js";
+import NobucaPanelDynamicVerticalDividerView from "../panel-resizable/NobucaPanelDynamicVerticalDividerView.js";
+import NobucaPanelDynamicHorizontalDividerView from "../panel-resizable/NobucaPanelDynamicHorizontalDividerView.js";
 import NobucaTreeView from "../tree/NobucaTreeView.js";
 import NobucaTabsView from "../tabs/NobucaTabsView.js";
 import NobucaTabsHeaderView from "../tabs/NobucaTabsHeaderView.js";
@@ -15,6 +15,7 @@ import NobucaSelectView from "../select/NobucaSelectView.js";
 import NobucaTextView from "../text/NobucaTextView.js";
 import NobucaTextAreaView from "../text-area/NobucaTextAreaView.js";
 import NobucaHtmlView from "../html/NobucaHtmlView.js";
+import NobucaImageView from "../image/NobucaImageView.js";
 
 export default class NobucaFactory {
 
@@ -48,7 +49,7 @@ export default class NobucaFactory {
             function(model) { return new NobucaFieldsetView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
             function(model) { return new NobucaTabsView(model); });
-            NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsHeaderModel",
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsHeaderModel",
             function(model) { return new NobucaTabsHeaderView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaButtonModel",
             function(model) { return new NobucaButtonView(model); });
@@ -58,6 +59,8 @@ export default class NobucaFactory {
             function(model) { return new NobucaLinkView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaSelectModel",
             function(model) { return new NobucaSelectView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaImageModel",
+            function(model) { return new NobucaImageView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTextModel",
             function(model) { return new NobucaTextView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTextAreaModel",

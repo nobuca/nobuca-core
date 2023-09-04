@@ -11,7 +11,7 @@ export default class NobucaMenubarItemChildrenView {
         this.createChildItems();
     }
 
-    getMenuItemModel() {
+    getModel() {
         return this.menuItemModel;
     }
 
@@ -27,7 +27,7 @@ export default class NobucaMenubarItemChildrenView {
     }
 
     createChildItems() {
-        this.getMenuItemModel().getMenuItems().forEach(childMenuItemModel => {
+        this.getModel().getMenuItems().forEach(childMenuItemModel => {
             let childMenuItemView = new NobucaMenubarItemView(childMenuItemModel, this.getMenubarView(), this.getParentMenubarItemView());
             this.nativeElement.appendChild(childMenuItemView.nativeElement);
             this.getMenuItemViewList().push(childMenuItemView);

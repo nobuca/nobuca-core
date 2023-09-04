@@ -1,14 +1,13 @@
 import NobucaMenubarItemView from "./NobucaMenubarItemView.js";
 import NobucaHtmlElementIsDescendantOf from "../utils/NobucaHtmlElementIsDescendantOf.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaMenubarView {
-    constructor(menubarModel) {
+export default class NobucaMenubarView extends NobucaComponentView {
+    constructor(model) {
+        super(model);
         this.nativeElement = this.createDiv();
-        this.menubarModel = menubarModel;
         this.menuItemViewList = [];
         this.createMenuItemsViews();
-
-        this.listenMenubarModelEvents();
 
         window.addEventListener("click", (event) => {
             if (!NobucaHtmlElementIsDescendantOf.check(event.target, this.nativeElement)) {
@@ -31,16 +30,13 @@ export default class NobucaMenubarView {
         return div;
     }
 
-    getMenubarModel() {
-        return this.menubarModel;
-    }
 
     updateViewFromModel() {
         this.createMenuItemsViews();
     }
 
     createMenuItemsViews() {
-        this.getMenubarModel()
+        this.getModel()
             .getMenuItems()
             .forEach((menuItemModel) => {
                 this.creaMenuItemView(menuItemModel);
@@ -56,7 +52,7 @@ export default class NobucaMenubarView {
         this.nativeElement.appendChild(menuItemView.nativeElement);
         this.getMenuItemViewList().push(menuItemView);
         menuItemView
-            .getMenuItemModel()
+            .getModel()
             .getClickEventEmitter()
             .subscribe(() => {
                 this.collapseAllButTheMenuItem(menuItemView);
@@ -79,7 +75,7 @@ export default class NobucaMenubarView {
 
     setSize(width, height) {
         this.nativeElement.style.width = width + "px";
-        this.nativeElement.style.height = this.getMenubarModel().getSize().getFixedHeight() + "px";
+        this.nativeElement.style.height = this.getModel().getSize().getFixedHeight() + "px";
     }
 
     setPosition(top, left) {
@@ -87,24 +83,24 @@ export default class NobucaMenubarView {
         this.nativeElement.style.left = left + "px";
     }
 
-    listenMenubarModelEvents() {
-        this.getMenubarModel()
+    listenModel() {
+        this.getModel()
             .getPosition()
             .getChangeEventEmitter()
             .subscribe(() => {
                 this.setPosition(
-                    this.getMenubarModel().getPosition().getTop(),
-                    this.getMenubarModel().getPosition().getLeft()
+                    this.getModel().getPosition().getTop(),
+                    this.getModel().getPosition().getLeft()
                 );
             });
 
-        this.getMenubarModel()
+        this.getModel()
             .getSize()
             .getChangeEventEmitter()
             .subscribe(() => {
                 this.setSize(
-                    this.getMenubarModel().getSize().getWidth(),
-                    this.getMenubarModel().getSize().getHeight()
+                    this.getModel().getSize().getWidth(),
+                    this.getModel().getSize().getHeight()
                 );
             });
     }

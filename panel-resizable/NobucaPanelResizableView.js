@@ -3,10 +3,11 @@ import NobucaPanelDynamicVerticalDividerView from "./NobucaPanelDynamicVerticalD
 import NobucaPanelStaticHorizontalDividerView from "./NobucaPanelStaticHorizontalDividerView.js";
 import NobucaPanelStaticVerticalDividerView from "./NobucaPanelStaticVerticalDividerView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaPanelResizableView {
-    constructor(panelModel) {
-        this.panelModel = panelModel;
+export default class NobucaPanelResizableView extends NobucaComponentView{
+    constructor(model) {
+        super(model);
         this.nativeElement = this.createDiv();
         this.headerView = null;
         this.childViews = [];
@@ -19,17 +20,13 @@ export default class NobucaPanelResizableView {
         this.listenPanelModelEvents();
     }
 
-    getPanelModel() {
-        return this.panelModel;
-    }
-
     getNativeElement() {
         return this.nativeElement;
     }
 
     resizeToWindow() {
-        this.getPanelModel().getPosition().setTopAndLeft(0, 0);
-        this.getPanelModel()
+        this.getModel().getPosition().setTopAndLeft(0, 0);
+        this.getModel()
             .getSize()
             .setWidthAndHeight(window.innerWidth, window.innerHeight);
     }
@@ -37,8 +34,8 @@ export default class NobucaPanelResizableView {
     createDiv() {
         let div = document.createElement("div");
         div.className = "NobucaPanel";
-        if (this.getPanelModel().getId() != null) {
-            div.id = this.getPanelModel().getId();
+        if (this.getModel().getId() != null) {
+            div.id = this.getModel().getId();
         }
         return div;
     }
@@ -129,34 +126,34 @@ export default class NobucaPanelResizableView {
 
     updatePositionFromModel() {
         this.setPosition(
-            this.getPanelModel().getPosition().getTop(),
-            this.getPanelModel().getPosition().getLeft()
+            this.getModel().getPosition().getTop(),
+            this.getModel().getPosition().getLeft()
         );
     }
 
     updateSizeFromModel() {
         this.setSize(
-            this.getPanelModel().getSize().getWidth(),
-            this.getPanelModel().getSize().getHeight()
+            this.getModel().getSize().getWidth(),
+            this.getModel().getSize().getHeight()
         );
     }
 
-    listenPanelModelEvents() {
-        this.getPanelModel()
+    listenModel() {
+        this.getModel()
             .getAddChildEventEmitter()
             .subscribe((childModel) => {
                 let childView = NobucaFactory.createNewViewForModel(childModel);
                 this.addChild(childView);
             });
 
-        this.getPanelModel()
+        this.getModel()
             .getSize()
             .getChangeEventEmitter()
             .subscribe(() => {
                 this.updateSizeFromModel();
             });
 
-        this.getPanelModel()
+        this.getModel()
             .getPosition()
             .getChangeEventEmitter()
             .subscribe(() => {

@@ -1,28 +1,25 @@
-export default class NobucaLabelView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-    constructor(labelModel) {
-        this.labelModel = labelModel;
+export default class NobucaLabelView extends NobucaComponentView {
+
+    constructor(model) {
+        super(model);
         this.nativeElement = this.createDiv();
-        this.listenLabelModel();
-    }
-
-    getLabelModel() {
-        return this.labelModel;
     }
 
     createDiv() {
         let label = document.createElement("div");
         label.className = "NobucaLabel";
-        label.innerHTML = this.getLabelModel().getText();
+        label.innerHTML = this.getModel().getText();
         return label;
     }
 
     updateView() {
-        this.nativeElement.innerHTML = this.getLabelModel().getText();
+        this.nativeElement.innerHTML = this.getModel().getText();
     }
 
-    listenLabelModel() {
-        this.getLabelModel().getTextChangedEventEmitter().subscribe(() => {
+    listenModel() {
+        this.getModel().getTextChangedEventEmitter().subscribe(() => {
             this.updateView();
         });
     }

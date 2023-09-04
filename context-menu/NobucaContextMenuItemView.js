@@ -1,9 +1,10 @@
+import NobucaComponentView from '../component/NobucaComponentView.js';
 import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
-export default class NobucaContextMenuItemView {
+export default class NobucaContextMenuItemView extends NobucaComponentView {
 
-    constructor(menuItemModel) {
-        this.menuItemModel = menuItemModel;
+    constructor(model) {
+        super(model);
         this.nativeElement = this.createDiv();
 
         this.menuItemClickEventEmitter = new NobucaEventEmitter()
@@ -17,16 +18,12 @@ export default class NobucaContextMenuItemView {
         return this.menuItemClickEventEmitter;
     }
 
-    getMenuItemModel() {
-        return this.menuItemModel;
-    }
-
     createDiv() {
 
         let div = document.createElement('div');
         div.className = 'NobucaContextMenuItem';
 
-        if (this.getMenuItemModel().getSeparator()) {
+        if (this.getModel().getSeparator()) {
             div.className = 'NobucaContextMenuItemSeparator';
             return div;
         }
@@ -34,7 +31,7 @@ export default class NobucaContextMenuItemView {
         div.appendChild(this.createMenuItemText());
 
         div.addEventListener('click', () => {
-            this.getMenuItemModel().getClickEventEmitter().emit(this.getMenuItemModel());
+            this.getModel().getClickEventEmitter().emit(this.getModel());
         });
 
         return div;
@@ -43,7 +40,7 @@ export default class NobucaContextMenuItemView {
     createMenuItemText() {
         let div = document.createElement('div');
         div.className = 'NobucaContextMenuItemText';
-        div.innerHTML = this.getMenuItemModel().getText();
+        div.innerHTML = this.getModel().getText();
         return div;
     }
 

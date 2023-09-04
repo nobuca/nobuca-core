@@ -1,20 +1,16 @@
 import NobucaPanelView from "../panel/NobucaPanelView.js";
 import NobucaDialogView from "../dialog/NobucaDialogView.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaAppView {
+export default class NobucaAppView extends NobucaComponentView {
 
-    constructor(appModel) {
-        this.appModel = appModel;
+    constructor(model) {
+        super(model);
         this.createRootPanel();
-        this.listenAppModel();
-    }
-
-    getAppModel() {
-        return this.appModel;
     }
 
     createRootPanel() {
-        this.rootPanelView = new NobucaPanelView(this.getAppModel().getRootPanel());
+        this.rootPanelView = new NobucaPanelView(this.getModel().getRootPanel());
         this.addRootPanelToDocumentBody(this.rootPanelView);
     }
 
@@ -26,12 +22,12 @@ export default class NobucaAppView {
         document.body.appendChild(rootPanelView.getNativeElement());
     }
 
-    listenAppModel() {
-        this.getAppModel().getShowDialogEventEmitter().subscribe((dialogModel) => {
+    listenModel() {
+        this.getModel().getShowDialogEventEmitter().subscribe((dialogModel) => {
             let dialogView = new NobucaDialogView(dialogModel);
         });
-        this.getAppModel().getTitleChangedEventEmitter().subscribe(() => {
-            document.title = this.getAppModel().getTitle();
+        this.getModel().getTitleChangedEventEmitter().subscribe(() => {
+            document.title = this.getModel().getTitle();
         });
     }
 }

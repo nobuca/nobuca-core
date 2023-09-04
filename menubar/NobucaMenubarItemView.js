@@ -16,7 +16,7 @@ export default class NobucaMenubarItemView {
         }
     }
 
-    getMenuItemModel() {
+    getModel() {
         return this.menuItemModel;
     }
 
@@ -30,7 +30,7 @@ export default class NobucaMenubarItemView {
 
         div.addEventListener("click", () => {
             this.expandCollapse();
-            this.getMenuItemModel().getClickEventEmitter().emit(this.getMenuItemModel());
+            this.getModel().getClickEventEmitter().emit(this.getModel());
         });
 
         return div;
@@ -39,7 +39,7 @@ export default class NobucaMenubarItemView {
     createMenuItemContents() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemContents";
-        if (this.getMenuItemModel().getDisabled()) {
+        if (this.getModel().getDisabled()) {
             div.className += " disabled";
         }
         div.appendChild(this.createMenuItemIcon());
@@ -72,9 +72,9 @@ export default class NobucaMenubarItemView {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemIcon";
 
-        if (this.getMenuItemModel().getIconImageSrc() != null) {
+        if (this.getModel().getIconImageSrc() != null) {
             let img = document.createElement("img");
-            img.src = this.getMenuItemModel().getIconImageSrc();
+            img.src = this.getModel().getIconImageSrc();
             div.appendChild(img);
         }
 
@@ -84,8 +84,8 @@ export default class NobucaMenubarItemView {
     createMenuItemText() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemText";
-        if (this.getMenuItemModel().getText() != null) {
-            div.innerHTML = this.getMenuItemModel().getText();
+        if (this.getModel().getText() != null) {
+            div.innerHTML = this.getModel().getText();
             div.style.display = "";
         } else {
             div.style.display = "none";
@@ -96,8 +96,8 @@ export default class NobucaMenubarItemView {
     createMenuItemShortcut() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemShortcut";
-        if (this.getMenuItemModel().getShortcut() != null) {
-            div.innerHTML = this.getMenuItemModel().getShortcut();
+        if (this.getModel().getShortcut() != null) {
+            div.innerHTML = this.getModel().getShortcut();
             div.style.display = "";
         }
         return div;
@@ -106,7 +106,7 @@ export default class NobucaMenubarItemView {
     createMenuItemChildrenMark() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemChildrenMark";
-        if (this.getMenuItemModel().getMenuItems().length > 0) {
+        if (this.getModel().getMenuItems().length > 0) {
             div.innerHTML = "⏵";
         }
         return div;
@@ -119,7 +119,7 @@ export default class NobucaMenubarItemView {
     }
 
     hasChildMenuItems() {
-        if (this.getMenuItemModel().getMenuItems().length === 0) return false;
+        if (this.getModel().getMenuItems().length === 0) return false;
         return true;
     }
 
@@ -132,7 +132,7 @@ export default class NobucaMenubarItemView {
     }
 
     createChildMenuItemsViews() {
-        if (this.getMenuItemModel().getMenuItems().length === 0) return;
+        if (this.getModel().getMenuItems().length === 0) return;
 
         this.itemChildrenView = new NobucaMenubaItemChildrenView(
             this.menuItemModel,

@@ -1,36 +1,31 @@
+import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
 
-export default class NobucaPanelView {
-    constructor(panelModel) {
-        this.panelModel = panelModel;
-        this.nativeElement = this.createDiv();
-        this.childViews = [];
-        this.listenPanelModelEvents();
-        this.createNewViewsForChildModels();
+export default class NobucaPanelView extends NobucaComponentView {
+    constructor(model) {
+        super(model);
     }
 
-    createNewViewsForChildModels() {
-        this.getPanelModel().getChildren().forEach(childModel => {
+    getClassName() {
+        return "NobucaPanel";
+    }
+
+    createNativeElement() {
+        let div = document.createElement("div");
+        div.className = this.getClassName();
+        if (this.getModel().getId() != null) {
+            div.id = this.getModel().getId();
+        }
+        this.nativeElement = div;
+        this.createChildViewsForChildModels();
+    }
+
+    createChildViewsForChildModels() {
+        this.childViews = [];
+        this.getModel().getChildren().forEach(childModel => {
             let childView = NobucaFactory.createNewViewForModel(childModel);
             this.addChild(childView);
         });
-    }
-
-    getPanelModel() {
-        return this.panelModel;
-    }
-
-    getNativeElement() {
-        return this.nativeElement;
-    }
-
-    createDiv() {
-        let div = document.createElement("div");
-        div.className = "NobucaPanel";
-        if (this.getPanelModel().getId() != null) {
-            div.id = this.getPanelModel().getId();
-        }
-        return div;
     }
 
     makeRootPanel() {
@@ -63,8 +58,8 @@ export default class NobucaPanelView {
         return this.childViews[index];
     }
 
-    listenPanelModelEvents() {
-        this.getPanelModel()
+    listenModel() {
+        this.getModel()
             .getAddChildEventEmitter()
             .subscribe((childModel) => {
                 let childView = NobucaFactory.createNewViewForModel(childModel);

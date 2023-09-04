@@ -1,7 +1,7 @@
 .NobucaMenubar {
     position: absolute;
     display: flex;
-    background-color: var(--base-background-color);
+    background-color: var(--background-color-dark);
     align-items: center;
   }
   
