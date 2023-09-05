@@ -2,7 +2,7 @@ import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaComponentModel from "../component/NobucaComponentModel.js";
 
 export default class NobucaPanelModel extends NobucaComponentModel {
-    constructor(direction) {
+    constructor() {
         super();
         this.children = [];
         this.addChildEventEmitter = new NobucaEventEmitter();

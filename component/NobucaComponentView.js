@@ -27,4 +27,17 @@ export default class NobucaComponentView {
         
     }
 
+    updateContentsPositionAndSize() {
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+    }
+
+    getParent() {
+        return this.parent;
+    }
+
+
+
 }

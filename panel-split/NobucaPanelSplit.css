@@ -1,0 +1,37 @@
+.NobucaPanelSplitLeftRight,
+.NobucaPanelSplitTopBottom {
+    background-color: rgb(35, 35, 35);
+    position: absolute;
+    display: flex;
+}
+
+.NobucaPanelSplitLeftRight {
+    flex-direction: row;
+}
+
+.NobucaPanelSplitTopBottom {
+    flex-direction: column;
+}
+
+.NobucaPanelSplitLeftRightDivider,
+.NobucaPanelSplitTopBottomDivider {
+    background-color: rgb(45, 45, 45);
+}
+
+.NobucaPanelSplitLeftRightDivider:hover,
+.NobucaPanelSplitTopBottomDivider:hover {
+    background-color: rgb(59, 89, 137);
+}
+
+.NobucaPanelSplitLeftRightDivider.dragging,
+.NobucaPanelSplitTopBottomDivider.dragging {
+    background-color: rgb(81, 119, 178);
+}
+
+.NobucaPanelSplitLeftRightDivider {
+    cursor: col-resize;
+}
+
+.NobucaPanelSplitTopBottomDivider {
+    cursor: row-resize;
+}

@@ -1,14 +1,14 @@
-.NobucaTabs {
-    position: absolute;
+.NobucaTabsHeader {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    background-color: var(--background-color-dark);
 }
 
 .NobucaTabsHeadersContainer {
     display: flex;
     flex-direction: row;
-    margin-top: 3px;
+    margin-top: 6px;
     margin-left: 3px;
     margin-right: 3px;
     overflow: hidden;
@@ -19,9 +19,8 @@
     flex-direction: row;
     align-items: top;
     cursor: default;
-    min-width: 80px;
     user-select: none;
-    padding-top: 5px;
+    padding-top: 2px;
     min-height: 22px;
     max-height: 22px;
     border-width: 1px;
@@ -37,19 +36,17 @@
 
 .NobucaTabHeader.inactive {
     color: rgb(147, 147, 147);
-    background-color: rgb(55, 55, 55);
-    border-color: rgb(55, 55, 55);
     cursor: pointer;
 }
 
 .NobucaTabHeader.inactive:hover {
     color: rgb(186, 186, 186);
-    background-color: rgb(52, 52, 52);
 }
 
 .NobucaTabHeader.active {
-    color: rgb(186, 186, 186);
-    background-color: var(--background-color-dark);
+    color: rgb(255, 255, 255);
+    background-color: rgb(55, 55, 55);
+    border-color: rgb(55, 55, 55);
     z-index: 0;
 }
 
@@ -59,6 +56,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-left: 10px;
+    padding-right: 10px;
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    user-select: none;
 }
 
 .NobucaTabHeaderCloseButton {
@@ -81,16 +82,3 @@
     background-color: rgb(112, 112, 112);
 }
 
-.NobucaTabsBodiesContainer {
-    color: rgb(247, 247, 247);
-    background-color: var(--background-color-dark);
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--component-border-color);
-    border-radius: var(--component-border-radius);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin-right: 3px;
-    margin-left: 3px;
-    margin-bottom: 3px;
-}

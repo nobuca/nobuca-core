@@ -12,16 +12,21 @@
 @import "dialog/NobucaDialog.css";
 @import "tree/NobucaTree.css";
 @import "menubar/NobucaMenubar.css";
-@import "panel/NobucaPanel.css";
+@import "panel-split/NobucaPanelSplit.css";
 @import "cards/NobucaCards.css";
 :root {
-    --background-color-dark: rgb(66, 66, 66);
+    --background-color-dark: rgb(29, 29, 29);
+    --background-color-light: rgb(55, 55, 55);
+    --background-color-light-bright: rgb(75, 75, 75);
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    --font-size: 14px;
+    --font-size: 12px;
     --font-color: rgb(201, 201, 201);
     --text-shadow: none;
-    --component-border-color: rgb(66, 66, 66);
+    --component-border-color: rgb(29, 29, 29);
     --component-border-radius: 6px;
+    --menubar-border: 1px solid rgb(70, 70, 70);
+    --menubar-border-radius: 6px;
+    --opacity-disabled: 0.3;
 }
 
 .NobucaGraphicEngine svg {

@@ -2,10 +2,7 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaPanelView extends NobucaComponentView {
-    constructor(model) {
-        super(model);
-    }
-
+ 
     getClassName() {
         return "NobucaPanel";
     }
@@ -28,34 +25,39 @@ export default class NobucaPanelView extends NobucaComponentView {
         });
     }
 
-    makeRootPanel() {
-        this.rootPanel = true;
+    getChildViews() {
+        return this.childViews;
     }
 
     addChild(childView) {
-        this.nativeElement.appendChild(childView.nativeElement);
-        this.childViews.push(childView);
-        childView.parentView = this;
+        this.getNativeElement().appendChild(childView.nativeElement);
+        this.getChildViews().push(childView);
+        childView.setParent(this);
+        childView.updateContentsPositionAndSize();
     }
 
     removeChild(childView) {
-        let index = this.childViews.indexOf(childView);
-        this.nativeElement.removeChild(childView.nativeElement);
-        this.childViews.splice(index, 1);
+        let index = this.getChildViews().indexOf(childView);
+        this.getNativeElement().removeChild(childView.getNativeElement());
+        this.getChildViews().splice(index, 1);
     }
 
     removeChilds() {
-        while (this.childViews.length > 0) {
-            this.removeChild(this.childViews[0]);
+        while (this.getChildViews().length > 0) {
+            this.removeChild(this.getChildViews()[0]);
         }
     }
 
     getChildIndex(childView) {
-        return this.childViews.indexOf(childView);
+        return this.getChildViews().indexOf(childView);
     }
 
     getChildAtIndex(index) {
-        return this.childViews[index];
+        return this.getChildViews()[index];
+    }
+
+    updateContentsPositionAndSize() {
+        this.getChildViews().forEach(childView => childView.updateContentsPositionAndSize());
     }
 
     listenModel() {

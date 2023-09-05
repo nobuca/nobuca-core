@@ -1,9 +1,8 @@
 import NobucaAppView from "../app/NobucaAppView.js";
 import NobucaMenubarView from "../menubar/NobucaMenubarView.js";
 import NobucaPanelView from "../panel/NobucaPanelView.js";
-import NobucaPanelResizableView from "../panel-resizable/NobucaPanelResizableView.js";
-import NobucaPanelDynamicVerticalDividerView from "../panel-resizable/NobucaPanelDynamicVerticalDividerView.js";
-import NobucaPanelDynamicHorizontalDividerView from "../panel-resizable/NobucaPanelDynamicHorizontalDividerView.js";
+import NobucaPanelSplitLeftRightView from "../panel-split/NobucaPanelSplitLeftRightView.js";
+import NobucaPanelSplitTopBottomView from "../panel-split/NobucaPanelSplitTopBottomView.js";
 import NobucaTreeView from "../tree/NobucaTreeView.js";
 import NobucaTabsView from "../tabs/NobucaTabsView.js";
 import NobucaTabsHeaderView from "../tabs/NobucaTabsHeaderView.js";
@@ -35,14 +34,12 @@ export default class NobucaFactory {
             function(model) { return new NobucaMenubarView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelModel",
             function(model) { return new NobucaPanelView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelSplitLeftRightModel",
+            function(model) { return new NobucaPanelSplitLeftRightView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelSplitTopBottomModel",
+            function(model) { return new NobucaPanelSplitTopBottomView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeModel",
             function(model) { return new NobucaTreeView(model); });
-        NobucaFactory.registerViewConstructorForModelClassName("NobucaDynamicPanelVerticalDividerModel",
-            function(model) { return new NobucaPanelDynamicVerticalDividerView(model); });
-        NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelDynamicHorizontalDividerModel",
-            function(model) { return new NobucaPanelDynamicHorizontalDividerView(model); });
-        NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelDynamicHorizontalDividerModel",
-            function(model) { return new NobucaPanelDynamicHorizontalDividerView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
             function(model) { return new NobucaTabsView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaFieldsetModel",

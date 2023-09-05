@@ -1,74 +1,145 @@
 .NobucaMenubar {
-    position: absolute;
-    display: flex;
-    background-color: var(--background-color-dark);
-    align-items: center;
-  }
-  
-  .NobucaMenubarItem {
-    display: flex;
-    z-index: 1;
-    align-items: center;
-    margin: 4px;
+  display: flex;
+  background-color: var(--background-color-dark);
+  align-items: center;
+}
 
-    cursor: pointer;
-  }
-  
-  .NobucaMenubarItemSeparator {
-    height: 1px;
-    border-bottom: 1px solid rgb(55, 55, 55);
-  }
-  
-  .NobucaMenubarItemText {
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 3px;
-    padding-bottom: 2px;
-    border-radius: 4px;
-    color: rgb(201, 201, 201);
-  }
-  
-  .NobucaMenubarItemText:hover {
-    background-color: rgb(81, 119, 178);
-  }
-  
-  .NobucaMenubarItem.expanded > .NobucaMenubarItemText {
-    background-color: rgb(81, 119, 178);
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
-  
-  .NobucaMenubarChildMenuItems {
-    z-index: 2;
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 23px;
-    min-width: 200px;
-    background-color: rgb(35, 35, 36);
-    border: 1px solid rgb(25, 25, 26);
-    opacity: 0.9;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.88);
-  }
-  
-  .NobucaMenubarChildMenuItems .NobucaMenubarItem {
-    flex-grow: 1;
-    margin: 0;
-    border-radius: 0;
-  }
-  
-  .NobucaMenubarChildMenuItems .NobucaMenubarItem .NobucaMenubarItemText {
-    flex-grow: 1;
-    margin: 0;
-    border-radius: 0;
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
-  
-  .NobucaMenubarChildMenuItems .NobucaMenubarItem:hover .NobucaMenubarItemText {
-    background-color: rgb(81, 119, 178);
-  }
-  
-  
+.NobucaMenubarItem {
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 2px;
+  margin-right: 2px;
+  cursor: pointer;
+}
+
+.NobucaMenubarItemSeparator {
+  height: 1px;
+  border-bottom: 1px solid rgb(55, 55, 55);
+}
+
+.NobucaMenubarItemContents {
+  display: flex;
+  flex-grow: 1;
+  border-radius: 4px;
+  border: 1px solid var(--background-color-dark);
+  height: 18px;
+}
+
+.NobucaMenubarItemContents.disabled {
+  opacity: var(--opacity-disabled);
+}
+
+.NobucaMenubarItemIcon img {
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+  user-select: none; 
+}
+
+.NobucaMenubarItemText {
+  padding-left: 8px;
+  padding-right: 8px;
+  color: rgb(211, 211, 211);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  user-select: none;
+}
+
+.NobucaMenubarItemShortcut {
+  display: none;
+  padding-left: 2px;
+  padding-right: 2px;
+  color: rgb(211, 211, 211);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  user-select: none;
+  opacity: var(--opacity-disabled);
+}
+
+.NobucaMenubarItemChildrenMark {
+  display: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: rgb(211, 211, 211);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  user-select: none;
+  opacity: var(--opacity-disabled);
+  min-width: 12px;
+}
+
+.NobucaMenubarItemContents:hover {
+  background-color: rgb(58, 89, 138);
+  border: 1px solid rgb(71, 114, 179);
+}
+
+.NobucaMenubarItem.expanded>.NobucaMenubarItemContents {
+  background-color: rgb(58, 89, 138);
+  border: 1px solid rgb(71, 114, 179);
+}
+
+.NobucaMenubarChildMenuItems {
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 23px;
+  min-width: 200px;
+  background-color: var(--background-color-dark);
+  border: var(--menubar-border);
+  opacity: 1;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.88);
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItem {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItemContents {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  height: 14px;
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItemContents:hover {
+  background-color: rgb(58, 89, 138);
+  border: 1px solid rgb(71, 114, 179);
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItemIcon {
+  height: 100%;
+  min-width: 26px;
+}
+.NobucaMenubarChildMenuItems .NobucaMenubarItemContents .NobucaMenubarItemIcon img {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItemText {
+  padding-left: 2px;
+  padding-right: 25px;
+  flex-grow: 1;
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItemShortcut {
+  display: flex;
+}
+
+.NobucaMenubarChildMenuItems .NobucaMenubarItemChildrenMark {
+  display: flex;
+}

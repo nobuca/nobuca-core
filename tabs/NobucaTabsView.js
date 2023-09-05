@@ -9,7 +9,7 @@ export default class NobucaTabsView extends NobucaComponentView {
         this.divTabHeadersContainer = this.createDivTabHeadersContainer();
         this.divTabBodiesContainer = this.createDivTabBodiesContainer();
         this.tabHeaderViewCollection = [];
-        this.updatePositionFromModel();
+        this.updateContentsPositionAndSize();
         this.updateSizeFromModel();
     }
 
@@ -120,7 +120,7 @@ export default class NobucaTabsView extends NobucaComponentView {
         return this.tabHeaderViewCollection;
     }
 
-    updatePositionFromModel() {
+    updateContentsPositionAndSize() {
         this.setPosition(
             this.getModel().getPosition().getTop(),
             this.getModel().getPosition().getLeft()
@@ -181,7 +181,7 @@ export default class NobucaTabsView extends NobucaComponentView {
             .getPosition()
             .getChangeEventEmitter()
             .subscribe(() => {
-                this.updatePositionFromModel();
+                this.updateContentsPositionAndSize();
             });
     }
 

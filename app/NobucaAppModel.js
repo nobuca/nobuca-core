@@ -31,7 +31,7 @@ export default class NobucaAppModel {
     }
 
     createRootPanel() {
-        this.rootPanel = new NobucaPanelModel("vertical");
+        this.rootPanel = new NobucaPanelModel();
         this.rootPanel.setId("rootPanel");
     }
 

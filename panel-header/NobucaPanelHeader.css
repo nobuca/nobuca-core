@@ -1,0 +1,12 @@
+  .NobucaPanelHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgb(59, 59, 59);
+    background-color: rgb(59, 59, 59);
+    min-height: 25px;
+    max-height: 25px;
+    padding-left: 10px;
+    color: rgb(201, 201, 201);
+  }
+  

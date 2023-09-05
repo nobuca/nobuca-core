@@ -58,7 +58,7 @@ export default class NobucaTreeView {
         );
     }
 
-    updatePositionFromModel() {
+    updateContentsPositionAndSize() {
         this.setPosition(
             this.getTreeModel().getPosition().getTop(),
             this.getTreeModel().getPosition().getLeft()
@@ -84,7 +84,7 @@ export default class NobucaTreeView {
             .getPosition()
             .getChangeEventEmitter()
             .subscribe(() => {
-                this.updatePositionFromModel();
+                this.updateContentsPositionAndSize();
             });
 
         this.getTreeModel()
