@@ -39,7 +39,7 @@ export default class NobucaTabsHeaderView extends NobucaComponentView {
     createTab(tabModel) {
 
         let tabHeaderView = new NobucaTabHeaderView(tabModel);
-        this.divTabHeadersContainer.appendChild(tabHeaderView.nativeElement);
+        this.divTabHeadersContainer.appendChild(tabHeaderView.getNativeElement());
 
         tabHeaderView.getClickEventEmitter().subscribe((tabModel) => {
             this.getModel().setActiveTab(tabModel);
@@ -57,13 +57,13 @@ export default class NobucaTabsHeaderView extends NobucaComponentView {
         let tabHeaderView = this.getTabHeaderViewByTabModel(tabModel);
         let index = this.tabHeaderViewCollection.indexOf(tabHeaderView);
         this.tabHeaderViewCollection.splice(index, 1);
-        this.divTabHeadersContainer.removeChild(tabHeaderView.nativeElement);
+        this.divTabHeadersContainer.removeChild(tabHeaderView.getNativeElement());
     }
 
     getTabHeaderViewByTabModel(tabModel) {
         for (let i = 0; i < this.getTabHeaderViewCollection().length; i++) {
             let tabHeaderView = this.getTabHeaderViewCollection()[i];
-            if (tabHeaderView.getTabModel() == tabModel) {
+            if (tabHeaderView.getModel() == tabModel) {
                 return tabHeaderView;
             }
         }

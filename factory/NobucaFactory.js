@@ -71,7 +71,7 @@ export default class NobucaFactory {
         if (model.getClassName == null) {
             console.log(
                 "Unable to instantiate a view for a model without getClassName method."
-            );
+            , model);
             return null;
         }
 
@@ -83,7 +83,7 @@ export default class NobucaFactory {
                     "Something gone wrong executing view constructor for model [" +
                     model.getClassName() +
                     "]."
-                );
+                , model);
             }
             return view;
         }

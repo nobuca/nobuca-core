@@ -1,5 +1,4 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
-import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaPanelView extends NobucaComponentView {
  
@@ -20,7 +19,7 @@ export default class NobucaPanelView extends NobucaComponentView {
     createChildViewsForChildModels() {
         this.childViews = [];
         this.getModel().getChildren().forEach(childModel => {
-            let childView = NobucaFactory.createNewViewForModel(childModel);
+            let childView = this.createNewViewForModel(childModel);
             this.addChild(childView);
         });
     }
@@ -30,7 +29,7 @@ export default class NobucaPanelView extends NobucaComponentView {
     }
 
     addChild(childView) {
-        this.getNativeElement().appendChild(childView.nativeElement);
+        this.getNativeElement().appendChild(childView.getNativeElement());
         this.getChildViews().push(childView);
         childView.setParent(this);
         childView.updateContentsPositionAndSize();
@@ -64,7 +63,7 @@ export default class NobucaPanelView extends NobucaComponentView {
         this.getModel()
             .getAddChildEventEmitter()
             .subscribe((childModel) => {
-                let childView = NobucaFactory.createNewViewForModel(childModel);
+                let childView = this.createNewViewForModel(childModel);
                 this.addChild(childView);
             });
     }

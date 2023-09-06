@@ -67,7 +67,7 @@ export default class NobucaTreeNodeWithoutChildrenView {
         let depth = this.nodeModel.getDepth();
         for (let i = 0; i < depth; i++) {
             this.nodeIdentView = new NobucaTreeNodeIndentView(this.nodeModel);
-            this.nativeElement.appendChild(this.nodeIdentView.nativeElement);
+            this.nativeElement.appendChild(this.nodeIdentView.getNativeElement());
         }
     }
 
@@ -78,12 +78,12 @@ export default class NobucaTreeNodeWithoutChildrenView {
 
     createIcon() {
         this.nodeIconView = new NobucaTreeNodeIconView(this.nodeModel);
-        this.nativeElement.appendChild(this.nodeIconView.nativeElement);
+        this.nativeElement.appendChild(this.nodeIconView.getNativeElement());
     }
 
     createText() {
         this.nodeTextView = new NobucaTreeNodeTextView(this.nodeModel);
-        this.nativeElement.appendChild(this.nodeTextView.nativeElement);
+        this.nativeElement.appendChild(this.nodeTextView.getNativeElement());
     }
 
     createContextMenuView() {

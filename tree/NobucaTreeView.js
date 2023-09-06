@@ -31,7 +31,7 @@ export default class NobucaTreeView {
 
     createNodesView() {
         this.nodesView = new NobucaTreeNodesView(this.treeModel);
-        this.nativeElement.appendChild(this.nodesView.nativeElement);
+        this.nativeElement.appendChild(this.nodesView.getNativeElement());
     }
 
     getNodesView() {

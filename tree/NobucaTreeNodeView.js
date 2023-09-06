@@ -31,14 +31,14 @@ export default class NobucaTreeNodeView {
         this.nodeWithoutChildrenView = new NobucaTreeNodeWithoutChildrenView(
             this.nodeModel
         );
-        this.nativeElement.appendChild(this.nodeWithoutChildrenView.nativeElement);
+        this.nativeElement.appendChild(this.nodeWithoutChildrenView.getNativeElement());
     }
 
     createNodeWithChildren() {
         this.nodeWithChildrenView = new NobucaTreeNodeWithChildrenView(
             this.nodeModel
         );
-        this.nativeElement.appendChild(this.nodeWithChildrenView.nativeElement);
+        this.nativeElement.appendChild(this.nodeWithChildrenView.getNativeElement());
     }
 
     getNodeWithChildrenView() {

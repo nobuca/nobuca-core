@@ -40,7 +40,7 @@ export default class NobucaTreeNodesView {
 
     createNode(nodeModel) {
         let nodeView = new NobucaTreeNodeView(nodeModel);
-        this.nativeElement.appendChild(nodeView.nativeElement);
+        this.nativeElement.appendChild(nodeView.getNativeElement());
         this.nodeViewList.push(nodeView);
     }
 
@@ -56,6 +56,6 @@ export default class NobucaTreeNodesView {
         let index = this.getNodeViewList().indexOf(nodeView);
         if (index < 0) return;
         this.getNodeViewList().splice(index, 1);
-        this.nativeElement.removeChild(nodeView.nativeElement);
+        this.nativeElement.removeChild(nodeView.getNativeElement());
     }
 }

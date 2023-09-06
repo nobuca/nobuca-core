@@ -1,25 +1,43 @@
+import NobucaComponentView from "../component/NobucaComponentView.js";
+import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaPanelView from "../panel/NobucaPanelView.js";
 import NobucaDialogView from "../dialog/NobucaDialogView.js";
-import NobucaComponentView from "../component/NobucaComponentView.js";
 
 export default class NobucaAppView extends NobucaComponentView {
 
     constructor(model) {
         super(model);
-        this.createRootPanel();
+        this.createRootPanelView();
     }
 
-    createRootPanel() {
+    registerViewConstructors() {
+        NobucaFactory.registerDefaultViewConstructors();
+    }
+
+    createRootPanelView() {
         this.rootPanelView = new NobucaPanelView(this.getModel().getRootPanel());
-        this.addRootPanelToDocumentBody(this.rootPanelView);
+        this.addRootPanelViewToDocumentBody(this.rootPanelView);
+        this.updateContentsPositionAndSize();
+
+        window.addEventListener("resize", () => {
+            this.updateContentsPositionAndSize();
+        });
     }
 
     getRootPanelView() {
         return this.rootPanelView;
     }
 
-    addRootPanelToDocumentBody(rootPanelView) {
+    addRootPanelViewToDocumentBody(rootPanelView) {
         document.body.appendChild(rootPanelView.getNativeElement());
+    }
+
+    updateContentsPositionAndSize() {
+
+        this.getRootPanelView().getNativeElement().style.height = window.innerHeight + "px";
+        this.getRootPanelView().getNativeElement().style.width = window.innerWidth + "px";
+
+        this.getRootPanelView().updateContentsPositionAndSize();
     }
 
     listenModel() {
@@ -31,4 +49,3 @@ export default class NobucaAppView extends NobucaComponentView {
         });
     }
 }
-

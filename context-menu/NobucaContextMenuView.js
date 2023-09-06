@@ -33,7 +33,7 @@ export default class NobucaContextMenuView {
 
     createTitle() {
         this.titleView = new NobucaContextMenuTitleView(this.contextMenuModel);
-        this.nativeElement.appendChild(this.titleView.nativeElement);
+        this.nativeElement.appendChild(this.titleView.getNativeElement());
     }
 
     updateTitle() {
@@ -42,7 +42,7 @@ export default class NobucaContextMenuView {
 
     createMenuItems() {
         this.menuItemViewList.forEach(menuItemView => {
-            menuItemView.nativeElement.parentNode.removeChild(menuItemView.nativeElement);
+            menuItemView.getNativeElement().parentNode.removeChild(menuItemView.getNativeElement());
         });
         this.menuItemViewList = [];
         this.contextMenuModel.menuItems.forEach(menuItemModel => {
@@ -52,7 +52,7 @@ export default class NobucaContextMenuView {
 
     createMenuItem(menuItemModel) {
         let menuItemView = new NobucaContextMenuItemView(menuItemModel);
-        this.nativeElement.appendChild(menuItemView.nativeElement);
+        this.nativeElement.appendChild(menuItemView.getNativeElement());
         this.menuItemViewList.push(menuItemView);
         if (!menuItemModel.getSeparator()) {
             menuItemModel.getClickEventEmitter().subscribe(event => {
@@ -90,7 +90,7 @@ export default class NobucaContextMenuView {
 
     hide() {
         if (NobucaContextMenuView.showingContextMenuView != null) {
-            NobucaContextMenuView.showingContextMenuView.nativeElement.style.display = 'none';
+            NobucaContextMenuView.showingContextMenuView.getNativeElement().style.display = 'none';
             NobucaContextMenuView.showingContextMenuView = null;
         }
     }
@@ -99,7 +99,7 @@ export default class NobucaContextMenuView {
 window.addEventListener('click', (event) => {
     if (NobucaContextMenuView.showingContextMenuView == null) return;
     if (!NobucaHtmlElementIsDescendantOf.check(event.target,
-            NobucaContextMenuView.showingContextMenuView.nativeElement)) {
+            NobucaContextMenuView.showingContextMenuView.getNativeElement())) {
         NobucaContextMenuView.showingContextMenuView.hide();
     }
 });

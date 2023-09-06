@@ -1,5 +1,4 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
-import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
     static dragging = null;
@@ -13,7 +12,7 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
 
     createContents() {
         let topPanelModel = this.getModel().getTopPanel();
-        this.topPanelView = NobucaFactory.createNewViewForModel(topPanelModel);
+        this.topPanelView = this.createNewViewForModel(topPanelModel);
         this.topPanelView.setParent(this);
         this.getNativeElement().appendChild(this.topPanelView.getNativeElement());
 
@@ -25,7 +24,7 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         this.getNativeElement().appendChild(this.divDivider);
 
         let bottomPanelModel = this.getModel().getBottomPanel();
-        this.bottomPanelView = NobucaFactory.createNewViewForModel(bottomPanelModel);
+        this.bottomPanelView = this.createNewViewForModel(bottomPanelModel);
         this.bottomPanelView.setParent(this);
         this.getNativeElement().appendChild(this.bottomPanelView.getNativeElement());
     }

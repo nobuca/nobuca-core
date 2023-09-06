@@ -1,10 +1,24 @@
+import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaComponentView {
 
     constructor(model) {
         this.model = model;
+        this.registerViewConstructors();
         this.createNativeElement();
         this.listenModel();
+    }
+
+    registerViewConstructors() {
+
+    }
+
+    registerViewConstructorForModelClassName(modelClassName, viewConstructor) {
+        NobucaFactory.registerViewConstructorForModelClassName(modelClassName, viewConstructor);
+    }
+
+    createNewViewForModel(model) {
+        return NobucaFactory.createNewViewForModel(model);
     }
 
     getModel() {

@@ -1,47 +1,37 @@
-import NobucaFactory from "../factory/NobucaFactory.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaFieldsetView {
+export default class NobucaFieldsetView extends NobucaComponentView {
 
     constructor(fieldsetModel) {
-        this.fieldsetModel = fieldsetModel;
-        this.nativeElement = this.createFieldset();
+        super(fieldsetModel);
         this.legend = this.createLegend();
-        this.listenFieldsetModelEvents();
     }
 
-    getFieldsetModel() {
-        return this.fieldsetModel;
-    }
-
-    getNativeElement() {
-        return this.nativeElement;
-    }
-
-    createFieldset() {
+    createNativeElement() {
         let fieldset = document.createElement('fieldset');
         fieldset.className = 'NobucaFieldset';
         fieldset.style.flexGrow = 1;
         fieldset.style.flexDirection = 'column';
-        return fieldset;
+        this.setNativeElement(fieldset);
     }
 
     createLegend() {
         let legend = document.createElement('legend');
         this.nativeElement.appendChild(legend);
         legend.className = 'NobucaFieldsetLegend';
-        if (this.getFieldsetModel().getRadioName() != null && this.getFieldsetModel().getRadioValue() != null) {
+        if (this.getModel().getRadioName() != null && this.getModel().getRadioValue() != null) {
             let radio = document.createElement('input');
             legend.appendChild(radio);
             radio.className = 'NobucaFieldsetLegendRadio';
             radio.type = 'radio';
-            radio.name = this.getFieldsetModel().getRadioName();
-            radio.value = this.getFieldsetModel().getRadioValue();
-            radio.checked = this.getFieldsetModel().getRadioChecked();
+            radio.name = this.getModel().getRadioName();
+            radio.value = this.getModel().getRadioValue();
+            radio.checked = this.getModel().getRadioChecked();
             radio.addEventListener('change', () => {
                 if (this.checked) {
-                    this.getFieldsetModel().checkRadio();
+                    this.getModel().checkRadio();
                 } else {
-                    this.getFieldsetModel().uncheckRadio();
+                    this.getModel().uncheckRadio();
                 }
             });
             this.radio = radio;
@@ -49,12 +39,12 @@ export default class NobucaFieldsetView {
         let divLegendText = document.createElement('div');
         legend.appendChild(divLegendText);
         divLegendText.className = 'NobucaFieldsetLegendText';
-        divLegendText.innerHTML = this.getFieldsetModel().getText();
+        divLegendText.innerHTML = this.getModel().getText();
         return legend;
     }
 
     addChild(childView) {
-        this.nativeElement.appendChild(childView.nativeElement);
+        this.nativeElement.appendChild(childView.getNativeElement());
     }
 
     checkRadio() {
@@ -66,28 +56,28 @@ export default class NobucaFieldsetView {
     }
 
     addChild(view) {
-        this.nativeElement.appendChild(view.nativeElement);
+        this.nativeElement.appendChild(view.getNativeElement());
     }
 
-    listenFieldsetModelEvents() {
+    listenModel() {
 
-        this.getFieldsetModel()
+        this.getModel()
             .getAddChildEventEmitter()
             .subscribe((childModel) => {
                 console.log(
                     "Added child model [" + childModel + "] to fieldset model [" + this + "]"
                 );
-                let childView = NobucaFactory.createNewViewForModel(childModel);
+                let childView = this.createNewViewForModel(childModel);
                 this.addChild(childView);
             });
 
-        this.getFieldsetModel()
+        this.getModel()
             .getRadioCheckEventListener()
             .subscribe(() => {
                 this.radio.checked = true;
             });
 
-        this.getFieldsetModel()
+        this.getModel()
             .getRadioUncheckEventListener()
             .subscribe(() => {
                 this.radio.checked = false;

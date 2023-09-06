@@ -1,18 +1,12 @@
 import NobucaButtonView from "../button/NobucaButtonView.js";
-import NobucaButtonModel from "../button/NobucaButtonModel.js";
-import NobucaFactory from "../factory/NobucaFactory.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaDialogView {
+export default class NobucaDialogView extends NobucaComponentView{
 
     constructor(dialogModel) {
-        this.dialogModel = dialogModel;
+        super(dialogModel);
         this.divDialogBackground = this.createDivDialogBackground();
         this.createDivDialog();
-        this.listenDialogModelEvents();
-    }
-
-    getDialogModel() {
-        return this.dialogModel;
     }
 
     createDivDialogBackground() {
@@ -34,8 +28,8 @@ export default class NobucaDialogView {
         divDialog.className = "NobucaDialog";
 
         divDialog.style.display = "flex";
-        divDialog.style.width = this.getDialogModel().getWidth() + "px";
-        divDialog.style.height = this.getDialogModel().getHeight() + "px";
+        divDialog.style.width = this.getModel().getWidth() + "px";
+        divDialog.style.height = this.getModel().getHeight() + "px";
 
         divDialog.style.top =
             window.innerHeight / 2 - divDialog.offsetHeight / 2 + "px";
@@ -77,7 +71,7 @@ export default class NobucaDialogView {
         let divDialogHeaderTitle = document.createElement("div");
         this.getDivDialogHeader().appendChild(divDialogHeaderTitle);
         divDialogHeaderTitle.className = "NobucaDialogHeaderTitle";
-        divDialogHeaderTitle.innerHTML = this.getDialogModel().getTitle();
+        divDialogHeaderTitle.innerHTML = this.getModel().getTitle();
         return divDialogHeaderTitle;
     }
 
@@ -89,7 +83,7 @@ export default class NobucaDialogView {
     }
 
     addChild(view) {
-        this.divDialogBody.appendChild(view.nativeElement);
+        this.divDialogBody.appendChild(view.getNativeElement());
     }
 
     clearChildren() {
@@ -111,34 +105,34 @@ export default class NobucaDialogView {
         return divDialogButtons;
     }
 
-    listenDialogModelEvents() {
-        this.getDialogModel()
+    listenModel() {
+        this.getModel()
             .getAddChildEventEmitter()
             .subscribe((childModel) => {
-                let childView = NobucaFactory.createNewViewForModel(childModel);
+                let childView = this.createNewViewForModel(childModel);
                 this.addChild(childView);
             });
 
-        this.getDialogModel()
+        this.getModel()
             .getClearChildrenEventEmitter()
             .subscribe(() => {
                 this.clearChildren();
             });
 
-        this.getDialogModel()
+        this.getModel()
             .getAddButtonEventEmitter()
             .subscribe((buttonModel) => {
                 this.buttonView = new NobucaButtonView(buttonModel);
-                this.divDialogButtons.appendChild(this.buttonView.nativeElement);;
+                this.divDialogButtons.appendChild(this.buttonView.getNativeElement());;
             });
 
-        this.getDialogModel()
+        this.getModel()
             .getClearButtonsEventEmitter()
             .subscribe(() => {
                 this.clearButtons();
             });
 
-        this.getDialogModel()
+        this.getModel()
             .getCloseEventEmitter()
             .subscribe(() => {
                 this.close();

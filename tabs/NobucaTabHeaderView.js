@@ -1,18 +1,13 @@
+import NobucaComponentView from '../component/NobucaComponentView.js';
 import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
-export default class NobucaTabHeaderView {
+export default class NobucaTabHeaderView extends NobucaComponentView {
 
-    constructor(tabModel) {
-        this.tabModel = tabModel;
-        this.nativeElement = this.createDivTabHeader();
+    constructor(model) {
+        super(model);
         this.deactivate();
         this.clickEventEmitter = new NobucaEventEmitter();
         this.closeEventEmitter = new NobucaEventEmitter();
-        this.listenTabModelEvents(this.tabModel);
-    }
-
-    getTabModel() {
-        return this.tabModel;
     }
 
     getClickEventEmitter() {
@@ -23,11 +18,11 @@ export default class NobucaTabHeaderView {
         return this.closeEventEmitter;
     }
 
-    createDivTabHeader() {
+    createNativeElement() {
         let divTabHeader = document.createElement("div");
         divTabHeader.className = "NobucaTabHeader";
         divTabHeader.addEventListener('click', (event) => {
-            this.getClickEventEmitter().emit(this.getTabModel());
+            this.getClickEventEmitter().emit(this.getModel());
         });
 
         divTabHeader.classList.add('inactive');
@@ -35,7 +30,7 @@ export default class NobucaTabHeaderView {
         let divTabHeaderText = document.createElement("div");
         divTabHeader.appendChild(divTabHeaderText);
         divTabHeaderText.className = "NobucaTabHeaderText";
-        divTabHeaderText.innerHTML = this.getTabModel().getText();
+        divTabHeaderText.innerHTML = this.getModel().getText();
 
         divTabHeader.divTabHeaderText = divTabHeaderText;
 
@@ -48,43 +43,43 @@ export default class NobucaTabHeaderView {
 
         divTabHeaderCloseButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            this.getCloseEventEmitter().emit(this.getTabModel());
+            this.getCloseEventEmitter().emit(this.getModel());
         });
 
         divTabHeaderCloseButton.style.display = "none";
-        if (this.getTabModel().getCloseable()) {
+        if (this.getModel().getCloseable()) {
             divTabHeaderCloseButton.style.display = "";
         }
 
-        return divTabHeader;
+        this.setNativeElement(divTabHeader);
     }
 
     setCloseable(closeable) {
-        this.nativeElement.divTabHeaderCloseButton.style.display = "none";
+        this.getNativeElement().divTabHeaderCloseButton.style.display = "none";
         if (closeable) {
-            this.nativeElement.divTabHeaderCloseButton.style.display = "";
+            this.getNativeElement().divTabHeaderCloseButton.style.display = "";
         }
     }
 
     setText(text) {
-        this.nativeElement.divTabHeaderText.innerHTML = text;
+        this.getNativeElement().divTabHeaderText.innerHTML = text;
     }
 
     deactivate() {
-        this.nativeElement.classList.remove('active');
-        this.nativeElement.classList.add('inactive');
+        this.getNativeElement().classList.remove('active');
+        this.getNativeElement().classList.add('inactive');
     }
 
     activate() {
-        this.nativeElement.classList.add('active');
-        this.nativeElement.classList.remove('inactive');
+        this.getNativeElement().classList.add('active');
+        this.getNativeElement().classList.remove('inactive');
     }
 
-    listenTabModelEvents(tabModel) {
-        tabModel.getTextChangeEventEmitter().subscribe(text => {
+    listenModel() {
+        this.getModel().getTextChangeEventEmitter().subscribe(text => {
             this.setText(text);
         });
-        tabModel.getCloseableChangeEventEmitter().subscribe(closeable => {
+        this.getModel().getCloseableChangeEventEmitter().subscribe(closeable => {
             this.setCloseable(closeable);
         });
     }

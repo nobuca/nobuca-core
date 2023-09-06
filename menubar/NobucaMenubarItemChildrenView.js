@@ -1,35 +1,29 @@
+import NobucaComponentView from '../component/NobucaComponentView.js';
 import NobucaMenubarItemView from './NobucaMenubarItemView.js';
 
-export default class NobucaMenubarItemChildrenView {
+export default class NobucaMenubarItemChildrenView extends NobucaComponentView {
 
-    constructor(menuItemModel, menubarView, parentMenubarItemView) {
-        this.menuItemModel = menuItemModel;
-        this.menubarView = menubarView;
-        this.parentMenubarItemView = parentMenubarItemView;
-        this.nativeElement = this.createDiv();
-        this.menuItemViewList = [];
+    constructor(menuItemModel) {
+        super(menuItemModel);
         this.createChildItems();
-    }
-
-    getModel() {
-        return this.menuItemModel;
     }
 
     getMenuItemViewList() {
         return this.menuItemViewList;
     }
 
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement('div');
         div.className = 'NobucaMenubarChildMenuItems';
         div.style.display = 'none';
-        return div;
+        this.setNativeElement(div);
     }
 
     createChildItems() {
+        this.menuItemViewList = [];
         this.getModel().getMenuItems().forEach(childMenuItemModel => {
-            let childMenuItemView = new NobucaMenubarItemView(childMenuItemModel, this.getMenubarView(), this.getParentMenubarItemView());
-            this.nativeElement.appendChild(childMenuItemView.nativeElement);
+            let childMenuItemView = new NobucaMenubarItemView(childMenuItemModel);
+            this.getNativeElement().appendChild(childMenuItemView.getNativeElement());
             this.getMenuItemViewList().push(childMenuItemView);
         });
     }
@@ -38,18 +32,28 @@ export default class NobucaMenubarItemChildrenView {
         return this.menubarView;
     }
 
+    setMenubarView(menubarView) {
+        this.menubarView = menubarView;
+        this.getMenuItemViewList().forEach(menuItemView => menuItemView.setMenubarView(this.getMenubarView()));
+    }
+
     getParentMenubarItemView() {
         return this.parentMenubarItemView;
     }
 
+    setParentMenubarItemView(parentMenubarItemView) {
+        this.parentMenubarItemView = parentMenubarItemView;
+        this.getMenuItemViewList().forEach(menuItemView => menuItemView.setParentMenubarItemView(this.getParentMenubarItemView()));
+    }
+
     expand() {
         this.expanded = true;
-        this.nativeElement.style.display = 'flex';
+        this.getNativeElement().style.display = 'flex';
     }
 
     collapse() {
         this.expanded = false;
-        this.nativeElement.style.display = 'none';
+        this.getNativeElement().style.display = 'none';
         this.getMenuItemViewList().forEach(menuItemView => menuItemView.collapse());
     }
 }

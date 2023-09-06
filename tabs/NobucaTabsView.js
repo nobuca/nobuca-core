@@ -1,11 +1,9 @@
 import NobucaTabHeaderView from "./NobucaTabHeaderView.js";
-import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaComponentView from "../component/NobucaComponentView.js";
 
 export default class NobucaTabsView extends NobucaComponentView {
     constructor(model) {
         super(mode);
-        this.nativeElement = this.createDiv();
         this.divTabHeadersContainer = this.createDivTabHeadersContainer();
         this.divTabBodiesContainer = this.createDivTabBodiesContainer();
         this.tabHeaderViewCollection = [];
@@ -13,30 +11,30 @@ export default class NobucaTabsView extends NobucaComponentView {
         this.updateSizeFromModel();
     }
 
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaTabs";
-        return div;
+        this.setNativeElement(div);
     }
 
     createDivTabHeadersContainer() {
         let div = document.createElement("div");
-        this.nativeElement.appendChild(div);
+        this.getNativeElement().appendChild(div);
         div.className = "NobucaTabsHeadersContainer";
         return div;
     }
 
     createDivTabBodiesContainer() {
         let div = document.createElement("div");
-        this.nativeElement.appendChild(div);
+        this.getNativeElement().appendChild(div);
         div.className = "NobucaTabsBodiesContainer";
         return div;
     }
 
     setSize(width, height) {
 
-        this.nativeElement.style.width = width + "px";
-        this.nativeElement.style.height = height + "px";
+        this.getNativeElement().style.width = width + "px";
+        this.getNativeElement().style.height = height + "px";
 
         let margin = 3;
         let border = 1;
@@ -63,13 +61,13 @@ export default class NobucaTabsView extends NobucaComponentView {
     }
 
     setPosition(top, left) {
-        this.nativeElement.style.top = top + "px";
-        this.nativeElement.style.left = left + "px";
+        this.getNativeElement().style.top = top + "px";
+        this.getNativeElement().style.left = left + "px";
     }
 
     createDivTabHeader(text) {
         let div = document.createElement("div");
-        this.nativeElement.appendChild(div);
+        this.getNativeElement().appendChild(div);
         div.className = "NobucaTabHeader";
         div.innerHTML = text;
         return div;
@@ -79,8 +77,8 @@ export default class NobucaTabsView extends NobucaComponentView {
 
         let tabBodyView = this.createTabBodyView(tabModel);
         let tabHeaderView = new NobucaTabHeaderView(tabModel, tabBodyView);
-        this.divTabHeadersContainer.appendChild(tabHeaderView.nativeElement);
-        this.divTabBodiesContainer.appendChild(tabBodyView.nativeElement);
+        this.divTabHeadersContainer.appendChild(tabHeaderView.getNativeElement());
+        this.divTabBodiesContainer.appendChild(tabBodyView.getNativeElement());
 
         tabHeaderView.getClickEventEmitter().subscribe((tabModel) => {
             this.getModel().setActiveTab(tabModel);
@@ -98,14 +96,14 @@ export default class NobucaTabsView extends NobucaComponentView {
         let tabHeaderView = this.getTabHeaderViewByTabModel(tabModel);
         let index = this.tabHeaderViewCollection.indexOf(tabHeaderView);
         this.tabHeaderViewCollection.splice(index, 1);
-        this.divTabHeadersContainer.removeChild(tabHeaderView.nativeElement);
+        this.divTabHeadersContainer.removeChild(tabHeaderView.getNativeElement());
         this.divTabBodiesContainer.removeChild(tabHeaderView.getBodyView().nativeElement);
     }
 
     getTabHeaderViewByTabModel(tabModel) {
         for (let i = 0; i < this.getTabHeaderViewCollection().length; i++) {
             let tabHeaderView = this.getTabHeaderViewCollection()[i];
-            if (tabHeaderView.getTabModel() == tabModel) {
+            if (tabHeaderView.getModel() == tabModel) {
                 return tabHeaderView;
             }
         }
@@ -113,7 +111,7 @@ export default class NobucaTabsView extends NobucaComponentView {
     }
 
     createTabBodyView(tabModel) {
-        return NobucaFactory.createNewViewForModel(tabModel.getBody());
+        return this.createNewViewForModel(tabModel.getBody());
     }
 
     getTabHeaderViewCollection() {
@@ -170,19 +168,6 @@ export default class NobucaTabsView extends NobucaComponentView {
                 this.removeTab(tabModel);
             });
 
-        this.getModel()
-            .getSize()
-            .getChangeEventEmitter()
-            .subscribe(() => {
-                this.updateSizeFromModel();
-            });
-
-        this.getModel()
-            .getPosition()
-            .getChangeEventEmitter()
-            .subscribe(() => {
-                this.updateContentsPositionAndSize();
-            });
     }
 
 }

@@ -1,26 +1,19 @@
+import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaMenubaItemChildrenView from "./NobucaMenubarItemChildrenView.js";
 
-export default class NobucaMenubarItemView {
+export default class NobucaMenubarItemView extends NobucaComponentView {
 
-    constructor(menuItemModel, menubarView, parentMenubarItemView) {
-        this.menuItemModel = menuItemModel;
-        this.menubarView = menubarView;
-        this.parentMenubarItemView = parentMenubarItemView;
+    constructor(menuItemModel) {
+        super(menuItemModel);
         this.expaned = false;
+    }
 
-        if (menuItemModel.getSeparator()) {
-            this.nativeElement = this.createSeparatorDiv();
-        } else {
-            this.nativeElement = this.createDiv();
-            this.createChildMenuItemsViews();
+    createNativeElement() {
+
+        if (this.getModel().getSeparator()) {
+            this.createNativeElementSeparator();
         }
-    }
 
-    getModel() {
-        return this.menuItemModel;
-    }
-
-    createDiv() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItem";
 
@@ -33,7 +26,33 @@ export default class NobucaMenubarItemView {
             this.getModel().getClickEventEmitter().emit(this.getModel());
         });
 
-        return div;
+        this.setNativeElement(div);
+
+        this.createChildMenuItemsViews();
+    }
+
+    getMenubarView() {
+        return this.menubarView;
+    }
+
+    setMenubarView(menubarView) {
+        this.menubarView = menubarView;
+        if (this.getItemChildrenView() == null) return;
+        this.getItemChildrenView().setMenubarView(this.getMenubarView());
+    }
+
+    getParentMenubarItemView() {
+        return this.parentMenubarItemView;
+    }
+
+    setParentMenubarItemView(parentMenubarItemView) {
+        this.parentMenubarItemView = parentMenubarItemView;
+    }
+
+    createNativeElementSeparator() {
+        let div = document.createElement("div");
+        div.className = "NobucaMenubarItemSeparator";
+        this.setNativeElement(div);
     }
 
     createMenuItemContents() {
@@ -112,35 +131,23 @@ export default class NobucaMenubarItemView {
         return div;
     }
 
-    createSeparatorDiv() {
-        let div = document.createElement("div");
-        div.className = "NobucaMenubarItemSeparator";
-        return div;
-    }
-
     hasChildMenuItems() {
         if (this.getModel().getMenuItems().length === 0) return false;
         return true;
     }
 
-    getMenubarView() {
-        return this.menubarView;
-    }
-
-    getParentMenubarItemView() {
-        return this.parentMenubarItemView;
-    }
-
     createChildMenuItemsViews() {
         if (this.getModel().getMenuItems().length === 0) return;
 
-        this.itemChildrenView = new NobucaMenubaItemChildrenView(
-            this.menuItemModel,
-            this.getMenubarView(),
-            this
-        );
+        this.itemChildrenView = new NobucaMenubaItemChildrenView(this.getModel());
 
-        this.nativeElement.appendChild(this.itemChildrenView.nativeElement);
+        this.itemChildrenView.setParentMenubarItemView(this);
+
+        this.getNativeElement().appendChild(this.getItemChildrenView().getNativeElement());
+    }
+
+    getItemChildrenView() {
+        return this.itemChildrenView;
     }
 
     isFirstLevelMenuItem() {
@@ -184,25 +191,25 @@ export default class NobucaMenubarItemView {
         if (this.expanded) return;
         this.expandAncestors();
         this.expanded = true;
-        this.nativeElement.classList.add("expanded");
+        this.getNativeElement().classList.add("expanded");
         if (this.itemChildrenView == null) return;
-        this.itemChildrenView.expand();
+        this.getItemChildrenView().expand();
         if (this.isFirstLevelMenuItem()) {
-            this.itemChildrenView.nativeElement.style.left =
-                this.nativeElement.offsetLeft + "px";
+            this.getItemChildrenView().getNativeElement().style.left =
+                this.getNativeElement().offsetLeft + "px";
         } else {
-            var top = this.nativeElement.offsetTop;
-            var left = this.nativeElement.offsetLeft + this.nativeElement.offsetWidth;
-            this.itemChildrenView.nativeElement.style.top = top + "px";
-            this.itemChildrenView.nativeElement.style.left = left + "px";
+            var top = this.getNativeElement().offsetTop;
+            var left = this.getNativeElement().offsetLeft + this.getNativeElement().offsetWidth;
+            this.getItemChildrenView().getNativeElement().style.top = top + "px";
+            this.getItemChildrenView().getNativeElement().style.left = left + "px";
         }
     }
 
     collapse() {
         if (!this.expanded) return;
         this.expanded = false;
-        this.nativeElement.classList.remove("expanded");
+        this.getNativeElement().classList.remove("expanded");
         if (this.itemChildrenView == null) return;
-        this.itemChildrenView.collapse();
+        this.getItemChildrenView().collapse();
     }
 }

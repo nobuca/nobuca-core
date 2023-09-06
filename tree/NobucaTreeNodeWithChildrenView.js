@@ -53,7 +53,7 @@ export default class NobucaTreeNodeWithChildrenView {
 
     createChildNode(childNodeModel) {
         let childNodeView = new NobucaTreeNodeView(childNodeModel);
-        this.nativeElement.appendChild(childNodeView.nativeElement);
+        this.nativeElement.appendChild(childNodeView.getNativeElement());
         this.nodeViewList.push(childNodeView);
     }
 

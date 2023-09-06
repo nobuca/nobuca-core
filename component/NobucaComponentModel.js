@@ -1,3 +1,4 @@
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaComponentModel {
 
@@ -10,5 +11,9 @@ export default class NobucaComponentModel {
 
     setId(id) {
         this.id = id;
+    }
+
+    newEventEmitter() {
+        return new NobucaEventEmitter();
     }
 }

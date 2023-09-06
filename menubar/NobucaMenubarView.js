@@ -5,7 +5,6 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 export default class NobucaMenubarView extends NobucaComponentView {
     constructor(model) {
         super(model);
-        this.nativeElement = this.createDiv();
         this.menuItemViewList = [];
         this.createMenuItemsViews();
 
@@ -24,10 +23,10 @@ export default class NobucaMenubarView extends NobucaComponentView {
         });
     }
 
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaMenubar";
-        return div;
+        this.setNativeElement(div);
     }
 
 
@@ -48,8 +47,9 @@ export default class NobucaMenubarView extends NobucaComponentView {
     }
 
     creaMenuItemView(menuItemModel) {
-        let menuItemView = new NobucaMenubarItemView(menuItemModel, this, null);
-        this.nativeElement.appendChild(menuItemView.nativeElement);
+        let menuItemView = new NobucaMenubarItemView(menuItemModel);
+        menuItemView.setMenubarView(this);
+        this.getNativeElement().appendChild(menuItemView.getNativeElement());
         this.getMenuItemViewList().push(menuItemView);
         menuItemView
             .getModel()
@@ -74,13 +74,13 @@ export default class NobucaMenubarView extends NobucaComponentView {
     }
 
     setSize(width, height) {
-        this.nativeElement.style.width = width + "px";
-        this.nativeElement.style.height = this.getModel().getSize().getFixedHeight() + "px";
+        this.getNativeElement().style.width = width + "px";
+        this.getNativeElement().style.height = this.getModel().getSize().getFixedHeight() + "px";
     }
 
     setPosition(top, left) {
-        this.nativeElement.style.top = top + "px";
-        this.nativeElement.style.left = left + "px";
+        this.getNativeElement().style.top = top + "px";
+        this.getNativeElement().style.left = left + "px";
     }
 
     listenModel() {

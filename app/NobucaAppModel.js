@@ -8,9 +8,6 @@ export default class NobucaAppModel {
         this.createRootPanel();
         this.showDialogEventEmitter = new NobucaEventEmitter();
         this.titleChangedEventEmitter = new NobucaEventEmitter();
-        
-        NobucaFactory.registerDefaultViewConstructors();
-        NobucaFactory.createNewViewForModel(this);
     }
 
     getClassName() {
