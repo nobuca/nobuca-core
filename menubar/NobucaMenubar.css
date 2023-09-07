@@ -23,8 +23,9 @@
 .NobucaMenubarItemContents {
   display: flex;
   flex-grow: 1;
+  align-items: center;
   border-radius: 4px;
-  border: 1px solid var(--background-color-dark);
+  border: 1px solid transparent;
   height: 18px;
 }
 
