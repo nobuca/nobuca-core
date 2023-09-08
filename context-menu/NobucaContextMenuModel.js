@@ -39,7 +39,7 @@ export default class NobucaContextMenuModel {
 
     addMenuItem(menuItem) {
         this.menuItems.push(menuItem);
-        menuItem.getClickEventEmitter().subscribe(event => {
+        menuItem.getClickedEventEmitter().subscribe(event => {
             this.getMenuItemClickEventEmitter().emit(event);
         });
     }

@@ -55,7 +55,7 @@ export default class NobucaContextMenuView {
         this.nativeElement.appendChild(menuItemView.getNativeElement());
         this.menuItemViewList.push(menuItemView);
         if (!menuItemModel.getSeparator()) {
-            menuItemModel.getClickEventEmitter().subscribe(event => {
+            menuItemModel.getClickedEventEmitter().subscribe(event => {
                 this.hide();
             });
         }

@@ -31,7 +31,7 @@ export default class NobucaContextMenuItemView extends NobucaComponentView {
         div.appendChild(this.createMenuItemText());
 
         div.addEventListener('click', () => {
-            this.getModel().getClickEventEmitter().emit(this.getModel());
+            this.getModel().getClickedEventEmitter().emit(this.getModel());
         });
 
         return div;

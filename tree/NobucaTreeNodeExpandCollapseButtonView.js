@@ -25,8 +25,8 @@ export default class NobucaTreeNodeExpandCollapseButtonView {
         return this.nodeModel;
     }
 
-    getClickEventEmitter() {
-        return this.clickEventEmitter;
+    getClickedEventEmitter() {
+        return this.clickedEventEmitter;
     }
 
     createDiv() {

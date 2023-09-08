@@ -80,7 +80,7 @@ export default class NobucaTabsView extends NobucaComponentView {
         this.divTabHeadersContainer.appendChild(tabHeaderView.getNativeElement());
         this.divTabBodiesContainer.appendChild(tabBodyView.getNativeElement());
 
-        tabHeaderView.getClickEventEmitter().subscribe((tabModel) => {
+        tabHeaderView.getClickedEventEmitter().subscribe((tabModel) => {
             this.getModel().setActiveTab(tabModel);
         });
 

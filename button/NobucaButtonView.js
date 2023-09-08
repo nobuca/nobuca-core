@@ -31,7 +31,7 @@ export default class NobucaButtonView extends NobucaComponentView {
     emitClickEvent() {
         if (this.getModel().getEnabled()) {
             this.getModel()
-                .getClickEventEmitter()
+                .getClickedEventEmitter()
                 .emit();
         }
     }

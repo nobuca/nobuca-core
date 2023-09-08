@@ -12,9 +12,8 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
         this.iconClassName = iconClassName;
         this.iconImageSrc = iconImageSrc;
         this.menuItems = [];
-        this.clickEventEmitter = new NobucaEventEmitter();
+        this.clickedEventEmitter = new NobucaEventEmitter();
     }
-
 
     getText() {
         return this.text;
@@ -57,8 +56,8 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
         return this.menuItems;
     }
 
-    getClickEventEmitter() {
-        return this.clickEventEmitter;
+    getClickedEventEmitter() {
+        return this.clickedEventEmitter;
     }
 
     getSeparator() {

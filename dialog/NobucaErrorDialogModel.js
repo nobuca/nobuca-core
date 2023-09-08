@@ -12,7 +12,7 @@ export default class NobucaErrorDialogModel {
         this.getDialog().addChild(label);
 
         let okButton = this.getDialog().addOkButton();
-        okButton.getClickEventEmitter().subscribe(() => {
+        okButton.getClickedEventEmitter().subscribe(() => {
             this.getDialog().close();
         });
         okButton.focus();

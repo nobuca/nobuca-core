@@ -53,7 +53,7 @@ export default class NobucaMenubarView extends NobucaComponentView {
         this.getMenuItemViewList().push(menuItemView);
         menuItemView
             .getModel()
-            .getClickEventEmitter()
+            .getClickedEventEmitter()
             .subscribe(() => {
                 this.collapseAllButTheMenuItem(menuItemView);
             });

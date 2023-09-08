@@ -32,7 +32,7 @@ export default class NobucaMenuModel extends NobucaComponentModel {
     }
 
     listenMenuItem(menuItem) {
-        menuItem.getClickEventEmitter().subscribe(menuItem =>
+        menuItem.getClickedEventEmitter().subscribe(menuItem =>
             this.getMenuItemClickEventEmitter().emit(menuItem));
     }
 }

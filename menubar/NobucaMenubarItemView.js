@@ -23,7 +23,7 @@ export default class NobucaMenubarItemView extends NobucaComponentView {
 
         div.addEventListener("click", () => {
             this.expandCollapse();
-            this.getModel().getClickEventEmitter().emit(this.getModel());
+            this.getModel().getClickedEventEmitter().emit(this.getModel());
         });
 
         this.setNativeElement(div);

@@ -13,7 +13,7 @@ export default class NobucaButtonModel extends NobucaComponentModel {
             this.enabled = true;     
         }
         this.children = [];
-        this.clickEventEmitter = new NobucaEventEmitter();
+        this.clickedEventEmitter = new NobucaEventEmitter();
         this.enabledChangedEventEmitter = new NobucaEventEmitter();
         this.requestFocusEventEmitter = new NobucaEventEmitter();
     }
@@ -50,8 +50,8 @@ export default class NobucaButtonModel extends NobucaComponentModel {
         return this.enabled;
     }
 
-    getClickEventEmitter() {
-        return this.clickEventEmitter;
+    getClickedEventEmitter() {
+        return this.clickedEventEmitter;
     }
 
     getEnabledChangedEventEmitter() {

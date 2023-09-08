@@ -6,12 +6,12 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
     constructor(model) {
         super(model);
         this.deactivate();
-        this.clickEventEmitter = new NobucaEventEmitter();
+        this.clickedEventEmitter = new NobucaEventEmitter();
         this.closeEventEmitter = new NobucaEventEmitter();
     }
 
-    getClickEventEmitter() {
-        return this.clickEventEmitter;
+    getClickedEventEmitter() {
+        return this.clickedEventEmitter;
     }
 
     getCloseEventEmitter() {
@@ -22,7 +22,7 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
         let divTabHeader = document.createElement("div");
         divTabHeader.className = "NobucaTabHeader";
         divTabHeader.addEventListener('click', (event) => {
-            this.getClickEventEmitter().emit(this.getModel());
+            this.getClickedEventEmitter().emit(this.getModel());
         });
 
         divTabHeader.classList.add('inactive');

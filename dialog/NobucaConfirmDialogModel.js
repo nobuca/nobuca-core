@@ -14,13 +14,13 @@ export default class NobucaConfirmDialogModel {
         this.getDialog().addChild(label);
 
         let yesButton = this.getDialog().addYesButton();
-        yesButton.getClickEventEmitter().subscribe(() => {
+        yesButton.getClickedEventEmitter().subscribe(() => {
             this.getDialog().close();
             this.getResultYesEventEmitter().emit();
         });
         yesButton.focus();
 
-        this.getDialog().addNoButton().getClickEventEmitter().subscribe(() => {
+        this.getDialog().addNoButton().getClickedEventEmitter().subscribe(() => {
             this.getDialog().close();
         });
     }
