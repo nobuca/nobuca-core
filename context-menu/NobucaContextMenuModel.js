@@ -1,5 +1,5 @@
 import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
-import NobucaMenuItemSeparatorModel from '../menu-item/NobucaMenuItemSeparatorModel.js';
+import NobucaMenuItemSeparatorModel from '../menu/NobucaMenuItemSeparatorModel.js';
 
 export default class NobucaContextMenuModel {
 

@@ -6,7 +6,6 @@
 
 .NobucaMenubarItem {
   display: flex;
-  z-index: 1;
   align-items: center;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -83,7 +82,6 @@
 }
 
 .NobucaMenubarChildMenuItems {
-  z-index: 2;
   display: none;
   flex-direction: column;
   position: absolute;

@@ -82,26 +82,4 @@ export default class NobucaMenubarView extends NobucaComponentView {
         this.getNativeElement().style.top = top + "px";
         this.getNativeElement().style.left = left + "px";
     }
-
-    listenModel() {
-        this.getModel()
-            .getPosition()
-            .getChangeEventEmitter()
-            .subscribe(() => {
-                this.setPosition(
-                    this.getModel().getPosition().getTop(),
-                    this.getModel().getPosition().getLeft()
-                );
-            });
-
-        this.getModel()
-            .getSize()
-            .getChangeEventEmitter()
-            .subscribe(() => {
-                this.setSize(
-                    this.getModel().getSize().getWidth(),
-                    this.getModel().getSize().getHeight()
-                );
-            });
-    }
 }
