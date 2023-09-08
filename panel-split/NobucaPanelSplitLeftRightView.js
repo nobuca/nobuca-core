@@ -93,7 +93,7 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
         this.getLeftPanelView().updateContentsPositionAndSize();
 
         this.getDivider().style.height = parentHeight + "px";
-        this.getDivider().style.width = dividerWidth + "px";
+        this.getDivider().style.minWidth = dividerWidth + "px";
 
         this.getRightPanelView().getNativeElement().style.height = parentHeight + "px";
         this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";

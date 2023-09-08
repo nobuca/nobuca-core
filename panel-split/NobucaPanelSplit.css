@@ -1,6 +1,5 @@
 .NobucaPanelSplitLeftRight,
 .NobucaPanelSplitTopBottom {
-    background-color: rgb(35, 35, 35);
     position: absolute;
     display: flex;
 }
