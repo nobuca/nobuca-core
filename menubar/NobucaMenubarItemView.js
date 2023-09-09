@@ -12,6 +12,7 @@ export default class NobucaMenubarItemView extends NobucaComponentView {
 
         if (this.getModel().getSeparator()) {
             this.createNativeElementSeparator();
+            return;
         }
 
         let div = document.createElement("div");
