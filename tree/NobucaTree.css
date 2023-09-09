@@ -6,11 +6,6 @@
 
 .NobucaTreeNodes {
     flex-grow: 1;
-    margin: 3px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--component-border-color);
-    border-radius: var(--component-border-radius);
     overflow: auto;
 }
 
@@ -28,6 +23,20 @@
     padding-left: 7px;
     cursor: pointer;
     align-items: center;
+    height: 24px;
+}
+
+.NobucaTreeNodeWithoutChildrenRightSideComponents {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+
+.NobucaTreeNodeWithoutChildrenLeftSideComponents {
+    display: flex;
+    flex-direction: row;
+    padding-right: 4px;
 }
 
 .NobucaTreeNodeWithChildren {
@@ -36,7 +45,7 @@
 }
 
 .NobucaTreeNodeIndent {
-    width: 15px;
+    width: 21px;
 }
 
 .NobucaTreeNodeExpandCollapseButton {
@@ -44,10 +53,8 @@
     align-self: center;
     padding-left: 4px;
     padding-right: 4px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    min-width: 15px;
-    max-width: 15px;
+    min-width: 26px;
+    max-width: 26px;
     box-sizing: border-box;
 }
 
@@ -58,18 +65,19 @@
     justify-self: center;
     width: 20px;
     height: 15px;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 2px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
 }
 
-.NobucaTreeNodeIcon img {
+.NobucaTreeNodeIconImg {
     border-style: none;
     image-rendering: pixelated;
-    height: 13px;
+    opacity: 0.7;
+}
+
+.NobucaTreeNodeIconImg:hover {
+    opacity: 1;
 }
 
 .NobucaTreeNodeExpandCollapseButton.collapse {
@@ -81,15 +89,16 @@
 }
 
 .NobucaTreeNodeText {
-    padding-left: 5px;
+    margin-left: 3px;
     color: rgb(201, 201, 201);
-    height: 20px;
     display: flex;
     white-space: nowrap;
     overflow: hidden;
     flex-grow: 1;
     text-overflow: ellipsis;
-    padding-top: 2px;
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    color: var(--font-color);
 }
 
 .NobucaTreeNode.selected>.NobucaTreeNodeWithoutChildren {

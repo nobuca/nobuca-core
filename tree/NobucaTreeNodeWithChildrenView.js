@@ -1,65 +1,58 @@
+import NobucaComponentView from '../component/NobucaComponentView.js';
 import NobucaTreeNodeView from './NobucaTreeNodeView.js';
 
-export default class NobucaTreeNodeWithChildrenView {
+export default class NobucaTreeNodeWithChildrenView extends NobucaComponentView {
 
-    constructor(nodeModel) {
-
-        this.nodeModel = nodeModel;
-
-        this.nativeElement = this.createDiv();
-
-        this.nodeViewList = [];
-
-        this.createChildNodes();
-
-        this.paint();
-
-        this.nodeModel.getAddNodeEventEmitter().subscribe(event => {
-            this.createChildNode(event.childNode);
-        });
-
-        this.nodeModel.getExpandEventEmitter().subscribe(() => {
-            this.paint();
-        });
-
-        this.nodeModel.getCollapseEventEmitter().subscribe(() => {
-            this.paint();
-        });
-    }
-
-    getNodeModel() {
-        return this.nodeModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaTreeNodeWithChildren";
-        return div;
+        this.setNativeElement(div);
+        this.nodeViewList = [];
+        this.createChildNodes();
+        this.updateView();
     }
 
-    paint() {
-        if (this.nodeModel.getExpanded()) {
-            this.nativeElement.style.display = '';
+    getNodeViewList() {
+        return this.nodeViewList;
+    }
+
+    updateView() {
+        if (this.getModel().getExpanded()) {
+            this.getNativeElement().style.display = '';
         } else {
-            this.nativeElement.style.display = 'none';
+            this.getNativeElement().style.display = 'none';
         }
     }
 
     createChildNodes() {
-        this.getNodeModel().getNodes().forEach(childNodeModel => {
+        this.getModel().getNodes().forEach(childNodeModel => {
             this.createChildNode(childNodeModel);
         })
     }
 
     createChildNode(childNodeModel) {
         let childNodeView = new NobucaTreeNodeView(childNodeModel);
-        this.nativeElement.appendChild(childNodeView.getNativeElement());
-        this.nodeViewList.push(childNodeView);
+        this.getNativeElement().appendChild(childNodeView.getNativeElement());
+        this.getNodeViewList().push(childNodeView);
     }
 
     clearNodes() {
-        while (this.nativeElement.childNodes.length > 0) {
-            this.nativeElement.removeChild(this.nativeElement.childNodes[0]);
+        while (this.getNativeElement().childNodes.length > 0) {
+            this.getNativeElement().removeChild(this.getNativeElement().childNodes[0]);
         }
+    }
+
+    listenModel() {
+        this.getModel().getAddNodeEventEmitter().subscribe(event => {
+            this.createChildNode(event.childNode);
+        });
+
+        this.getModel().getExpandEventEmitter().subscribe(() => {
+            this.updateView();
+        });
+
+        this.getModel().getCollapseEventEmitter().subscribe(() => {
+            this.updateView();
+        });
     }
 }

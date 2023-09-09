@@ -1,43 +1,19 @@
-export default class NobucaTreeNodeIconView {
-  constructor(nodeModel) {
-    this.nodeModel = nodeModel;
-    this.nativeElement = this.createDiv();
-    this.createIconSrc();
-    this.createIconClassName();
-  }
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-  getNodeModel() {
-    return this.nodeModel;
-  }
+export default class NobucaTreeNodeIconView extends NobucaComponentView {
 
-  createDiv() {
-    let div = document.createElement("div");
-    div.className = "NobucaTreeNodeIcon";
-    return div;
-  }
+    createNativeElement() {
+        let div = document.createElement("div");
+        div.className = "NobucaTreeNodeIcon";
+        this.setNativeElement(div);
+        this.createIconImg();
+    }
 
-  createIconSrc() {
-    if (this.nodeModel.getIconSrc() == null) {
-      return;
+    createIconImg() {
+        if (this.getModel().getSrc() == null) return;
+        let img = document.createElement("img");
+        img.className = "NobucaTreeNodeIconImg";
+        img.src = this.getModel().getSrc();
+        this.getNativeElement().appendChild(img);
     }
-    let img = document.createElement("img");
-    img.className = "NobucaTreeNodeIconImg";
-    img.src = this.nodeModel.getIconSrc();
-    this.nativeElement.appendChild(img);
-    if (this.getNodeModel().getIconColor() != null) {
-      img.style.color = this.getNodeModel().getIconColor();
-    }
-  }
-
-  createIconClassName() {
-    if (this.nodeModel.getIconClassName() == null) {
-      return;
-    }
-    let div = document.createElement("div");
-    div.className = this.nodeModel.getIconClassName();
-    this.nativeElement.appendChild(div);
-    if (this.getNodeModel().getIconColor() != null) {
-      div.style.color = this.getNodeModel().getIconColor();
-    }
-  }
 }

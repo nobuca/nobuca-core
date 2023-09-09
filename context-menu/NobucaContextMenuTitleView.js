@@ -1,24 +1,21 @@
-export default class NobucaContextMenuTitleView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-    constructor(contextMenuModel) {
-        this.contextMenuModel = contextMenuModel;
-        this.nativeElement = this.createDiv();
-    }
+export default class NobucaContextMenuTitleView extends NobucaComponentView {
 
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaContextMenuTitle";
-        div.innerHTML = this.contextMenuModel.getTitle();
+        div.innerHTML = this.getModel().getTitle();
         document.body.appendChild(div);
-        return div;
+        this.setNativeElement(div);
     }
 
     setTitle(title) {
-        this.nativeElement.innerHTML = title;
+        this.getNativeElement().innerHTML = title;
     }
 
     updateViewFromModel() {
-        this.setTitle(this.contextMenuModel.getTitle());
+        this.setTitle(this.getModel().getTitle());
     }
 
 }

@@ -1,18 +1,10 @@
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaTreeNodeIndentView {
+export default class NobucaTreeNodeIndentView extends NobucaComponentView {
 
-    constructor(nodeModel) {
-        this.nodeModel = nodeModel;
-        this.nativeElement = this.createDiv();
-    }
-
-    getNodeModel() {
-        return this.nodeModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaTreeNodeIndent";
-        return div;
+        this.setNativeElement(div);
     }
 }

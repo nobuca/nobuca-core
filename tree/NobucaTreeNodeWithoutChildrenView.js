@@ -1,27 +1,12 @@
-import NobucaTreeNodeTextView from './NobucaTreeNodeTextView.js';
 import NobucaTreeNodeIndentView from './NobucaTreeNodeIndentView.js';
 import NobucaTreeNodeExpandCollapseButtonView from './NobucaTreeNodeExpandCollapseButtonView.js';
-import NobucaTreeNodeIconView from './NobucaTreeNodeIconView.js';
 import NobucaContextMenuView from '../context-menu/NobucaContextMenuView.js';
 import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
+import NobucaComponentView from '../component/NobucaComponentView.js';
 
-export default class NobucaTreeNodeWithoutChildrenView {
+export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentView {
 
-    constructor(nodeModel) {
-        this.nodeModel = nodeModel;
-        this.nativeElement = this.createDiv();
-        this.createIndent();
-        this.createExpandCollapseButton();
-        this.createIcon();
-        this.createText();
-        this.createContextMenuView();
-    }
-
-    getNodeModel() {
-        return this.nodeModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaTreeNodeWithoutChildren";
 
@@ -38,7 +23,7 @@ export default class NobucaTreeNodeWithoutChildrenView {
                     this.selectedStateChanged();
                 }
             } else {
-                this.getNodeModel().select();
+                this.getModel().select();
             }
             event.stopPropagation();
         });
@@ -47,7 +32,7 @@ export default class NobucaTreeNodeWithoutChildrenView {
             if (event.ctrlKey) return;
             event.preventDefault();
             if (this.contextMenuView.getContextMenuModel().hasMenuItems()) {
-                this.getNodeModel().select();
+                this.getModel().select();
                 this.contextMenuView.show(event.x, event.y);
                 event.stopPropagation();
             }
@@ -55,42 +40,75 @@ export default class NobucaTreeNodeWithoutChildrenView {
 
         div.addEventListener('dblclick', event => {
             window.getSelection().removeAllRanges();
-            this.getNodeModel().select();
-            this.getNodeModel().getDoubleClickEventEmitter().emit(this);
+            this.getModel().select();
+            this.getModel().getDoubleClickEventEmitter().emit(this);
             event.stopPropagation();
         });
 
-        return div;
+        this.setNativeElement(div);
+
+        this.createIndent();
+        this.createExpandCollapseButton();
+        this.createContextMenuView();
+
+        this.createRightSideComponents();
+        this.createLeftSideComponents();
     }
 
     createIndent() {
-        let depth = this.nodeModel.getDepth();
+        let depth = this.getModel().getDepth();
         for (let i = 0; i < depth; i++) {
-            this.nodeIdentView = new NobucaTreeNodeIndentView(this.nodeModel);
-            this.nativeElement.appendChild(this.nodeIdentView.getNativeElement());
+            this.nodeIdentView = new NobucaTreeNodeIndentView(this.getModel());
+            this.getNativeElement().appendChild(this.nodeIdentView.getNativeElement());
         }
     }
 
     createExpandCollapseButton() {
-        this.nodeExpandCollapseButton = new NobucaTreeNodeExpandCollapseButtonView(this.nodeModel);
-        this.nativeElement.appendChild(this.nodeExpandCollapseButton.nativeElement);
+        this.nodeExpandCollapseButton = new NobucaTreeNodeExpandCollapseButtonView(this.getModel());
+        this.getNativeElement().appendChild(this.nodeExpandCollapseButton.getNativeElement());
     }
 
-    createIcon() {
-        this.nodeIconView = new NobucaTreeNodeIconView(this.nodeModel);
-        this.nativeElement.appendChild(this.nodeIconView.getNativeElement());
+    createRightSideComponents() {
+
+        this.divRightSideComponents = document.createElement("div");
+        this.divRightSideComponents.className = "NobucaTreeNodeWithoutChildrenRightSideComponents";
+        this.getNativeElement().appendChild(this.divRightSideComponents);
+
+        this.getModel().getRightSideComponents().forEach(componentModel => this.createRightSideComponent(componentModel));
     }
 
-    createText() {
-        this.nodeTextView = new NobucaTreeNodeTextView(this.nodeModel);
-        this.nativeElement.appendChild(this.nodeTextView.getNativeElement());
+    getDivRightSideComponents() {
+        return this.divRightSideComponents;
+    }
+
+    createLeftSideComponents() {
+
+        this.divLeftSideComponents = document.createElement("div");
+        this.divLeftSideComponents.className = "NobucaTreeNodeWithoutChildrenLeftSideComponents";
+        this.getNativeElement().appendChild(this.divLeftSideComponents);
+
+        this.getModel().getLeftSideComponents().forEach(componentModel => this.createLeftSideComponent(componentModel));
+    }
+
+    getDivLeftSideComponents() {
+        return this.divLeftSideComponents;
+    }
+
+    createRightSideComponent(componentModel) {
+        var componentView = this.createNewViewForModel(componentModel);
+        this.getDivRightSideComponents().appendChild(componentView.getNativeElement());
+    }
+
+    createLeftSideComponent(componentModel) {
+        var componentView = this.createNewViewForModel(componentModel);
+        this.getDivLeftSideComponents().appendChild(componentView.getNativeElement());
     }
 
     createContextMenuView() {
-        this.contextMenuView = new NobucaContextMenuView(this.nodeModel.getContextMenu());
+        this.contextMenuView = new NobucaContextMenuView(this.getModel().getContextMenu());
         this.contextMenuItemClicked = new NobucaEventEmitter();
-        this.nodeModel.getContextMenuItemClickEventEmitter().subscribe(event => {
-            this.contextMenuItemClicked.emit({ nodeModel: this.nodeModel, menuItemModel: event });
+        this.getModel().getContextMenuItemClickEventEmitter().subscribe(event => {
+            this.contextMenuItemClicked.emit({ nodeModel: this.getModel(), menuItemModel: event });
         });
     }
 
@@ -100,7 +118,7 @@ export default class NobucaTreeNodeWithoutChildrenView {
 
         div.addEventListener("dragstart", event => {
             console.log("dragstart", event);
-            event.dataTransfer.setData("node/data", JSON.stringify(this.getNodeModel().getData()));
+            event.dataTransfer.setData("node/data", JSON.stringify(this.getModel().getData()));
         });
 
         div.addEventListener("dragleave", event => {

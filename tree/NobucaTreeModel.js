@@ -87,6 +87,10 @@ export default class NobucaTreeModel extends NobucaPositionAndSizeModel {
         });
 
         this.getAddNodeEventEmitter().emit({ parentNode: null, childNode: node });
+
+        node.setTree(this);
+
+        return node;
     }
 
     findNodeByData(data) {
@@ -116,5 +120,19 @@ export default class NobucaTreeModel extends NobucaPositionAndSizeModel {
         this.getRemoveNodeEventEmitter().emit(node);
     }
 
+    setExpandButtonIconSrc(expandButtonIconSrc) {
+        this.expandButtonIconSrc = expandButtonIconSrc;
+    }
 
+    getExpandButtonIconSrc() {
+        return this.expandButtonIconSrc;
+    }
+
+    setCollapseButtonIconSrc(collapseButtonIconSrc) {
+        this.collapseButtonIconSrc = collapseButtonIconSrc;
+    }
+
+    getCollapseButtonIconSrc() {
+        return this.collapseButtonIconSrc;
+    }
 }

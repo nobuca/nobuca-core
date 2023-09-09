@@ -1,58 +1,49 @@
-export default class NobucaTreeNodeExpandCollapseButtonView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-    constructor(nodeModel) {
+export default class NobucaTreeNodeExpandCollapseButtonView extends NobucaComponentView {
+F
+    createNativeElement() {
+        let img = document.createElement("img");
+        img.className = "NobucaTreeNodeExpandCollapseButton";
 
-        this.nodeModel = nodeModel;
-
-        this.nativeElement = this.createDiv();
-
-        this.paint();
-
-        this.nodeModel.getExpandEventEmitter().subscribe(() => {
-            this.paint();
-        });
-
-        this.nodeModel.getCollapseEventEmitter().subscribe(() => {
-            this.paint();
-        });
-
-        this.nodeModel.getAddNodeEventEmitter().subscribe(() => {
-            this.paint();
-        });
-    }
-
-    getNodeModel() {
-        return this.nodeModel;
-    }
-
-    getClickedEventEmitter() {
-        return this.clickedEventEmitter;
-    }
-
-    createDiv() {
-        let div = document.createElement("div");
-        div.className = "NobucaTreeNodeExpandCollapseButton";
-
-        div.addEventListener('click', event => {
-            if (this.getNodeModel().getExpanded()) {
-                this.getNodeModel().collapse();
+        img.addEventListener('click', event => {
+            if (this.getModel().getExpanded()) {
+                this.getModel().collapse();
             } else {
-                this.getNodeModel().expand();
+                this.getModel().expand();
             }
         });
 
-        return div;
+        this.setNativeElement(img);
+
+        this.updateView();
     }
 
-    paint() {
-        if (this.getNodeModel().getNodes().length === 0) {
-            this.nativeElement.className = 'NobucaTreeNodeExpandCollapseButton';
+    updateView() {
+        if (this.getModel().getNodes().length === 0) {
+            this.getNativeElement().className = 'NobucaTreeNodeExpandCollapseButton withoutChildren';
         } else {
-            if (this.getNodeModel().getExpanded()) {
-                this.nativeElement.className = 'NobucaTreeNodeExpandCollapseButton far fa-minus-square';
+            this.getNativeElement().className = 'NobucaTreeNodeExpandCollapseButton withChildren';
+            if (this.getModel().getExpanded()) {
+                this.getNativeElement().src = this.getModel().getTree().getCollapseButtonIconSrc();
             } else {
-                this.nativeElement.className = 'NobucaTreeNodeExpandCollapseButton far fa-plus-square';
+                this.getNativeElement().src = this.getModel().getTree().getExpandButtonIconSrc();
             }
         }
     }
+
+    listenModel() {
+        this.getModel().getExpandEventEmitter().subscribe(() => {
+            this.updateView();
+        });
+
+        this.getModel().getCollapseEventEmitter().subscribe(() => {
+            this.updateView();
+        });
+
+        this.getModel().getAddNodeEventEmitter().subscribe(() => {
+            this.updateView();
+        });
+    }
+
 }

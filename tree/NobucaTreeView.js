@@ -1,20 +1,15 @@
+import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaContextMenuView from "../context-menu/NobucaContextMenuView.js";
 import NobucaTreeNodesView from "./NobucaTreeNodesView.js";
 
-export default class NobucaTreeView {
+export default class NobucaTreeView extends NobucaComponentView{
     constructor(treeModel) {
-        this.treeModel = treeModel;
-        this.nativeElement = this.createDiv();
+        super(treeModel);
         this.createNodesView();
         this.createContextMenuView();
-        this.listenTreeModelEvents();
     }
 
-    getTreeModel() {
-        return this.treeModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaTree";
 
@@ -26,12 +21,12 @@ export default class NobucaTreeView {
             }
         });
 
-        return div;
+        this.setNativeElement(div);
     }
 
     createNodesView() {
-        this.nodesView = new NobucaTreeNodesView(this.treeModel);
-        this.nativeElement.appendChild(this.nodesView.getNativeElement());
+        this.nodesView = new NobucaTreeNodesView(this.getModel());
+        this.getNativeElement().appendChild(this.getNodesView().getNativeElement());
     }
 
     getNodesView() {
@@ -43,51 +38,23 @@ export default class NobucaTreeView {
     }
 
     setSize(width, height) {
-        this.nativeElement.style.width = width + "px";
-        this.nativeElement.style.height = height + "px";
+        this.getNativeElement().style.width = width + "px";
+        this.getNativeElement().style.height = height + "px";
     }
 
     setPosition(top, left) {
-        this.nativeElement.style.top = top + "px";
-        this.nativeElement.style.left = left + "px";
+        this.getNativeElement().style.top = top + "px";
+        this.getNativeElement().style.left = left + "px";
     }
 
     createContextMenuView() {
         this.contextMenuView = new NobucaContextMenuView(
-            this.treeModel.getContextMenu()
+            this.getModel().getContextMenu()
         );
     }
 
-    updateContentsPositionAndSize() {
-        this.setPosition(
-            this.getTreeModel().getPosition().getTop(),
-            this.getTreeModel().getPosition().getLeft()
-        );
-    }
-
-    updateSizeFromModel() {
-        this.setSize(
-            this.getTreeModel().getSize().getWidth(),
-            this.getTreeModel().getSize().getHeight()
-        );
-    }
-
-    listenTreeModelEvents() {
-        this.getTreeModel()
-            .getSize()
-            .getChangeEventEmitter()
-            .subscribe(() => {
-                this.updateSizeFromModel();
-            });
-
-        this.getTreeModel()
-            .getPosition()
-            .getChangeEventEmitter()
-            .subscribe(() => {
-                this.updateContentsPositionAndSize();
-            });
-
-        this.getTreeModel()
+    listenModel() {
+        this.getModel()
             .getRemoveNodeEventEmitter()
             .subscribe(nodeModel => {
                 console.log("node removed");

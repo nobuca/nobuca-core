@@ -4,6 +4,8 @@ import NobucaPanelView from "../panel/NobucaPanelView.js";
 import NobucaPanelSplitLeftRightView from "../panel-split/NobucaPanelSplitLeftRightView.js";
 import NobucaPanelSplitTopBottomView from "../panel-split/NobucaPanelSplitTopBottomView.js";
 import NobucaTreeView from "../tree/NobucaTreeView.js";
+import NobucaTreeNodeIconView from "../tree/NobucaTreeNodeIconView.js";
+import NobucaTreeNodeTextView from "../tree/NobucaTreeNodeTextView.js";
 import NobucaTabsView from "../tabs/NobucaTabsView.js";
 import NobucaTabsHeaderView from "../tabs/NobucaTabsHeaderView.js";
 import NobucaFieldsetView from "../fieldset/NobucaFieldsetView.js";
@@ -40,6 +42,10 @@ export default class NobucaFactory {
             function(model) { return new NobucaPanelSplitTopBottomView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeModel",
             function(model) { return new NobucaTreeView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeNodeIconModel",
+            function(model) { return new NobucaTreeNodeIconView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeNodeTextModel",
+            function(model) { return new NobucaTreeNodeTextView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
             function(model) { return new NobucaTabsView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaFieldsetModel",
@@ -70,8 +76,7 @@ export default class NobucaFactory {
     static createNewViewForModel(model) {
         if (model.getClassName == null) {
             console.log(
-                "Unable to instantiate a view for a model without getClassName method."
-            , model);
+                "Unable to instantiate a view for a model without getClassName method.", model);
             return null;
         }
 
@@ -82,8 +87,7 @@ export default class NobucaFactory {
                 console.log(
                     "Something gone wrong executing view constructor for model [" +
                     model.getClassName() +
-                    "]."
-                , model);
+                    "].", model);
             }
             return view;
         }

@@ -2,42 +2,38 @@ import NobucaContextMenuModel from './NobucaContextMenuModel.js';
 import NobucaContextMenuItemView from './NobucaContextMenuItemView.js';
 import NobucaContextMenuTitleView from './NobucaContextMenuTitleView.js';
 import NobucaHtmlElementIsDescendantOf from '../utils/NobucaHtmlElementIsDescendantOf.js';
+import NobucaComponentView from '../component/NobucaComponentView.js';
 
 
-export default class NobucaContextMenuView {
+export default class NobucaContextMenuView extends NobucaComponentView {
 
     static showingContextMenuView;
 
     constructor(contextMenuModel) {
-        if (contextMenuModel != null) {
-            this.contextMenuModel = contextMenuModel;
-        } else {
-            this.contextMenuModel = new NobucaContextMenuModel();
-        }
+        super(contextMenuModel)
         this.menuItemViewList = [];
-        this.nativeElement = this.createDiv();
         this.createTitle();
         this.createMenuItems();
     }
 
-    getContextMenuModel() {
-        return this.contextMenuModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement('div');
         div.className = 'NobucaContextMenu';
         document.body.appendChild(div);
-        return div;
+        this.setNativeElement(div);
     }
 
     createTitle() {
-        this.titleView = new NobucaContextMenuTitleView(this.contextMenuModel);
-        this.nativeElement.appendChild(this.titleView.getNativeElement());
+        this.titleView = new NobucaContextMenuTitleView(this.getModel());
+        this.getNativeElement().appendChild(this.getTitleView().getNativeElement());
+    }
+
+    getTitleView() {
+        return this.titleView;
     }
 
     updateTitle() {
-        if (this.contextMenuModel.getTitle() == null) return;
+        if (this.getModel().getTitle() == null) return;
     }
 
     createMenuItems() {
@@ -45,14 +41,14 @@ export default class NobucaContextMenuView {
             menuItemView.getNativeElement().parentNode.removeChild(menuItemView.getNativeElement());
         });
         this.menuItemViewList = [];
-        this.contextMenuModel.menuItems.forEach(menuItemModel => {
+        this.getModel().menuItems.forEach(menuItemModel => {
             this.createMenuItem(menuItemModel);
         });
     }
 
     createMenuItem(menuItemModel) {
         let menuItemView = new NobucaContextMenuItemView(menuItemModel);
-        this.nativeElement.appendChild(menuItemView.getNativeElement());
+        this.getNativeElement().appendChild(menuItemView.getNativeElement());
         this.menuItemViewList.push(menuItemView);
         if (!menuItemModel.getSeparator()) {
             menuItemModel.getClickedEventEmitter().subscribe(event => {
@@ -62,7 +58,7 @@ export default class NobucaContextMenuView {
     }
 
     getContextMenuModel() {
-        return this.contextMenuModel;
+        return this.getModel();
     }
 
     updateViewFromModel() {
@@ -74,18 +70,18 @@ export default class NobucaContextMenuView {
         this.hide();
         this.getContextMenuModel().setX(x);
         this.getContextMenuModel().setY(y);
-        this.nativeElement.style.left = x + 'px';
-        this.nativeElement.style.top = y + 'px';
-        this.nativeElement.style.display = 'flex';
+        this.getNativeElement().style.left = x + 'px';
+        this.getNativeElement().style.top = y + 'px';
+        this.getNativeElement().style.display = 'flex';
         NobucaContextMenuView.showingContextMenuView = this;
     }
 
     getX() {
-        return this.nativeElement.offsetLeft;
+        return this.getNativeElement().offsetLeft;
     }
 
     getY() {
-        return this.nativeElement.offsetTop;
+        return this.getNativeElement().offsetTop;
     }
 
     hide() {

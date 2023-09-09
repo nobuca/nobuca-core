@@ -1,44 +1,39 @@
 import NobucaTreeNodeWithoutChildrenView from "./NobucaTreeNodeWithoutChildrenView.js";
 import NobucaTreeNodeWithChildrenView from "./NobucaTreeNodeWithChildrenView.js";
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-export default class NobucaTreeNodeView {
+export default class NobucaTreeNodeView extends NobucaComponentView {
     constructor(nodeModel) {
-        this.nodeModel = nodeModel;
-        this.nativeElement = this.createDiv();
+        super(nodeModel);
+
         this.createNodeWithoutChildren();
         this.createNodeWithChildren();
 
-        if (this.nodeModel.getSelected()) {
+        if (this.getModel().getSelected()) {
             this.paintAsSelected();
         } else {
             this.paintAsDeselected();
         }
-
-        this.listenNodeModel();
     }
 
-    getNodeModel() {
-        return this.nodeModel;
-    }
-
-    createDiv() {
+    createNativeElement() {
         let div = document.createElement("div");
         div.className = "NobucaTreeNode";
-        return div;
+        this.setNativeElement(div);
     }
 
     createNodeWithoutChildren() {
-        this.nodeWithoutChildrenView = new NobucaTreeNodeWithoutChildrenView(
-            this.nodeModel
-        );
-        this.nativeElement.appendChild(this.nodeWithoutChildrenView.getNativeElement());
+        this.nodeWithoutChildrenView = new NobucaTreeNodeWithoutChildrenView(this.getModel());
+        this.getNativeElement().appendChild(this.getNodeWithoutChildren().getNativeElement());
+    }
+
+    getNodeWithoutChildren() {
+        return this.nodeWithoutChildrenView;
     }
 
     createNodeWithChildren() {
-        this.nodeWithChildrenView = new NobucaTreeNodeWithChildrenView(
-            this.nodeModel
-        );
-        this.nativeElement.appendChild(this.nodeWithChildrenView.getNativeElement());
+        this.nodeWithChildrenView = new NobucaTreeNodeWithChildrenView(this.getModel());
+        this.getNativeElement().appendChild(this.getNodeWithChildrenView().getNativeElement());
     }
 
     getNodeWithChildrenView() {
@@ -50,25 +45,25 @@ export default class NobucaTreeNodeView {
     }
 
     paintAsSelected() {
-        this.nativeElement.classList.add("selected");
+        this.getNativeElement().classList.add("selected");
     }
 
     paintAsDeselected() {
-        this.nativeElement.classList.remove("selected");
+        this.getNativeElement().classList.remove("selected");
     }
 
     clearNodes() {
         this.getNodeWithChildrenView().clearNodes();
     }
 
-    listenNodeModel() {
-        this.getNodeModel().getSelectEventEmitter().subscribe(() => {
+    listenModel() {
+        this.getModel().getSelectEventEmitter().subscribe(() => {
             this.paintAsSelected();
         });
-        this.getNodeModel().getDeselectEventEmitter().subscribe(() => {
+        this.getModel().getDeselectEventEmitter().subscribe(() => {
             this.paintAsDeselected();
         });
-        this.getNodeModel().getClearNodesEventEmitter().subscribe(() => {
+        this.getModel().getClearNodesEventEmitter().subscribe(() => {
             this.clearNodes();
         });
     }
