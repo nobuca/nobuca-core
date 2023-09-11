@@ -68,6 +68,9 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
         this.getBottomPanelView().getNativeElement().style.width = parentWidth + "px";
         this.getBottomPanelView().updateContentsPositionAndSize();
+
+        var newWeight = topPanelHeight / parentHeightWithoutDivider;
+        this.getModel().setWeight(newWeight);
     }
 
     endDrag(x, y) {

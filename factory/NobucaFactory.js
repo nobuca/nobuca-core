@@ -11,12 +11,14 @@ import NobucaTabsHeaderView from "../tabs/NobucaTabsHeaderView.js";
 import NobucaFieldsetView from "../fieldset/NobucaFieldsetView.js";
 import NobucaButtonView from "../button/NobucaButtonView.js";
 import NobucaLabelView from "../label/NobucaLabelView.js";
+import NobucaCheckboxView from "../checkbox/NobucaCheckboxView.js";
 import NobucaLinkView from "../link/NobucaLinkView.js";
 import NobucaSelectView from "../select/NobucaSelectView.js";
 import NobucaTextView from "../text/NobucaTextView.js";
 import NobucaTextAreaView from "../text-area/NobucaTextAreaView.js";
 import NobucaHtmlView from "../html/NobucaHtmlView.js";
 import NobucaImageView from "../image/NobucaImageView.js";
+import NobucaAccordionView from "../accordion/NobucaAccordionView.js";
 
 export default class NobucaFactory {
 
@@ -58,6 +60,8 @@ export default class NobucaFactory {
             function(model) { return new NobucaButtonView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLabelModel",
             function(model) { return new NobucaLabelView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaCheckboxModel",
+            function(model) { return new NobucaCheckboxView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLinkModel",
             function(model) { return new NobucaLinkView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaSelectModel",
@@ -68,6 +72,8 @@ export default class NobucaFactory {
             function(model) { return new NobucaTextView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTextAreaModel",
             function(model) { return new NobucaTextAreaView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaAccordionModel",
+            function(model) { return new NobucaAccordionView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaHtmlModel",
             function(model) { return new NobucaHtmlView(model); });
         return null;

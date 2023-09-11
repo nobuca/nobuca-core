@@ -2,16 +2,11 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 
 export default class NobucaLabelView extends NobucaComponentView {
 
-    constructor(model) {
-        super(model);
-        this.nativeElement = this.createDiv();
-    }
-
-    createDiv() {
+    createNativeElement() {
         let label = document.createElement("div");
         label.className = "NobucaLabel";
         label.innerHTML = this.getModel().getText();
-        return label;
+        this.setNativeElement(label);
     }
 
     updateView() {

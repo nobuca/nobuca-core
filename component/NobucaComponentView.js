@@ -6,6 +6,7 @@ export default class NobucaComponentView {
         this.model = model;
         this.registerViewConstructors();
         this.createNativeElement();
+        this.applyLayout();
         this.listenModel();
     }
 
@@ -52,6 +53,30 @@ export default class NobucaComponentView {
         return this.parent;
     }
 
+    applyLayout() {
+        var layout = this.getModel().getLayout();
 
+        if (layout.getDirectionRow()) {
+            this.getNativeElement().style.flexDirection = "row";
+        } else if (layout.getDirectionColumn()) {
+            this.getNativeElement().style.flexDirection = "column";
+        }
+
+        if (layout.getJustifyContentsLeft()) {
+            this.getNativeElement().style.justifyContent = "left";
+        } else if (layout.getJustifyContentsRight()) {
+            this.getNativeElement().style.justifyContent = "right";
+        } else if (layout.getJustifyContentsCenter()) {
+            this.getNativeElement().style.justifyContent = "center";
+        }
+   
+        if(layout.getAlignContentsCenter()) {
+            this.getNativeElement().style.alignItems = "center";
+        }
+
+        if(layout.getGrow()) {
+            this.getNativeElement().style.flexGrow = 1;
+        }
+    }
 
 }

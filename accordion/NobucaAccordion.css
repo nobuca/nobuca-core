@@ -1,0 +1,115 @@
+.NobucaAccordion {
+    display: flex;
+    flex-direction: column;
+}
+
+.NobucaAccordionSections {
+    display: flex;
+    flex-direction: column;
+}
+
+.NobucaAccordionSection {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--menubar-border-radius);
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.NobucaAccordionSectionHeader {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: rgb(61, 61, 61);
+    height: 26px;
+}
+
+.NobucaAccordionSectionHeaderComponents {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 3px;
+    padding-left: 5px;
+}
+
+.NobucaAccordionSectionHeaderButtonContainer {
+    display: flex;
+    width: 10px;
+    justify-content: center;
+}
+
+.NobucaAccordionSectionHeaderButton {
+    display: flex;
+    opacity: .7;
+}
+
+.NobucaAccordionSectionHeaderTitle {
+    display: flex;
+    padding-left: 4px;
+    padding-right: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: var(--font-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    text-shadow: var(--text-shadow);
+}
+
+.NobucaAccordionSectionHeaderDragger {
+    display: flex;
+    cursor: grab;
+    flex-grow: 1;
+    justify-content: right;
+}
+
+.NobucaAccordionSectionHeaderDraggerImg {
+ opacity: .7;
+}
+
+.NobucaAccordionSectionHeaderDragger:active {
+    cursor: grabbing;
+}
+
+.NobucaAccordionSectionBody {
+    display: flex;
+    background-color: rgb(61, 61, 61);
+}
+
+.NobucaAccordionSectionBody>.NobucaPanel {
+    width: 100%;
+}
+
+.NobucaAccordionSectionBody>.NobucaPanel>.NobucaPanel {
+    padding: 8px;
+}
+
+.NobucaAccordionSectionBody .NobucaAccordion {
+    width: 100%;
+}
+
+.NobucaAccordionSectionBody .NobucaAccordionSections {
+    margin: 0;
+    padding: 0;
+}
+
+.NobucaAccordionSectionBody .NobucaAccordionSection {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+}
+
+.NobucaAccordionSectionBody .NobucaAccordionSectionHeader {
+    padding-left: 22px;
+}
+
+.NobucaAccordionSectionBody .NobucaAccordionSectionHeaderDragger {
+    display: none;
+}
+
+.NobucaAccordionSectionBody .NobucaAccordionSectionBody {
+    background-color: rgb(54, 54, 54);
+    padding: 0px;
+}

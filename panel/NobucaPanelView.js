@@ -1,7 +1,7 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
 
 export default class NobucaPanelView extends NobucaComponentView {
- 
+
     getClassName() {
         return "NobucaPanel";
     }
@@ -12,7 +12,8 @@ export default class NobucaPanelView extends NobucaComponentView {
         if (this.getModel().getId() != null) {
             div.id = this.getModel().getId();
         }
-        this.nativeElement = div;
+        this.setNativeElement(div);
+        this.applyLayout();
         this.createChildViewsForChildModels();
     }
 

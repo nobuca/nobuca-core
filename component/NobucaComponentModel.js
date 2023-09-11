@@ -1,8 +1,10 @@
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
+import NobucaPanelLayoutModel from "../layout/NobucaLayoutModel.js";
 
 export default class NobucaComponentModel {
 
     constructor() {
+        this.layout = new NobucaPanelLayoutModel();
     }
 
     getId() {
@@ -13,7 +15,12 @@ export default class NobucaComponentModel {
         this.id = id;
     }
 
-    newEventEmitter() {
+    createEventEmitter() {
         return new NobucaEventEmitter();
     }
+    
+    getLayout() {
+        return this.layout;
+    }
+
 }

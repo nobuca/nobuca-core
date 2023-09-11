@@ -1,10 +1,12 @@
 import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaPanelModel from "../panel/NobucaPanelModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
 
-export default class NobucaAppModel {
+export default class NobucaAppModel extends NobucaComponentModel {
 
     constructor() {
+        super();
         this.createRootPanel();
         this.showDialogEventEmitter = new NobucaEventEmitter();
         this.titleChangedEventEmitter = new NobucaEventEmitter();
