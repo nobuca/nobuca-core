@@ -77,25 +77,22 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
 
     updateContentsPositionAndSize() {
 
-        var parent = this.getNativeElement().parentNode;
-        var parentHeight = parent.offsetHeight;
-        var parentWidth = parent.offsetWidth;
-        this.getNativeElement().style.height = parentHeight + "px";
-        this.getNativeElement().style.width = parentWidth + "px";
-
+        var height = this.getNativeElement().offsetHeight;
+        var width = this.getNativeElement().offsetWidth;
+  
         var dividerWidth = 3;
-        var parentWithWithoutDivider = parentWidth - dividerWidth;
-        var leftPanelWidth = parentWithWithoutDivider * this.getModel().getWeight();
-        var rightPanelWidth = parentWithWithoutDivider * (1 - this.getModel().getWeight());
+        var widthWithoutDivider = width - dividerWidth;
+        var leftPanelWidth = widthWithoutDivider * this.getModel().getWeight();
+        var rightPanelWidth = widthWithoutDivider * (1 - this.getModel().getWeight());
 
-        this.getLeftPanelView().getNativeElement().style.height = parentHeight + "px";
+        this.getLeftPanelView().getNativeElement().style.height = height + "px";
         this.getLeftPanelView().getNativeElement().style.width = leftPanelWidth + "px";
         this.getLeftPanelView().updateContentsPositionAndSize();
 
-        this.getDivider().style.height = parentHeight + "px";
+        this.getDivider().style.height = height + "px";
         this.getDivider().style.minWidth = dividerWidth + "px";
 
-        this.getRightPanelView().getNativeElement().style.height = parentHeight + "px";
+        this.getRightPanelView().getNativeElement().style.height = height + "px";
         this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";
         this.getRightPanelView().updateContentsPositionAndSize();
     }

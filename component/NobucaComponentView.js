@@ -19,7 +19,9 @@ export default class NobucaComponentView {
     }
 
     createNewViewForModel(model) {
-        return NobucaFactory.createNewViewForModel(model);
+        var view = NobucaFactory.createNewViewForModel(model);
+        model.view = view;
+        return view;
     }
 
     getModel() {

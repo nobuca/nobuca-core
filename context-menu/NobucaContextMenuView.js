@@ -19,7 +19,6 @@ export default class NobucaContextMenuView extends NobucaComponentView {
     createNativeElement() {
         let div = document.createElement('div');
         div.className = 'NobucaContextMenu';
-        document.body.appendChild(div);
         this.setNativeElement(div);
     }
 

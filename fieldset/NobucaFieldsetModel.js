@@ -9,7 +9,7 @@ export default class NobucaFieldsetModel {
         this.radioValue = radioValue;
         this.radioChecked = radioChecked;
         this.children = new Array();
-        this.addChildEventEmitter = new NobucaEventEmitter();
+        this.childAddedEventEmitter = new NobucaEventEmitter();
         this.radioCheckEventListener = new NobucaEventEmitter();
         this.radioUncheckEventListener = new NobucaEventEmitter();
     }
@@ -58,12 +58,12 @@ export default class NobucaFieldsetModel {
         return this.radioUncheckEventListener;
     }
 
-    getAddChildEventEmitter() {
-        return this.addChildEventEmitter;
+    getChildAddedEventEmitter() {
+        return this.childAddedEventEmitter;
     }
 
     addChild(child) {
         this.children.push(child);
-        this.getAddChildEventEmitter().emit(child);
+        this.getChildAddedEventEmitter().emit(child);
     }
 }

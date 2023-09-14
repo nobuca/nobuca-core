@@ -15,7 +15,7 @@ export default class NobucaDialogModel {
         this.children = new Array();
         this.buttons = new Array();
         this.closeEventEmitter = new NobucaEventEmitter();
-        this.addChildEventEmitter = new NobucaEventEmitter();
+        this.childAddedEventEmitter = new NobucaEventEmitter();
         this.clearChildrenEventEmitter = new NobucaEventEmitter();
         this.addButtonEventEmitter = new NobucaEventEmitter();
         this.clearButtonsEventEmitter = new NobucaEventEmitter();
@@ -46,8 +46,8 @@ export default class NobucaDialogModel {
         return this.closeEventEmitter;
     }
 
-    getAddChildEventEmitter() {
-        return this.addChildEventEmitter;
+    getChildAddedEventEmitter() {
+        return this.childAddedEventEmitter;
     }
 
     getClearChildrenEventEmitter() {
@@ -68,7 +68,7 @@ export default class NobucaDialogModel {
 
     addChild(child) {
         this.children.push(child);
-        this.getAddChildEventEmitter().emit(child);
+        this.getChildAddedEventEmitter().emit(child);
     }
 
     clearChildren() {

@@ -5,8 +5,8 @@ export default class NobucaPanelModel extends NobucaComponentModel {
     constructor() {
         super();
         this.children = [];
-        this.addChildEventEmitter = new NobucaEventEmitter();
-        this.removeChildEventEmitter = new NobucaEventEmitter();
+        this.childAddedEventEmitter = new NobucaEventEmitter();
+        this.childRemovedEventEmitter = new NobucaEventEmitter();
     }
 
     getClassName() {
@@ -20,24 +20,24 @@ export default class NobucaPanelModel extends NobucaComponentModel {
     addChild(child) {
         this.getChildren().push(child);
         child.parent = this;
-        this.getAddChildEventEmitter().emit(child);
+        this.getChildAddedEventEmitter().emit(child);
         return child;
     }
 
     removeChild(childToBeRemoved) {
         this.children = this.getChildren().filter(child => child != childToBeRemoved);
-        this.getRemoveChildEventEmitter().emit(child);
+        this.getChildRemovedEventEmitter().emit(childToBeRemoved);
     }
 
     clear() {
         this.getChildren().forEach(child => this.removeChild(child));
     }
 
-    getAddChildEventEmitter() {
-        return this.addChildEventEmitter;
+    getChildAddedEventEmitter() {
+        return this.childAddedEventEmitter;
     }
 
-    getRemoveChildEventEmitter() {
-        return this.removeChildEventEmitter;
+    getChildRemovedEventEmitter() {
+        return this.childRemovedEventEmitter;
     }
 }

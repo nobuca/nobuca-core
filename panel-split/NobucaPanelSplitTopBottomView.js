@@ -78,45 +78,31 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         NobucaPanelSplitTopBottomView.dragging = null;
     }
 
-    getLeftSideWidthPercentage() {
+    getTopSideWidthPercentage() {
         let totalWidth = this.getTopPanelWidth() + this.getBottomPanelWidth();
         return this.getTopPanelWidth() / totalWidth;
     }
 
     updateContentsPositionAndSize() {
 
-        var parent = this.getNativeElement().parentNode;
-        var parentHeight = parent.offsetHeight;
-        var parentWidth = parent.offsetWidth;
-        this.getNativeElement().style.height = parentHeight + "px";
-        this.getNativeElement().style.width = parentWidth + "px";
-
+        var height =  this.getNativeElement().offsetHeight;
+        var width = this.getNativeElement().offsetWidth;
+        
         var dividerHeight = 3;
-        var parentHeightWithoutDivider = parentHeight - dividerHeight;
-        var topPanelHeight = parentHeightWithoutDivider * this.getModel().getWeight();
-        var bottomPanelHeight = parentHeightWithoutDivider * (1 - this.getModel().getWeight());
+        var heightWithoutDivider = height - dividerHeight;
+        var topPanelHeight = heightWithoutDivider * this.getModel().getWeight();
+        var bottomPanelHeight = heightWithoutDivider * (1 - this.getModel().getWeight());
 
         this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
-        this.getTopPanelView().getNativeElement().style.width = parentWidth + "px";
+        this.getTopPanelView().getNativeElement().style.width = width + "px";
         this.getTopPanelView().updateContentsPositionAndSize();
 
         this.getDivider().style.height = dividerHeight + "px";
-        this.getDivider().style.width = parentWidth + "px";
+        this.getDivider().style.width = width + "px";
 
         this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
-        this.getBottomPanelView().getNativeElement().style.width = parentWidth + "px";
+        this.getBottomPanelView().getNativeElement().style.width = width + "px";
         this.getBottomPanelView().updateContentsPositionAndSize();
-    }
-
-    setSize(width, height) {
-        this.getNativeElement().style.width =
-            this.getModel().getSize().getFixedWidth() + "px";
-        this.nativeElement.style.height = height + "px";
-    }
-
-    setPosition(top, left) {
-        this.getNativeElement().style.top = top + "px";
-        this.getNativeElement().style.left = left + "px";
     }
 }
 

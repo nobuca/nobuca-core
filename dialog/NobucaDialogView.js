@@ -107,7 +107,7 @@ export default class NobucaDialogView extends NobucaComponentView{
 
     listenModel() {
         this.getModel()
-            .getAddChildEventEmitter()
+            .getChildAddedEventEmitter()
             .subscribe((childModel) => {
                 let childView = this.createNewViewForModel(childModel);
                 this.addChild(childView);

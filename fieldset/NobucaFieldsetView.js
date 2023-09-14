@@ -62,7 +62,7 @@ export default class NobucaFieldsetView extends NobucaComponentView {
     listenModel() {
 
         this.getModel()
-            .getAddChildEventEmitter()
+            .getChildAddedEventEmitter()
             .subscribe((childModel) => {
                 console.log(
                     "Added child model [" + childModel + "] to fieldset model [" + this + "]"

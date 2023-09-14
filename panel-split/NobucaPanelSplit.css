@@ -1,6 +1,6 @@
 .NobucaPanelSplitLeftRight,
 .NobucaPanelSplitTopBottom {
-    position: absolute;
+    position: relative;
     display: flex;
 }
 

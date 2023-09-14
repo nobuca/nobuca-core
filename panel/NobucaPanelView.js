@@ -61,11 +61,14 @@ export default class NobucaPanelView extends NobucaComponentView {
     }
 
     listenModel() {
-        this.getModel()
-            .getAddChildEventEmitter()
-            .subscribe((childModel) => {
-                let childView = this.createNewViewForModel(childModel);
-                this.addChild(childView);
-            });
+        this.getModel().getChildAddedEventEmitter().subscribe(childModel => {
+            let childView = this.createNewViewForModel(childModel);
+            this.addChild(childView);
+        });
+        this.getModel().getChildRemovedEventEmitter().subscribe(childModel => {
+            console.log("child removed", childModel);
+            if (childModel.view != null)
+                this.removeChild(childModel.view);
+        })
     }
 }
