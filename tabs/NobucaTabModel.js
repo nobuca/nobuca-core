@@ -37,4 +37,5 @@ export default class NobucaTabModel extends NobucaComponentModel {
     getCloseableChangeEventEmitter() {
         return this.closeableChangeEventEmitter;
     }
+
 }

@@ -10,6 +10,7 @@ import NobucaTabsView from "../tabs/NobucaTabsView.js";
 import NobucaTabsHeaderView from "../tabs/NobucaTabsHeaderView.js";
 import NobucaFieldsetView from "../fieldset/NobucaFieldsetView.js";
 import NobucaButtonView from "../button/NobucaButtonView.js";
+import NobucaButtonBarView from "../button-bar/NobucaButtonBarView.js";
 import NobucaLabelView from "../label/NobucaLabelView.js";
 import NobucaCheckboxView from "../checkbox/NobucaCheckboxView.js";
 import NobucaLinkView from "../link/NobucaLinkView.js";
@@ -58,6 +59,8 @@ export default class NobucaFactory {
             function(model) { return new NobucaTabsHeaderView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaButtonModel",
             function(model) { return new NobucaButtonView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaButtonBarModel",
+            function(model) { return new NobucaButtonBarView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLabelModel",
             function(model) { return new NobucaLabelView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaCheckboxModel",
@@ -80,6 +83,11 @@ export default class NobucaFactory {
     }
 
     static createNewViewForModel(model) {
+        if (model == null) {
+            console.log(
+                "Unable to instantiate a view for a model null.");
+            return null;
+        }
         if (model.getClassName == null) {
             console.log(
                 "Unable to instantiate a view for a model without getClassName method.", model);

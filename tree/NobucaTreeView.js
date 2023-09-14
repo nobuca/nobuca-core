@@ -47,6 +47,10 @@ export default class NobucaTreeView extends NobucaComponentView{
         this.getNativeElement().style.left = left + "px";
     }
 
+    updateContentsPositionAndSize() {
+        this.getNodesView().getNativeElement().style.height = this.getNativeElement().offsetHeight + "px";
+    }
+
     createContextMenuView() {
         this.contextMenuView = new NobucaContextMenuView(
             this.getModel().getContextMenu()

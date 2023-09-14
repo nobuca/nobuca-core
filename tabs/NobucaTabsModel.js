@@ -33,8 +33,8 @@ export default class NobucaTabsModel extends NobucaComponentModel {
         return this.removeTabEventEmitter;
     }
 
-    findTabByData(data) {
-        return this.getTabs().find((tab) => tab.getData() === data);
+    getCurrentActivatedTab() {
+        return this.currentActivatedTab;
     }
 
     setActiveTab(tab) {

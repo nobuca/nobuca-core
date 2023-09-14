@@ -33,8 +33,12 @@ export default class NobucaTabsHeaderModel extends NobucaPositionAndSizeModel {
         return this.removeTabEventEmitter;
     }
 
-    findTabByData(data) {
-        return this.getTabs().find((tab) => tab.getData() === data);
+    findTabById(tabId) {
+        return this.getTabs().find((tab) => tab.getId() === tabId);
+    }
+    
+    getCurrentActivatedTab() {
+        return this.currentActivatedTab;
     }
 
     setActiveTab(tab) {
@@ -42,6 +46,12 @@ export default class NobucaTabsHeaderModel extends NobucaPositionAndSizeModel {
         this.currentActivatedTab = tab;
         this.addToLastActiveTabs(tab);
         this.getActiveTabChangeEventEmitter().emit(tab);
+    }
+
+    activateTab(tabId) {
+        var tab = this.findTabById(tabId);
+        if (tab == null) return;
+        this.setActiveTab(tab);
     }
 
     createTab(text, data) {

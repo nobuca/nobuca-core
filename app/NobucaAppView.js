@@ -5,13 +5,12 @@ import NobucaDialogView from "../dialog/NobucaDialogView.js";
 
 export default class NobucaAppView extends NobucaComponentView {
 
-    constructor(model) {
-        super(model);
-        this.createRootPanelView();
-    }
-
     registerViewConstructors() {
         NobucaFactory.registerDefaultViewConstructors();
+    }
+
+    createNativeElement() {
+        this.createRootPanelView();
     }
 
     createRootPanelView() {
