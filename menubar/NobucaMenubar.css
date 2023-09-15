@@ -7,8 +7,6 @@
 .NobucaMenubarItem {
     display: flex;
     align-items: center;
-    margin-top: 4px;
-    margin-bottom: 4px;
     cursor: pointer;
 }
 

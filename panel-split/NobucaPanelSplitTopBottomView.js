@@ -52,7 +52,6 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
 
         var parent = this.getNativeElement().parentNode;
         var parentHeight = parent.offsetHeight;
-        var parentWidth = parent.offsetWidth;
         var dividerHeight = 3;
         var parentHeightWithoutDivider = parentHeight - dividerHeight;
         var topPanelHeight = this.getTopPanelView().getNativeElement().offsetHeight;
@@ -60,13 +59,9 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         var bottomPanelHeight = parentHeightWithoutDivider - topPanelHeight;
 
         this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
-        this.getTopPanelView().getNativeElement().style.width = parentWidth + "px";
         this.getTopPanelView().updateContentsPositionAndSize();
 
-        this.getDivider().style.width = parentWidth + "px";
-
         this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
-        this.getBottomPanelView().getNativeElement().style.width = parentWidth + "px";
         this.getBottomPanelView().updateContentsPositionAndSize();
 
         var newWeight = topPanelHeight / parentHeightWithoutDivider;
@@ -90,8 +85,8 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         
         var dividerHeight = 3;
         var heightWithoutDivider = height - dividerHeight;
-        var topPanelHeight = heightWithoutDivider * this.getModel().getWeight();
-        var bottomPanelHeight = heightWithoutDivider * (1 - this.getModel().getWeight());
+        var topPanelHeight = Math.floor(heightWithoutDivider * this.getModel().getWeight());
+        var bottomPanelHeight = Math.floor(heightWithoutDivider * (1 - this.getModel().getWeight()));
 
         this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
         this.getTopPanelView().getNativeElement().style.width = width + "px";
