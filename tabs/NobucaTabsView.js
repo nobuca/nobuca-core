@@ -118,20 +118,6 @@ export default class NobucaTabsView extends NobucaComponentView {
         return this.tabHeaderViewCollection;
     }
 
-    updateContentsPositionAndSize() {
-        this.setPosition(
-            this.getModel().getPosition().getTop(),
-            this.getModel().getPosition().getLeft()
-        );
-    }
-
-    updateSizeFromModel() {
-        this.setSize(
-            this.getModel().getSize().getWidth(),
-            this.getModel().getSize().getHeight()
-        );
-    }
-
     deactivateAllTabs() {
         for (let i = 0; i < this.getTabHeaderViewCollection().length; i++) {
             let tabHeaderView = this.getTabHeaderViewCollection()[i];
@@ -160,7 +146,6 @@ export default class NobucaTabsView extends NobucaComponentView {
             .subscribe((tabModel) => {
                 this.activateTab(tabModel);
             });
-
 
         this.getModel()
             .getRemoveTabEventEmitter()

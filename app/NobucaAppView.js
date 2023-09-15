@@ -33,6 +33,9 @@ export default class NobucaAppView extends NobucaComponentView {
 
     updateContentsPositionAndSize() {
 
+        if (this.getRootPanelView().getNativeElement().offsetHeight == window.innerHeight &&
+            this.getRootPanelView().getNativeElement().offsetWidth == window.innerWidth) return;
+
         this.getRootPanelView().getNativeElement().style.height = window.innerHeight + "px";
         this.getRootPanelView().getNativeElement().style.width = window.innerWidth + "px";
 

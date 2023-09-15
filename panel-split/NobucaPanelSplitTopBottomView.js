@@ -80,24 +80,30 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
 
     updateContentsPositionAndSize() {
 
-        var height =  this.getNativeElement().offsetHeight;
+        var height = this.getNativeElement().offsetHeight;
         var width = this.getNativeElement().offsetWidth;
-        
+
         var dividerHeight = 3;
         var heightWithoutDivider = height - dividerHeight;
         var topPanelHeight = Math.floor(heightWithoutDivider * this.getModel().getWeight());
         var bottomPanelHeight = Math.floor(heightWithoutDivider * (1 - this.getModel().getWeight()));
 
-        this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
-        this.getTopPanelView().getNativeElement().style.width = width + "px";
-        this.getTopPanelView().updateContentsPositionAndSize();
+        if (this.getTopPanelView().getNativeElement().offsetHeight != topPanelHeight ||
+            this.getTopPanelView().getNativeElement().offsetWidth != width) {
+            this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
+            this.getTopPanelView().getNativeElement().style.width = width + "px";
+            this.getTopPanelView().updateContentsPositionAndSize();
+        }
 
         this.getDivider().style.height = dividerHeight + "px";
         this.getDivider().style.width = width + "px";
 
-        this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
-        this.getBottomPanelView().getNativeElement().style.width = width + "px";
-        this.getBottomPanelView().updateContentsPositionAndSize();
+        if (this.getBottomPanelView().getNativeElement().offsetHeight != bottomPanelHeight ||
+            this.getBottomPanelView().getNativeElement().offsetWidth != width) {
+            this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
+            this.getBottomPanelView().getNativeElement().style.width = width + "px";
+            this.getBottomPanelView().updateContentsPositionAndSize();
+        }
     }
 }
 

@@ -79,33 +79,28 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
 
         var height = this.getNativeElement().offsetHeight;
         var width = this.getNativeElement().offsetWidth;
-  
+
         var dividerWidth = 3;
         var widthWithoutDivider = width - dividerWidth;
         var leftPanelWidth = Math.floor(widthWithoutDivider * this.getModel().getWeight());
         var rightPanelWidth = Math.floor(widthWithoutDivider * (1 - this.getModel().getWeight()));
 
-        this.getLeftPanelView().getNativeElement().style.height = height + "px";
-        this.getLeftPanelView().getNativeElement().style.width = leftPanelWidth + "px";
-        this.getLeftPanelView().updateContentsPositionAndSize();
+        if (this.getLeftPanelView().getNativeElement().offsetHeight != height ||
+            this.getLeftPanelView().getNativeElement().offsetWidth != leftPanelWidth) {
+            this.getLeftPanelView().getNativeElement().style.height = height + "px";
+            this.getLeftPanelView().getNativeElement().style.width = leftPanelWidth + "px";
+            this.getLeftPanelView().updateContentsPositionAndSize();
+        }
 
         this.getDivider().style.height = height + "px";
         this.getDivider().style.minWidth = dividerWidth + "px";
 
-        this.getRightPanelView().getNativeElement().style.height = height + "px";
-        this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";
-        this.getRightPanelView().updateContentsPositionAndSize();
-    }
-
-    setSize(width, height) {
-        this.getNativeElement().style.width =
-            this.getModel().getSize().getFixedWidth() + "px";
-        this.nativeElement.style.height = height + "px";
-    }
-
-    setPosition(top, left) {
-        this.getNativeElement().style.top = top + "px";
-        this.getNativeElement().style.left = left + "px";
+        if (this.getRightPanelView().getNativeElement().offsetHeight != height ||
+            this.getRightPanelView().getNativeElement().offsetWidth != rightPanelWidth) {
+            this.getRightPanelView().getNativeElement().style.height = height + "px";
+            this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";
+            this.getRightPanelView().updateContentsPositionAndSize();
+        }
     }
 }
 
