@@ -1,0 +1,10 @@
+.NobucaPopover {
+    display: flex;
+    position: absolute;
+    background-color: var(--background-color-dark);
+    border: var(--menubar-border);
+    border-bottom-left-radius: var(--menubar-border-radius);
+    border-bottom-right-radius: var(--menubar-border-radius);
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.88);
+    z-index: 3;
+}

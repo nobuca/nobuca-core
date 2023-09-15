@@ -17,6 +17,7 @@
 @import "cards/NobucaCards.css";
 @import "accordion/NobucaAccordion.css";
 @import "checkbox/NobucaCheckbox.css";
+@import "popover/NobucaPopover.css";
 :root {
     --background-color-dark: rgb(29, 29, 29);
     --background-color-light: rgb(55, 55, 55);

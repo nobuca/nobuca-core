@@ -20,6 +20,7 @@ import NobucaTextAreaView from "../text-area/NobucaTextAreaView.js";
 import NobucaHtmlView from "../html/NobucaHtmlView.js";
 import NobucaImageView from "../image/NobucaImageView.js";
 import NobucaAccordionView from "../accordion/NobucaAccordionView.js";
+import NobucaPopoverView from "../popover/NobucaPopoverView.js";
 
 export default class NobucaFactory {
 
@@ -34,51 +35,53 @@ export default class NobucaFactory {
 
     static registerDefaultViewConstructors() {
         NobucaFactory.registerViewConstructorForModelClassName("NobucaAppModel",
-            function(model) { return new NobucaAppView(model); });
+            function (model) { return new NobucaAppView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaMenubarModel",
-            function(model) { return new NobucaMenubarView(model); });
+            function (model) { return new NobucaMenubarView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelModel",
-            function(model) { return new NobucaPanelView(model); });
+            function (model) { return new NobucaPanelView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelSplitLeftRightModel",
-            function(model) { return new NobucaPanelSplitLeftRightView(model); });
+            function (model) { return new NobucaPanelSplitLeftRightView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelSplitTopBottomModel",
-            function(model) { return new NobucaPanelSplitTopBottomView(model); });
+            function (model) { return new NobucaPanelSplitTopBottomView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeModel",
-            function(model) { return new NobucaTreeView(model); });
+            function (model) { return new NobucaTreeView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeNodeIconModel",
-            function(model) { return new NobucaTreeNodeIconView(model); });
+            function (model) { return new NobucaTreeNodeIconView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeNodeTextModel",
-            function(model) { return new NobucaTreeNodeTextView(model); });
+            function (model) { return new NobucaTreeNodeTextView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
-            function(model) { return new NobucaTabsView(model); });
+            function (model) { return new NobucaTabsView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaFieldsetModel",
-            function(model) { return new NobucaFieldsetView(model); });
+            function (model) { return new NobucaFieldsetView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
-            function(model) { return new NobucaTabsView(model); });
+            function (model) { return new NobucaTabsView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsHeaderModel",
-            function(model) { return new NobucaTabsHeaderView(model); });
+            function (model) { return new NobucaTabsHeaderView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaButtonModel",
-            function(model) { return new NobucaButtonView(model); });
+            function (model) { return new NobucaButtonView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaButtonBarModel",
-            function(model) { return new NobucaButtonBarView(model); });
+            function (model) { return new NobucaButtonBarView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLabelModel",
-            function(model) { return new NobucaLabelView(model); });
+            function (model) { return new NobucaLabelView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaCheckboxModel",
-            function(model) { return new NobucaCheckboxView(model); });
+            function (model) { return new NobucaCheckboxView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLinkModel",
-            function(model) { return new NobucaLinkView(model); });
+            function (model) { return new NobucaLinkView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaSelectModel",
-            function(model) { return new NobucaSelectView(model); });
+            function (model) { return new NobucaSelectView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaImageModel",
-            function(model) { return new NobucaImageView(model); });
+            function (model) { return new NobucaImageView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTextModel",
-            function(model) { return new NobucaTextView(model); });
+            function (model) { return new NobucaTextView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTextAreaModel",
-            function(model) { return new NobucaTextAreaView(model); });
+            function (model) { return new NobucaTextAreaView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaAccordionModel",
-            function(model) { return new NobucaAccordionView(model); });
+            function (model) { return new NobucaAccordionView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaHtmlModel",
-            function(model) { return new NobucaHtmlView(model); });
+            function (model) { return new NobucaHtmlView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaPopoverModel",
+            function (model) { return new NobucaPopoverView(model); });
         return null;
     }
 

@@ -50,7 +50,7 @@ export default class NobucaAccordionView extends NobucaComponentView {
 
         var imgSectionHeaderButton = document.createElement("img");
         imgSectionHeaderButton.className = "NobucaAccordionSectionHeaderButton";
-        imgSectionHeaderButton.src = "./window-system/icons/icon-chevron-down.svg";
+        imgSectionHeaderButton.src = "./user-interface/icons/icon-chevron-down.svg";
         divSectionHeaderButtonContainer.appendChild(imgSectionHeaderButton);
 
         divSectionHeader.imgSectionHeaderButton = imgSectionHeaderButton;
@@ -70,7 +70,7 @@ export default class NobucaAccordionView extends NobucaComponentView {
 
         var imgSectionHeaderDragger = document.createElement("img");
         imgSectionHeaderDragger.className = "NobucaAccordionSectionHeaderDraggerImg";
-        imgSectionHeaderDragger.src = "./window-system/icons/icon-dragger.svg";
+        imgSectionHeaderDragger.src = "./user-interface/icons/icon-dragger.svg";
         divSectionHeaderDragger.appendChild(imgSectionHeaderDragger);
 
         divSectionHeader.addEventListener("click", () => {
@@ -115,10 +115,10 @@ export default class NobucaAccordionView extends NobucaComponentView {
 
     updateSection(sectionModel) {
         if (sectionModel.getExpanded()) {
-            sectionModel.divSectionHeader.imgSectionHeaderButton.src = "./window-system/icons/icon-chevron-down.svg";
+            sectionModel.divSectionHeader.imgSectionHeaderButton.src = "./user-interface/icons/icon-chevron-down.svg";
             sectionModel.divSectionBody.style.display = "";
         } else {
-            sectionModel.divSectionHeader.imgSectionHeaderButton.src = "./window-system/icons/icon-chevron-right.svg";
+            sectionModel.divSectionHeader.imgSectionHeaderButton.src = "./user-interface/icons/icon-chevron-right.svg";
             sectionModel.divSectionBody.style.display = "none";
         }
     }

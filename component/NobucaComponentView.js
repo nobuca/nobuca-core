@@ -1,4 +1,5 @@
 import NobucaFactory from "../factory/NobucaFactory.js";
+import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaComponentView {
 
@@ -8,6 +9,10 @@ export default class NobucaComponentView {
         this.createNativeElement();
         this.applyLayout();
         this.listenModel();
+    }
+
+    createEventEmitter() {
+        return new NobucaEventEmitter();
     }
 
     registerViewConstructors() {
