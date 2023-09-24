@@ -2,16 +2,11 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 
 export default class NobucaImageView extends NobucaComponentView {
 
-    constructor(model) {
-        super(model);
-        this.nativeElement = this.createImg();
-    }
-
-    createImg() {
+    createNativeElement() {
         let img = document.createElement("img");
         img.className = "NobucaImage";
         img.src = this.getModel().getSrc();
-        return img;
+        this.setNativeElement(img);
     }
 
     updateView() {

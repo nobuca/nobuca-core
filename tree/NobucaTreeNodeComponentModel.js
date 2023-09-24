@@ -36,7 +36,7 @@ export default class NobucaTreeNodeComponentModel extends NobucaComponentModel {
 
     createContextMenu() {
         this.contextMenu = new NobucaContextMenuModel();
-        this.contextMenu.getMenuItemClickEventEmitter().subscribe(event => {
+        this.contextMenu.getMenuItemClickedEventEmitter().subscribe(event => {
             this.contextMenuItemClickEventEmitter.emit({ node: this, menuItem: event });
         });
     }

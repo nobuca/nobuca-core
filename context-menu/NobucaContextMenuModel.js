@@ -8,7 +8,7 @@ export default class NobucaContextMenuModel extends NobucaComponentModel {
         super();
         this.title = null;
         this.menuItems = [];
-        this.menuItemClickEventEmitter = new NobucaEventEmitter()
+        this.menuItemClickedEventEmitter = new NobucaEventEmitter()
     }
 
     setTitle(title) {
@@ -42,7 +42,7 @@ export default class NobucaContextMenuModel extends NobucaComponentModel {
     addMenuItem(menuItem) {
         this.menuItems.push(menuItem);
         menuItem.getClickedEventEmitter().subscribe(event => {
-            this.getMenuItemClickEventEmitter().emit(event);
+            this.getMenuItemClickedEventEmitter().emit(event);
         });
     }
 
@@ -51,8 +51,8 @@ export default class NobucaContextMenuModel extends NobucaComponentModel {
         this.menuItems.push(menuItemSeparator);
     }
 
-    getMenuItemClickEventEmitter() {
-        return this.menuItemClickEventEmitter;
+    getMenuItemClickedEventEmitter() {
+        return this.menuItemClickedEventEmitter;
     }
 
 }

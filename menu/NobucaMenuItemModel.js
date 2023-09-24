@@ -12,7 +12,7 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
         this.iconClassName = iconClassName;
         this.iconImageSrc = iconImageSrc;
         this.menuItems = [];
-        this.clickedEventEmitter = new NobucaEventEmitter();
+        this.menuItemClickedEventEmitter = this.createEventEmitter();
     }
 
     getText() {
@@ -47,20 +47,30 @@ export default class NobucaMenuItemModel extends NobucaComponentModel {
         this.iconImageSrc = iconImageSrc;
     }
 
-    addMenuItem(menuItemModel) {
-        this.getMenuItems().push(menuItemModel);
-        return menuItemModel;
-    }
-
     getMenuItems() {
         return this.menuItems;
     }
 
-    getClickedEventEmitter() {
-        return this.clickedEventEmitter;
+    getMenuItemClickedEventEmitter() {
+        return this.menuItemClickedEventEmitter;
     }
 
     getSeparator() {
         return false;
+    }
+
+    addMenuItem(menuItem) {
+        this.getMenuItems().push(menuItem);
+        this.listenMenuItem(menuItem);
+        return menuItem;
+    }
+
+    listenMenuItems() {
+        this.getMenuItems().forEach(menuItem => this.listenMenuItem(menuItem));
+    }
+
+    listenMenuItem(menuItem) {
+        menuItem.getMenuItemClickedEventEmitter().subscribe(menuItem =>
+            this.getMenuItemClickedEventEmitter().emit(menuItem));
     }
 }

@@ -1,5 +1,6 @@
 import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
+import NobucaLayoutView from "../layout/NobucaLayoutView.js";
 
 export default class NobucaComponentView {
 
@@ -61,29 +62,16 @@ export default class NobucaComponentView {
     }
 
     applyLayout() {
-        var layout = this.getModel().getLayout();
-
-        if (layout.getDirectionRow()) {
-            this.getNativeElement().style.flexDirection = "row";
-        } else if (layout.getDirectionColumn()) {
-            this.getNativeElement().style.flexDirection = "column";
-        }
-
-        if (layout.getJustifyContentsLeft()) {
-            this.getNativeElement().style.justifyContent = "left";
-        } else if (layout.getJustifyContentsRight()) {
-            this.getNativeElement().style.justifyContent = "right";
-        } else if (layout.getJustifyContentsCenter()) {
-            this.getNativeElement().style.justifyContent = "center";
-        }
-   
-        if(layout.getAlignContentsCenter()) {
-            this.getNativeElement().style.alignItems = "center";
-        }
-
-        if(layout.getGrow()) {
-            this.getNativeElement().style.flexGrow = 1;
-        }
+        NobucaLayoutView.applyLayout(this);
     }
 
+    getAbsoluteTop(element) {
+        if (element.offsetParent != null) return element.offsetTop + this.getAbsoluteTop(element.offsetParent);
+        return element.offsetTop;
+    }
+
+    getAbsoluteLeft(element) {
+        if (element.offsetParent != null) return element.offsetLeft + this.getAbsoluteLeft(element.offsetParent);
+        return element.offsetLeft;
+    }
 }

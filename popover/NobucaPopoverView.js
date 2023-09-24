@@ -9,7 +9,7 @@ export default class NobucaPopoverView extends NobucaPanelView {
         document.body.appendChild(this.getNativeElement());
 
         this.getNativeElement().addEventListener("mouseout", () => {
-            this.startMouseOutTimeout();
+            //this.startMouseOutTimeout();
         });
 
         this.getNativeElement().addEventListener("mouseover", () => {
@@ -19,7 +19,7 @@ export default class NobucaPopoverView extends NobucaPanelView {
 
     startMouseOutTimeout() {
         this.cancelMouseOutTimeout();
-        this.mouseOutTimeout = setTimeout(() => { this.destroyPopover() }, 1000);
+        this.mouseOutTimeout = setTimeout(() => { this.destroy() }, 1000);
     }
 
     cancelMouseOutTimeout() {
@@ -40,7 +40,7 @@ export default class NobucaPopoverView extends NobucaPanelView {
         return this.destroyedEventEmitter;
     }
 
-    destroyPopover() {
+    destroy() {
         this.getNativeElement().parentNode.removeChild(this.getNativeElement());
         this.getDestroyedEventEmitter().emit();
     }

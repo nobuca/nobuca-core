@@ -7,15 +7,15 @@ export default class NobucaContextMenuItemView extends NobucaComponentView {
         super(model);
         this.nativeElement = this.createDiv();
 
-        this.menuItemClickEventEmitter = new NobucaEventEmitter()
+        this.menuItemClickedEventEmitter = new NobucaEventEmitter()
 
         this.nativeElement.addEventListener('click', event => {
-            this.getMenuItemClickEventEmitter().emit(this.menuItemModel);
+            this.getMenuItemClickedEventEmitter().emit(this.menuItemModel);
         });
     }
 
-    getMenuItemClickEventEmitter() {
-        return this.menuItemClickEventEmitter;
+    getMenuItemClickedEventEmitter() {
+        return this.menuItemClickedEventEmitter;
     }
 
     createDiv() {

@@ -12,6 +12,9 @@ export default class NobucaPanelView extends NobucaComponentView {
         if (this.getModel().getId() != null) {
             div.id = this.getModel().getId();
         }
+        if(this.getModel().getClickable()) {
+            div.classList.add("clickable");
+        }
         this.setNativeElement(div);
         this.applyLayout();
         this.createChildViewsForChildModels();

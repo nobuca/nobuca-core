@@ -40,4 +40,12 @@ export default class NobucaPanelModel extends NobucaComponentModel {
     getChildRemovedEventEmitter() {
         return this.childRemovedEventEmitter;
     }
+
+    setClickable(clickable) {
+        this.clickable = true;
+    }
+
+    getClickable() {
+        return this.clickable;
+    }
 }

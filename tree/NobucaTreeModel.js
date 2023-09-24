@@ -21,7 +21,7 @@ export default class NobucaTreeModel extends NobucaPositionAndSizeModel {
 
     createContextMenu() {
         this.contextMenu = new NobucaContextMenuModel();
-        this.contextMenu.getMenuItemClickEventEmitter().subscribe((event) => {
+        this.contextMenu.getMenuItemClickedEventEmitter().subscribe((event) => {
             this.getContextMenuItemClickEventEmitter().emit({
                 node: null,
                 menuItem: event,

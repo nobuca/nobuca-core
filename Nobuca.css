@@ -1,4 +1,5 @@
 @import "normalize.css";
+@import "panel/NobucaPanel.css";
 @import "text/NobucaText.css";
 @import "text-area/NobucaTextArea.css";
 @import "html/NobucaHtml.css";

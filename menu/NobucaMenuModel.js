@@ -1,10 +1,9 @@
 import NobucaComponentModel from "../component/NobucaComponentModel.js";
-import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaMenuModel extends NobucaComponentModel {
     constructor() {
         super();
-        this.menuItemClickEventEmitter = new NobucaEventEmitter();
+        this.menuItemClickedEventEmitter = this.createEventEmitter();
         this.menuItems = [];
         this.listenMenuItems();
     }
@@ -13,8 +12,8 @@ export default class NobucaMenuModel extends NobucaComponentModel {
         return "NobucaMenubarModel";
     }
 
-    getMenuItemClickEventEmitter() {
-        return this.menuItemClickEventEmitter;
+    getMenuItemClickedEventEmitter() {
+        return this.menuItemClickedEventEmitter;
     }
 
     getMenuItems() {
@@ -22,17 +21,17 @@ export default class NobucaMenuModel extends NobucaComponentModel {
     }
 
     addMenuItem(menuItem) {
-        this.menuItems.push(menuItem);
+        this.getMenuItems().push(menuItem);
         this.listenMenuItem(menuItem);
         return menuItem;
     }
 
     listenMenuItems() {
-        this.menuItems.forEach(menuItem => this.listenMenuItem(menuItem));
+        this.getMenuItems().forEach(menuItem => this.listenMenuItem(menuItem));
     }
 
     listenMenuItem(menuItem) {
-        menuItem.getClickedEventEmitter().subscribe(menuItem =>
-            this.getMenuItemClickEventEmitter().emit(menuItem));
+        menuItem.getMenuItemClickedEventEmitter().subscribe(menuItem =>
+            this.getMenuItemClickedEventEmitter().emit(menuItem));
     }
 }
