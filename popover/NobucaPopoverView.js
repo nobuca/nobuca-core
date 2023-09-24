@@ -48,7 +48,7 @@ document.addEventListener("wheel", event => {
     if (NobucaPopoverView.activePopover == null) return;
     NobucaPopoverView.activePopover.destroy();
     NobucaPopoverView.activePopover = null;
-});
+}, { passive: true });
 
 document.addEventListener("keydown", event => {
     if (NobucaPopoverView.activePopover == null) return;

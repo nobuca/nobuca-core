@@ -20,7 +20,7 @@ export default class NobucaMenubarView extends NobucaComponentView {
 
         window.addEventListener("wheel", (event) => {
             this.collapseAll();
-        });
+        }, { passive: true });
     }
 
     createNativeElement() {
