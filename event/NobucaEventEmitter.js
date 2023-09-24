@@ -20,4 +20,8 @@ export default class NobucaEventEmitter {
         this.subscriptions = this.subscriptions.filter(subscriber => subscriber != subscriptionToBeRemoved)
         console.log("subscriptions after unsuscribe" + this.subscriptions.length);
     }
+
+    clearSubscriptions() {
+        this.subscriptions = [];
+    }
 }

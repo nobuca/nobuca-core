@@ -2,30 +2,21 @@ import NobucaPanelView from "../panel/NobucaPanelView.js";
 
 export default class NobucaPopoverView extends NobucaPanelView {
 
+    static activePopover;
+
     constructor(model) {
         super(model);
+
+        if (NobucaPopoverView.activePopover != null) {
+            NobucaPopoverView.activePopover.destroy();
+            NobucaPopoverView.activePopover = null;
+        }
+
         this.createDestroyedEventEmitter();
 
         document.body.appendChild(this.getNativeElement());
 
-        this.getNativeElement().addEventListener("mouseout", () => {
-            //this.startMouseOutTimeout();
-        });
-
-        this.getNativeElement().addEventListener("mouseover", () => {
-            this.cancelMouseOutTimeout();
-        });
-    }
-
-    startMouseOutTimeout() {
-        this.cancelMouseOutTimeout();
-        this.mouseOutTimeout = setTimeout(() => { this.destroy() }, 1000);
-    }
-
-    cancelMouseOutTimeout() {
-        if (this.mouseOutTimeout == null) return;
-        clearTimeout(this.mouseOutTimeout);
-        this.mouseOutTimeout = null;
+        NobucaPopoverView.activePopover = this;
     }
 
     getClassName() {
@@ -43,5 +34,24 @@ export default class NobucaPopoverView extends NobucaPanelView {
     destroy() {
         this.getNativeElement().parentNode.removeChild(this.getNativeElement());
         this.getDestroyedEventEmitter().emit();
+        this.getDestroyedEventEmitter().clearSubscriptions();
     }
 }
+
+document.addEventListener("mousedown", event => {
+    if (NobucaPopoverView.activePopover == null) return;
+    NobucaPopoverView.activePopover.destroy();
+    NobucaPopoverView.activePopover = null;
+});
+
+document.addEventListener("wheel", event => {
+    if (NobucaPopoverView.activePopover == null) return;
+    NobucaPopoverView.activePopover.destroy();
+    NobucaPopoverView.activePopover = null;
+});
+
+document.addEventListener("keydown", event => {
+    if (NobucaPopoverView.activePopover == null) return;
+    NobucaPopoverView.activePopover.destroy();
+    NobucaPopoverView.activePopover = null;
+});
