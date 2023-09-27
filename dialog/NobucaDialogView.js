@@ -1,5 +1,6 @@
 import NobucaButtonView from "../button/NobucaButtonView.js";
 import NobucaComponentView from "../component/NobucaComponentView.js";
+import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaDialogView extends NobucaComponentView{
 
@@ -109,7 +110,7 @@ export default class NobucaDialogView extends NobucaComponentView{
         this.getModel()
             .getChildAddedEventEmitter()
             .subscribe((childModel) => {
-                let childView = this.createNewViewForModel(childModel);
+                let childView = NobucaFactory.createNewViewForModel(childModel);
                 this.addChild(childView);
             });
 

@@ -3,6 +3,7 @@ import NobucaTreeNodeExpandCollapseButtonView from './NobucaTreeNodeExpandCollap
 import NobucaContextMenuView from '../context-menu/NobucaContextMenuView.js';
 import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 import NobucaComponentView from '../component/NobucaComponentView.js';
+import NobucaFactory from '../factory/NobucaFactory.js';
 
 export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentView {
 
@@ -95,12 +96,12 @@ export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentVi
     }
 
     createRightSideComponent(componentModel) {
-        var componentView = this.createNewViewForModel(componentModel);
+        var componentView = NobucaFactory.createNewViewForModel(componentModel);
         this.getDivRightSideComponents().appendChild(componentView.getNativeElement());
     }
 
     createLeftSideComponent(componentModel) {
-        var componentView = this.createNewViewForModel(componentModel);
+        var componentView = NobucaFactory.createNewViewForModel(componentModel);
         this.getDivLeftSideComponents().appendChild(componentView.getNativeElement());
     }
 

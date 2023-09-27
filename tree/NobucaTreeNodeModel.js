@@ -62,7 +62,7 @@ export default class NobucaTreeNodeModel extends NobucaComponentModel {
     }
 
     addLeftSideComponent(component) {
-        return this.getLeftSideComponents().push(component);
+        this.getLeftSideComponents().push(component);
         return component;
     }
 

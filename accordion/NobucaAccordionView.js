@@ -1,4 +1,5 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
+import NobucaFactory from "../factory/NobucaFactory.js";
 
 
 export default class NobucaAccordionView extends NobucaComponentView {
@@ -95,7 +96,7 @@ export default class NobucaAccordionView extends NobucaComponentView {
     createSectionHeaderComponent(sectionHeaderComponentModel) {
         var divSectionHeaderComponent = document.createElement("div");
         divSectionHeaderComponent.className = "NobucaAccordionSectionHeaderComponent";
-        var componentView = this.createNewViewForModel(sectionHeaderComponentModel);
+        var componentView = NobucaFactory.createNewViewForModel(sectionHeaderComponentModel);
         divSectionHeaderComponent.appendChild(componentView.getNativeElement());
         return divSectionHeaderComponent;
     }
@@ -107,7 +108,7 @@ export default class NobucaAccordionView extends NobucaComponentView {
 
         divSection.sectionModel.divSectionBody = divSectionBody;
 
-        var sectionView = this.createNewViewForModel(divSection.sectionModel);
+        var sectionView = NobucaFactory.createNewViewForModel(divSection.sectionModel);
         divSectionBody.appendChild(sectionView.getNativeElement());
 
         return divSectionBody;

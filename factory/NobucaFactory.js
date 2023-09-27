@@ -1,4 +1,3 @@
-import NobucaAppView from "../app/NobucaAppView.js";
 import NobucaMenubarView from "../menubar/NobucaMenubarView.js";
 import NobucaPanelView from "../panel/NobucaPanelView.js";
 import NobucaPanelSplitLeftRightView from "../panel-split/NobucaPanelSplitLeftRightView.js";
@@ -34,8 +33,6 @@ export default class NobucaFactory {
     }
 
     static registerDefaultViewConstructors() {
-        NobucaFactory.registerViewConstructorForModelClassName("NobucaAppModel",
-            function (model) { return new NobucaAppView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaMenubarModel",
             function (model) { return new NobucaMenubarView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaPanelModel",
@@ -86,37 +83,28 @@ export default class NobucaFactory {
     }
 
     static createNewViewForModel(model) {
+
         if (model == null) {
-            console.log(
-                "Unable to instantiate a view for a model null.");
-            return null;
+            throw "Unable to instantiate a view for a model null.";
         }
+
         if (model.getClassName == null) {
-            console.log(
-                "Unable to instantiate a view for a model without getClassName method.", model);
-            return null;
+            throw "Unable to instantiate a view for a model without getClassName method."
         }
 
         let viewConstructor = NobucaFactory.registeredViewConstructors.get(model.getClassName());
         if (viewConstructor != null) {
             let view = new viewConstructor(model);
             if (view == null) {
-                console.log(
-                    "Something gone wrong executing view constructor for model [" +
-                    model.getClassName() +
-                    "].", model);
+                throw "Something gone wrong executing view constructor for model [" +
+                model.getClassName() +
+                "].";
             }
             return view;
         }
 
-        console.log(
-            "Unable to instantiate a view for a model with getClassName [" +
-            model.getClassName() +
-            "]."
-        );
-
-        return null;
+        throw "Unable to instantiate a view for a model with getClassName [" +
+        model.getClassName() +
+        "].";
     }
-
-
 }

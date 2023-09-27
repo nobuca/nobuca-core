@@ -2,8 +2,11 @@ export default class NobucaLayoutView {
 
     static applyLayout(componentView) {
 
-        var layout = componentView.getModel().getLayout();
         var nativeElement = componentView.getNativeElement();
+        
+        if(nativeElement==null) return;
+
+        var layout = componentView.getModel().getLayout();
 
         if (layout.getDirectionRow()) {
             nativeElement.style.flexDirection = "row";

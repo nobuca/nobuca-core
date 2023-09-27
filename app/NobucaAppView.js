@@ -1,45 +1,42 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
-import NobucaPanelView from "../panel/NobucaPanelView.js";
 import NobucaDialogView from "../dialog/NobucaDialogView.js";
 
 export default class NobucaAppView extends NobucaComponentView {
 
-    registerViewConstructors() {
+    registerCustomViewConstructors() {
+    }
+
+    registerDefaultViewConstructors() {
         NobucaFactory.registerDefaultViewConstructors();
+    }
+   
+    registerViewConstructorForModelClassName(modelClassName, viewConstructor) {
+        NobucaFactory.registerViewConstructorForModelClassName(modelClassName, viewConstructor);
+    }
+
+    getClassName() {
+        return "NobucaApp";
     }
 
     createNativeElement() {
-        this.createRootPanelView();
-    }
-
-    createRootPanelView() {
-        this.rootPanelView = new NobucaPanelView(this.getModel().getRootPanel());
-        this.addRootPanelViewToDocumentBody(this.rootPanelView);
+        var div = document.createElement("div");
+        div.className = this.getClassName();
+        this.setNativeElement(div);
+        document.body.appendChild(this.getNativeElement());
         this.updateContentsPositionAndSize();
-
         window.addEventListener("resize", () => {
             this.updateContentsPositionAndSize();
         });
     }
 
-    getRootPanelView() {
-        return this.rootPanelView;
-    }
-
-    addRootPanelViewToDocumentBody(rootPanelView) {
-        document.body.appendChild(rootPanelView.getNativeElement());
-    }
-
     updateContentsPositionAndSize() {
 
-        if (this.getRootPanelView().getNativeElement().offsetHeight == window.innerHeight &&
-            this.getRootPanelView().getNativeElement().offsetWidth == window.innerWidth) return;
+        if (this.getNativeElement().offsetHeight == window.innerHeight &&
+            this.getNativeElement().offsetWidth == window.innerWidth) return;
 
-        this.getRootPanelView().getNativeElement().style.height = window.innerHeight + "px";
-        this.getRootPanelView().getNativeElement().style.width = window.innerWidth + "px";
-
-        this.getRootPanelView().updateContentsPositionAndSize();
+        this.getNativeElement().style.height = window.innerHeight + "px";
+        this.getNativeElement().style.width = window.innerWidth + "px";
     }
 
     listenModel() {

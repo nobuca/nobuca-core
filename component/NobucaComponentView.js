@@ -1,4 +1,4 @@
-import NobucaFactory from "../factory/NobucaFactory.js";
+//import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaLayoutView from "../layout/NobucaLayoutView.js";
 
@@ -6,22 +6,21 @@ export default class NobucaComponentView {
 
     constructor(model) {
         this.model = model;
-        this.registerViewConstructors();
+        this.registerCustomViewConstructors();
+        this.registerDefaultViewConstructors();
         this.createNativeElement();
         this.applyLayout();
         this.listenModel();
     }
 
+    registerCustomViewConstructors() {
+    }
+
+    registerDefaultViewConstructors() {
+    }
+
     createEventEmitter() {
         return new NobucaEventEmitter();
-    }
-
-    registerViewConstructors() {
-
-    }
-
-    registerViewConstructorForModelClassName(modelClassName, viewConstructor) {
-        NobucaFactory.registerViewConstructorForModelClassName(modelClassName, viewConstructor);
     }
 
     createNewViewForModel(model) {
@@ -47,7 +46,7 @@ export default class NobucaComponentView {
     }
 
     listenModel() {
-        
+
     }
 
     updateContentsPositionAndSize() {

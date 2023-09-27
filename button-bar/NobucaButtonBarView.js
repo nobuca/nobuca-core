@@ -1,4 +1,5 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
+import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class BlenderControlButtonView extends NobucaComponentView {
 
@@ -31,7 +32,7 @@ export default class BlenderControlButtonView extends NobucaComponentView {
             imgImage.src = buttonBarItemModel.getImageSrc();
             divItem.appendChild(imgImage);
         } else {
-            var buttonBarItemView = this.createNewViewForModel(buttonBarItemModel);
+            var buttonBarItemView = NobucaFactory.createNewViewForModel(buttonBarItemModel);
             divItem.appendChild(buttonBarItemView.getNativeElement());
         }
     }

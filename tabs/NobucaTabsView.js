@@ -1,5 +1,6 @@
 import NobucaTabHeaderView from "./NobucaTabHeaderView.js";
 import NobucaComponentView from "../component/NobucaComponentView.js";
+import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaTabsView extends NobucaComponentView {
     constructor(model) {
@@ -111,7 +112,7 @@ export default class NobucaTabsView extends NobucaComponentView {
     }
 
     createTabBodyView(tabModel) {
-        return this.createNewViewForModel(tabModel.getBody());
+        return NobucaFactory.createNewViewForModel(tabModel.getBody());
     }
 
     getTabHeaderViewCollection() {

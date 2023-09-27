@@ -1,4 +1,5 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
+import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaFieldsetView extends NobucaComponentView {
 
@@ -67,7 +68,7 @@ export default class NobucaFieldsetView extends NobucaComponentView {
                 console.log(
                     "Added child model [" + childModel + "] to fieldset model [" + this + "]"
                 );
-                let childView = this.createNewViewForModel(childModel);
+                let childView = NobucaFactory.createNewViewForModel(childModel);
                 this.addChild(childView);
             });
 
