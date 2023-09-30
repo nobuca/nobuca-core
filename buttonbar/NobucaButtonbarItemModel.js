@@ -1,6 +1,6 @@
 import NobucaPanelModel from "../panel/NobucaPanelModel.js";
 
-export default class NobucaButtonBarItemModel extends NobucaPanelModel {
+export default class NobucaButtonbarItemModel extends NobucaPanelModel {
 
     constructor(imageSrc) {
         super();

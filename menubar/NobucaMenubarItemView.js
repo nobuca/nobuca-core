@@ -18,6 +18,10 @@ export default class NobucaMenubarItemView extends NobucaComponentView {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItem";
 
+        if(this.hasChildMenuItems()) {
+            div.classList.add("hasChildMenuItems");
+        }
+
         this.menuItemContents = this.createMenuItemContents()
         div.appendChild(this.menuItemContents);
         this.listenMenuItemContentsEvents();
@@ -129,9 +133,6 @@ export default class NobucaMenubarItemView extends NobucaComponentView {
     createMenuItemChildrenMark() {
         let div = document.createElement("div");
         div.className = "NobucaMenubarItemChildrenMark";
-        if (this.getModel().getMenuItems().length > 0) {
-            div.innerHTML = "⏵";
-        }
         return div;
     }
 
@@ -202,7 +203,7 @@ export default class NobucaMenubarItemView extends NobucaComponentView {
             this.getItemChildrenView().getNativeElement().style.left =
                 this.getNativeElement().offsetLeft + "px";
         } else {
-            var top = this.getNativeElement().offsetTop;
+            var top = this.getNativeElement().offsetTop - 2;
             var left = this.getNativeElement().offsetLeft + this.getNativeElement().offsetWidth;
             this.getItemChildrenView().getNativeElement().style.top = top + "px";
             this.getItemChildrenView().getNativeElement().style.left = left + "px";

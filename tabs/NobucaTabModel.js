@@ -12,6 +12,14 @@ export default class NobucaTabModel extends NobucaComponentModel {
         this.closeableChangeEventEmitter = new NobucaEventEmitter();
     }
 
+    setIndex(index) {
+        this.index = index;
+    }
+
+    getIndex() {
+        return this.index;
+    }
+
     getText() {
         return this.text;
     }

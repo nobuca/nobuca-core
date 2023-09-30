@@ -1,146 +1,156 @@
 .NobucaMenubar {
-    display: flex;
-    background-color: var(--background-color-dark);
-    align-items: center;
+  display: flex;
+  background-color: var(--background-color-dark);
+  align-items: center;
 }
 
 .NobucaMenubarItem {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .NobucaMenubarItemSeparator {
-    height: 1px;
-    border-bottom: 1px solid rgb(55, 55, 55);
+  height: 1px;
+  border-bottom: 1px solid rgb(55, 55, 55);
 }
 
 .NobucaMenubarItemContents {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    height: 18px;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  height: 18px;
 }
 
 .NobucaMenubarItemContents.disabled {
-    opacity: var(--opacity-disabled);
+  opacity: var(--opacity-disabled);
 }
 
 .NobucaMenubarItemIcon img {
-    padding-left: 6px;
-    padding-right: 6px;
-    border-radius: 4px;
-    user-select: none;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 4px;
+  user-select: none;
 }
 
 .NobucaMenubarItemText {
-    padding-left: 8px;
-    padding-right: 8px;
-    color: rgb(211, 211, 211);
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    text-shadow: var(--text-shadow);
-    user-select: none;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: rgb(211, 211, 211);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  text-shadow: var(--text-shadow);
+  user-select: none;
 }
 
 .NobucaMenubarItemShortcut {
-    display: none;
-    padding-left: 2px;
-    padding-right: 2px;
-    color: rgb(211, 211, 211);
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    text-shadow: var(--text-shadow);
-    user-select: none;
-    opacity: var(--opacity-disabled);
+  display: none;
+  padding-left: 2px;
+  padding-right: 2px;
+  color: rgb(211, 211, 211);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  text-shadow: var(--text-shadow);
+  user-select: none;
+  opacity: var(--opacity-disabled);
 }
 
 .NobucaMenubarItemChildrenMark {
-    display: none;
-    padding-left: 0px;
-    padding-right: 0px;
-    color: rgb(211, 211, 211);
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    text-shadow: var(--text-shadow);
-    user-select: none;
-    opacity: var(--opacity-disabled);
-    min-width: 12px;
+  display: none;
+  padding-left: 2px;
+  padding-right: 0px;
+  color: rgb(211, 211, 211);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  text-shadow: var(--text-shadow);
+  user-select: none;
+  opacity: var(--opacity-disabled);
+  min-width: 12px;
+}
+
+.NobucaMenubarItem.hasChildMenuItems
+  > .NobucaMenubarItemContents
+  > .NobucaMenubarItemChildrenMark::before {
+  content: "⏵";
 }
 
 .NobucaMenubarItemContents:hover {
-    background-color: rgb(58, 89, 138);
-    border: 1px solid rgb(71, 114, 179);
+  background-color: rgb(58, 89, 138);
+  border: 1px solid rgb(71, 114, 179);
 }
 
-.NobucaMenubarItem.expanded>.NobucaMenubarItemContents {
-    background-color: rgb(58, 89, 138);
-    border: 1px solid rgb(71, 114, 179);
+.NobucaMenubarItem.expanded > .NobucaMenubarItemContents {
+  background-color: rgb(58, 89, 138);
+  border: 1px solid rgb(71, 114, 179);
 }
 
 .NobucaMenubarChildMenuItems {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 23px;
-    min-width: 200px;
-    background-color: var(--background-color-dark);
-    border: var(--menubar-border);
-    opacity: 1;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.88);
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 23px;
+  min-width: 200px;
+  background-color: var(--background-color-dark);
+  border: var(--menubar-border);
+  opacity: 1;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.88);
+  z-index: 3;
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItem {
-    flex-grow: 1;
-    margin: 0;
+  flex-grow: 1;
+  margin: 0;
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItemContents {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 4px;
-    margin-right: 4px;
-    border-radius: 3px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    height: 14px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 3px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  height: 14px;
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItemContents:hover {
-    background-color: rgb(58, 89, 138);
-    border: 1px solid rgb(71, 114, 179);
+  background-color: rgb(58, 89, 138);
+  border: 1px solid rgb(71, 114, 179);
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItemIcon {
-    min-width: 26px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+  min-width: 26px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
-.NobucaMenubarChildMenuItems .NobucaMenubarItemContents .NobucaMenubarItemIcon img {
-    padding-right: 5px;
-    padding-left: 5px;
+.NobucaMenubarChildMenuItems
+  .NobucaMenubarItemContents
+  .NobucaMenubarItemIcon
+  img {
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItemText {
-    padding-left: 2px;
-    padding-right: 25px;
-    flex-grow: 1;
+  padding-left: 2px;
+  padding-right: 25px;
+  flex-grow: 1;
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItemShortcut {
-    display: flex;
+  display: flex;
 }
 
 .NobucaMenubarChildMenuItems .NobucaMenubarItemChildrenMark {
-    display: flex;
+  display: flex;
 }

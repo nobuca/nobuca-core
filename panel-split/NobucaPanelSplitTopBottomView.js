@@ -89,6 +89,11 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         var topPanelHeight = Math.floor(heightWithoutDivider * this.getModel().getWeight());
         var bottomPanelHeight = Math.floor(heightWithoutDivider * (1 - this.getModel().getWeight()));
 
+        var diff = heightWithoutDivider - topPanelHeight - dividerHeight - bottomPanelHeight;
+        if(diff != 0) {
+            bottomPanelHeight -= diff;
+        }
+
         if (this.getTopPanelView().getNativeElement().offsetHeight != topPanelHeight ||
             this.getTopPanelView().getNativeElement().offsetWidth != width) {
             this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";

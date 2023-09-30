@@ -33,8 +33,15 @@ export default class NobucaComponentView {
         return this.model;
     }
 
-    createNativeElement() {
+    getClassName() {
+        return "NobucaComponent";
+    }
 
+    createNativeElement() {
+        var div = document.createElement("div");
+        div.className = this.getClassName();
+        this.setNativeElement(div);
+        return div;
     }
 
     setNativeElement(nativeElement) {

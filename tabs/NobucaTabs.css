@@ -1,85 +1,89 @@
 .NobucaTabsHeader {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background-color: var(--background-color-dark);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: var(--background-color-dark);
 }
 
 .NobucaTabsHeadersContainer {
-    display: flex;
-    flex-direction: row;
-    margin-top: 6px;
-    margin-left: 3px;
-    margin-right: 3px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+  margin-left: 3px;
+  margin-right: 3px;
+  overflow: hidden;
 }
 
 .NobucaTabHeader {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: default;
-    user-select: none;
-    padding-top: 2px;
-    min-height: 22px;
-    max-height: 22px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--component-border-color);
-    border-radius: var(--component-border-radius);
-    border-bottom: none;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    margin-bottom: -1px;
-    margin-right: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+  padding-top: 2px;
+  min-height: 22px;
+  max-height: 22px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--component-border-color);
+  border-radius: var(--component-border-radius);
+  border-bottom: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  margin-bottom: -1px;
+  margin-right: 4px;
+  box-sizing: border-box;
 }
 
 .NobucaTabHeader.inactive {
-    color: rgb(147, 147, 147);
-    cursor: pointer;
+  color: rgb(147, 147, 147);
+  cursor: pointer;
 }
 
 .NobucaTabHeader.inactive:hover {
-    color: rgb(186, 186, 186);
+  color: rgb(186, 186, 186);
 }
 
 .NobucaTabHeader.active {
-    color: rgb(255, 255, 255);
-    background-color: rgb(55, 55, 55);
-    border-color: rgb(55, 55, 55);
-    z-index: 0;
+  color: rgb(255, 255, 255);
+  background-color: rgb(55, 55, 55);
+  border-color: rgb(55, 55, 55);
+  z-index: 0;
 }
 
 .NobucaTabHeaderText {
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-family: var(--font-family);
-    font-size: var(--font-size);
-    text-shadow: var(--text-shadow);
-    user-select: none;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  text-shadow: var(--text-shadow);
+  user-select: none;
 }
 
 .NobucaTabHeaderCloseButton {
-    display: flex;
-    margin-left: 8px;
-    margin-right: 6px;
-    max-width: 16px;
-    max-height: 16px;
-    min-width: 16px;
-    min-height: 16px;
-    justify-content: center;
-    align-content: center;
-    line-height: 1;
-    border-radius: 6px;
-    cursor: pointer;
-    background-color: rgb(92, 92, 92, .35);
+  display: flex;
+  margin-left: 8px;
+  margin-right: 6px;
+  max-width: 16px;
+  max-height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  justify-content: center;
+  align-content: center;
+  line-height: 1;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: rgb(92, 92, 92, 0.35);
+}
+
+.NobucaTabHeaderCloseButton::before {
+  content: "⨯";
 }
 
 .NobucaTabHeaderCloseButton:hover {
-    background-color: rgb(112, 112, 112);
+  background-color: rgb(112, 112, 112);
 }
-

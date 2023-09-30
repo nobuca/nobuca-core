@@ -62,6 +62,7 @@ export default class NobucaTabsHeaderModel extends NobucaPositionAndSizeModel {
     }
 
     addTab(tab) {
+        tab.setIndex(this.getTabs().length);
         this.getTabs().push(tab);
         this.getCreateTabEventEmitter().emit(tab);
         if (this.currentActivatedTab == null) {

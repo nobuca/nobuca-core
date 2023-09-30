@@ -2,6 +2,7 @@ import NobucaComponentModel from "../component/NobucaComponentModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
 export default class NobucaButtonModel extends NobucaComponentModel {
+    
     constructor(text, enabled) {
         super();
         this.text = text;

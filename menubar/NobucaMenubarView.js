@@ -5,8 +5,6 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 export default class NobucaMenubarView extends NobucaComponentView {
     constructor(model) {
         super(model);
-        this.menuItemViewList = [];
-        this.createMenuItemsViews();
 
         window.addEventListener("click", (event) => {
             if (!NobucaHtmlElementIsDescendantOf.check(event.target, this.nativeElement)) {
@@ -27,14 +25,15 @@ export default class NobucaMenubarView extends NobucaComponentView {
         let div = document.createElement("div");
         div.className = "NobucaMenubar";
         this.setNativeElement(div);
+        this.createMenuItemsViews();
     }
-
 
     updateViewFromModel() {
         this.createMenuItemsViews();
     }
 
     createMenuItemsViews() {
+        this.menuItemsViews = [];
         this.getModel()
             .getMenuItems()
             .forEach((menuItemModel) => {
@@ -43,7 +42,7 @@ export default class NobucaMenubarView extends NobucaComponentView {
     }
 
     getMenuItemViewList() {
-        return this.menuItemViewList;
+        return this.menuItemsViews;
     }
 
     creaMenuItemView(menuItemModel) {

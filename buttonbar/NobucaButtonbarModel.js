@@ -1,6 +1,6 @@
 import NobucaComponentModel from "../component/NobucaComponentModel.js";
 
-export default class NobucaButtonBarModel extends NobucaComponentModel {
+export default class NobucaButtonbarModel extends NobucaComponentModel {
 
     constructor() {
         super();
@@ -8,7 +8,7 @@ export default class NobucaButtonBarModel extends NobucaComponentModel {
     }
 
     getClassName() {
-        return "NobucaButtonBarModel";
+        return "NobucaButtonbarModel";
     }
 
     getItems() {
@@ -20,5 +20,12 @@ export default class NobucaButtonBarModel extends NobucaComponentModel {
         return item;
     }
 
+    setMoveable(moveable) {
+        this.moveable = moveable;
+    }
+
+    getMoveable() {
+        return this.moveable;
+    }
 
 }

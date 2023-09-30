@@ -8,7 +8,7 @@
 @import "link/NobucaLink.css";
 @import "fieldset/NobucaFieldset.css";
 @import "button/NobucaButton.css";
-@import "button-bar/NobucaButtonBar.css";
+@import "buttonbar/NobucaButtonbar.css";
 @import "context-menu/NobucaContextMenu.css";
 @import "tabs/NobucaTabs.css";
 @import "dialog/NobucaDialog.css";
@@ -32,14 +32,6 @@
     --menubar-border: 1px solid rgb(70, 70, 70);
     --menubar-border-radius: 6px;
     --opacity-disabled: 0.3;
-}
-
-.NobucaGraphicEngine svg {
-    position: absolute;
-    background-color: var(--background-color-dark);
-    color: white;
-    box-sizing: border-box;
-    text-shadow: none;
 }
 
 h1,

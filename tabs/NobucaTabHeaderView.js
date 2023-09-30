@@ -37,7 +37,6 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
         let divTabHeaderCloseButton = document.createElement("div");
         divTabHeader.appendChild(divTabHeaderCloseButton);
         divTabHeaderCloseButton.className = "NobucaTabHeaderCloseButton";
-        divTabHeaderCloseButton.innerHTML = 'x';
 
         divTabHeader.divTabHeaderCloseButton = divTabHeaderCloseButton;
 
