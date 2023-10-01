@@ -20,9 +20,10 @@
   align-items: center;
   cursor: default;
   user-select: none;
-  padding-top: 2px;
-  min-height: 22px;
-  max-height: 22px;
+  padding-top: 4px;
+  padding-bottom: 5px;
+  padding-left: 6px;
+  padding-right: 6px;
   border-width: 1px;
   border-style: solid;
   border-color: var(--component-border-color);
@@ -51,13 +52,14 @@
   z-index: 0;
 }
 
+.NobucaTabHeaderIcon {
+  padding-right: 6px;
+}
+
 .NobucaTabHeaderText {
   flex-grow: 1;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding-left: 10px;
-  padding-right: 10px;
   font-family: var(--font-family);
   font-size: var(--font-size);
   text-shadow: var(--text-shadow);

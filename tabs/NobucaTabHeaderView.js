@@ -27,6 +27,13 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
 
         divTabHeader.classList.add('inactive');
 
+        if (this.getModel().getImageSrc() != null) {
+            let imgTabHeaderIcon = document.createElement("img");
+            divTabHeader.appendChild(imgTabHeaderIcon);
+            imgTabHeaderIcon.className = "NobucaTabHeaderIcon";
+            imgTabHeaderIcon.src = this.getModel().getImageSrc();
+        }
+
         let divTabHeaderText = document.createElement("div");
         divTabHeader.appendChild(divTabHeaderText);
         divTabHeaderText.className = "NobucaTabHeaderText";

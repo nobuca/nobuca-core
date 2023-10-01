@@ -29,6 +29,14 @@ export default class NobucaTabModel extends NobucaComponentModel {
         this.getTextChangeEventEmitter().emit(this.text);
     }
 
+    setImageSrc(imageSrc) {
+        this.imageSrc = imageSrc;
+    }
+
+    getImageSrc() {
+        return this.imageSrc;
+    }
+
     getCloseable() {
         return this.closeable;
     }
