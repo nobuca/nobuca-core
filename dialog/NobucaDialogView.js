@@ -2,11 +2,15 @@ import NobucaButtonView from "../button/NobucaButtonView.js";
 import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
 
-export default class NobucaDialogView extends NobucaComponentView{
+export default class NobucaDialogView extends NobucaComponentView {
 
-    constructor(dialogModel) {
-        super(dialogModel);
-        this.divDialogBackground = this.createDivDialogBackground();
+    constructor(model) {
+        super(model);
+        this.updateContentsPositionAndSize();
+    }
+
+    createNativeElement() {
+        this.createDivDialogBackground();
         this.createDivDialog();
     }
 
@@ -20,7 +24,11 @@ export default class NobucaDialogView extends NobucaComponentView{
         divDialogBackground.style.width = window.innerWidth + "px";
         divDialogBackground.style.height = window.innerHeight + "px";
 
-        return divDialogBackground;
+        this.divDialogBackground = divDialogBackground;
+    }
+
+    getDivDialogBackground() {
+        return this.divDialogBackground;
     }
 
     createDivDialog() {
@@ -40,6 +48,7 @@ export default class NobucaDialogView extends NobucaComponentView{
         this.divDialog = divDialog;
 
         this.createDivHeader();
+        this.createDivSubheader();
         this.divDialogBody = this.createDivBody();
         this.divDialogButtons = this.createDivButtons();
 
@@ -64,8 +73,18 @@ export default class NobucaDialogView extends NobucaComponentView{
         this.getDivDialog().appendChild(divDialogHeader);
         divDialogHeader.className = "NobucaDialogHeader";
         this.divDialogHeader = divDialogHeader;
+        this.createDivHeaderIcon();
         this.createDivHeaderTitle();
         return divDialogHeader;
+    }
+
+    createDivHeaderIcon() {
+        if (this.getModel().getIconSrc() == null) return;
+        let divDialogHeaderIcon = document.createElement("img");
+        this.getDivDialogHeader().appendChild(divDialogHeaderIcon);
+        divDialogHeaderIcon.className = "NobucaDialogHeaderIcon";
+        divDialogHeaderIcon.src = this.getModel().getIconSrc();
+        return divDialogHeaderIcon;
     }
 
     createDivHeaderTitle() {
@@ -76,10 +95,24 @@ export default class NobucaDialogView extends NobucaComponentView{
         return divDialogHeaderTitle;
     }
 
+    createDivSubheader() {
+        let divDialogSubheader = document.createElement("div");
+        this.getDivDialog().appendChild(divDialogSubheader);
+        divDialogSubheader.className = "NobucaDialogSubheader";
+        this.divDialogSubheader = divDialogSubheader;
+        var subheaderView = NobucaFactory.createNewViewForModel(this.getModel().getSubheader());
+        divDialogSubheader.appendChild(subheaderView.getNativeElement());
+        return divDialogSubheader;
+    }
+
     createDivBody() {
         let divDialogBody = document.createElement("div");
         this.getDivDialog().appendChild(divDialogBody);
         divDialogBody.className = "NobucaDialogBody";
+        this.getModel().getChildren().forEach(childModel => {
+            let childView = NobucaFactory.createNewViewForModel(childModel);
+            divDialogBody.appendChild(childView.getNativeElement());
+        });
         return divDialogBody;
     }
 
@@ -103,7 +136,22 @@ export default class NobucaDialogView extends NobucaComponentView{
         let divDialogButtons = document.createElement("div");
         this.divDialog.append(divDialogButtons);
         divDialogButtons.className = "NobucaDialogButtons";
+
+        if (this.getModel().getButtons().length == 0) {
+            divDialogButtons.style.display = "none";
+        }
+
         return divDialogButtons;
+    }
+
+    updateContentsPositionAndSize() {
+        this.getDivDialogBackground().style.width = window.innerWidth + "px";
+        this.getDivDialogBackground().style.height = window.innerHeight + "px";
+
+        this.getDivDialog().style.top =
+            window.innerHeight / 2 - this.getDivDialog().offsetHeight / 2 + "px";
+        this.getDivDialog().style.left =
+            window.innerWidth / 2 - this.getDivDialog().offsetWidth / 2 + "px";
     }
 
     listenModel() {

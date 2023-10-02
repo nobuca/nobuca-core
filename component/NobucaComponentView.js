@@ -1,4 +1,3 @@
-//import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaLayoutView from "../layout/NobucaLayoutView.js";
 
@@ -21,12 +20,6 @@ export default class NobucaComponentView {
 
     createEventEmitter() {
         return new NobucaEventEmitter();
-    }
-
-    createNewViewForModel(model) {
-        var view = NobucaFactory.createNewViewForModel(model);
-        model.view = view;
-        return view;
     }
 
     getModel() {
@@ -79,5 +72,11 @@ export default class NobucaComponentView {
     getAbsoluteLeft(element) {
         if (element.offsetParent != null) return element.offsetLeft + this.getAbsoluteLeft(element.offsetParent);
         return element.offsetLeft;
+    }
+
+    isEqualOrDescendant(descendant, ancestor) {
+        if (descendant == null) return false;
+        if (descendant == ancestor) return true;
+        return this.isEqualOrDescendant(descendant.parentNode, ancestor);
     }
 }

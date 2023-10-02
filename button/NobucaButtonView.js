@@ -3,7 +3,7 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 export default class NobucaButtonView extends NobucaComponentView {
     
     getClassName() {
-        return "NobucaButtton";
+        return "NobucaButton";
     }
 
     createNativeElement() {

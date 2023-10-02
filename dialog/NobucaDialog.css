@@ -6,6 +6,7 @@
     background-color: rgb(35, 35, 36);
     opacity: 0.9;
     box-sizing: border-box;
+    user-select: none;
 }
 
 .NobucaDialog {
@@ -22,10 +23,22 @@
     text-shadow: var(--text-shadow);
     box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 40%);
     box-sizing: border-box;
+    user-select: none;
 }
 
 .NobucaDialogHeader {
+    display: flex;
+    flex-direction: row;
+}
+
+.NobucaDialogSubheader {
+    display: flex;
+    flex-direction: row;
     border-bottom: 1px solid rgb(68, 68, 68);
+}
+
+.NobucaDialogHeaderIcon {
+    padding-left: 8px;
 }
 
 .NobucaDialogHeaderTitle {
@@ -33,10 +46,11 @@
     font-family: var(--font-family);
     font-size: var(--font-size);
     text-shadow: var(--text-shadow);
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 6px;
+    padding-right: 6px;
     padding-top: 8px;
     padding-bottom: 8px;
+    white-space: nowrap;
 }
 
 .NobucaDialogBody {

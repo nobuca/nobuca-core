@@ -2,13 +2,7 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 
 export default class NobucaTextView extends NobucaComponentView {
 
-    constructor(model) {
-        super(model);
-        this.nativeElement = this.createInput();
-        this.updateView();
-    }
-
-    createInput() {
+    createNativeElement() {
         let input = document.createElement('input');
         input.className = 'NobucaText';
         input.type = 'text';
@@ -34,7 +28,8 @@ export default class NobucaTextView extends NobucaComponentView {
             this.getModel().setValue(input.value);
         });
 
-        return input;
+        this.setNativeElement(input);
+        this.updateView();
     }
 
     getValue() {

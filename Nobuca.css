@@ -5,6 +5,7 @@
 @import "html/NobucaHtml.css";
 @import "select/NobucaSelect.css";
 @import "label/NobucaLabel.css";
+@import "whitespace/NobucaWhitespace.css";
 @import "link/NobucaLink.css";
 @import "fieldset/NobucaFieldset.css";
 @import "button/NobucaButton.css";

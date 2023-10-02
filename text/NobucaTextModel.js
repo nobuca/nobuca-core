@@ -1,8 +1,10 @@
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
-export default class NobucaTextModel {
+export default class NobucaTextModel extends NobucaComponentModel {
 
     constructor(value) {
+        super();
         this.enabled = true;
         this.value = value;
         this.password = false;

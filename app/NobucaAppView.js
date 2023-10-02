@@ -1,6 +1,7 @@
 import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
 import NobucaDialogView from "../dialog/NobucaDialogView.js";
+import NobucaDialogModel from "../dialog/NobucaDialogModel.js";
 
 export default class NobucaAppView extends NobucaComponentView {
 
@@ -10,7 +11,7 @@ export default class NobucaAppView extends NobucaComponentView {
     registerDefaultViewConstructors() {
         NobucaFactory.registerDefaultViewConstructors();
     }
-   
+
     registerViewConstructorForModelClassName(modelClassName, viewConstructor) {
         NobucaFactory.registerViewConstructorForModelClassName(modelClassName, viewConstructor);
     }
@@ -28,6 +29,19 @@ export default class NobucaAppView extends NobucaComponentView {
         window.addEventListener("resize", () => {
             this.updateContentsPositionAndSize();
         });
+        if (NobucaDialogModel.getActiveDialog() != null) {
+            if (this.getActiveDialogView() == null) {
+                this.setActiveDialogView(new NobucaDialogView(NobucaDialogModel.getActiveDialog()));
+            }
+        }
+    }
+
+    setActiveDialogView(activeDialogView) {
+        this.activeDialogView = activeDialogView;
+    }
+
+    getActiveDialogView() {
+        return this.activeDialogView;
     }
 
     updateContentsPositionAndSize() {
@@ -37,11 +51,15 @@ export default class NobucaAppView extends NobucaComponentView {
 
         this.getNativeElement().style.height = window.innerHeight + "px";
         this.getNativeElement().style.width = window.innerWidth + "px";
+
+        if (this.getActiveDialogView() != null) {
+            this.getActiveDialogView().updateContentsPositionAndSize();
+        }
     }
 
     listenModel() {
-        this.getModel().getShowDialogEventEmitter().subscribe((dialogModel) => {
-            let dialogView = new NobucaDialogView(dialogModel);
+        NobucaDialogModel.getShowDialogEventEmitter().subscribe((dialogModel) => {
+            this.setActiveDialogView(new NobucaDialogView(dialogModel));
         });
         this.getModel().getTitleChangedEventEmitter().subscribe(() => {
             document.title = this.getModel().getTitle();

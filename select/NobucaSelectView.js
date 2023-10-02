@@ -1,30 +1,82 @@
-export default class NobucaSelectView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-    constructor(selectModel) {
-        this.selectModel = selectModel;
-        this.nativeElement = this.createSelect();
+export default class NobucaSelectView extends NobucaComponentView {
+
+    createNativeElement() {
+        let div = document.createElement('div');
+        div.className = 'NobucaSelect';
+        this.setNativeElement(div);
+        this.createInput();
+        this.createDropDownButton();
+        this.createOptions();
         this.updateView();
-        this.listenSelectModelEvents();
     }
 
-    getSelectModel() {
-        return this.selectModel;
+    setExpanded(expanded) {
+        this.expanded = expanded;
     }
 
-    createSelect() {
+    getExpanded() {
+        return this.expanded;
+    }
 
-        let select = document.createElement('select');
-        select.className = 'NobucaSelect';
+    createInput() {
+        let divInput = document.createElement('input');
+        this.getNativeElement().appendChild(divInput);
+        divInput.className = 'NobucaSelectInput';
+        divInput.type = "text";
 
-        select.addEventListener('focus', event => {
-            this.getSelectModel().getFocusEventEmitter().emit(this);
+        divInput.addEventListener('focus', event => {
+            this.getModel().getFocusEventEmitter().emit(this);
         });
 
-        select.addEventListener('change', event => {
-            this.getSelectModel().setValue(this.getValue());
+        divInput.addEventListener('change', event => {
+            this.getModel().setValue(this.getValue());
         });
 
-        return select;
+        this.divInput = divInput;
+    }
+
+    getDivInput() {
+        return this.divInput;
+    }
+
+    createDropDownButton() {
+        let divButton = document.createElement('div');
+        this.getNativeElement().appendChild(divButton);
+        divButton.className = 'NobucaSelectButton';
+        divButton.addEventListener("mousedown", () => {
+            if (!this.getExpanded())
+                this.showOptions();
+            else
+                this.hideOptions();
+        });
+    }
+
+    createOptions() {
+        this.divOptions = document.createElement('div');
+        this.getNativeElement().appendChild(this.divOptions);
+        this.divOptions.className = 'NobucaSelectOptions';
+    }
+
+    getDivOptions() {
+        return this.divOptions;
+    }
+
+    showOptions() {
+        this.setExpanded(true);
+        this.getNativeElement().classList.add("expanded");
+        this.getDivOptions().style.minHeight = this.getNativeElement().offsetHeight + "px";
+        this.getDivOptions().style.minWidth = this.getNativeElement().offsetWidth + "px";
+        this.getDivOptions().style.top = (this.getNativeElement().offsetTop + this.getNativeElement().offsetHeight) + "px";
+        this.getDivOptions().style.left = (this.getNativeElement().offsetLeft) + "px";
+        NobucaSelectView.currentExpandedSelectView = this;
+    }
+
+    hideOptions() {
+        this.setExpanded(false);
+        this.getNativeElement().classList.remove("expanded");
+        NobucaSelectView.currentExpandedSelectView = null;
     }
 
     addOption(hiddenValue, visibleValue) {
@@ -58,7 +110,7 @@ export default class NobucaSelectView {
     }
 
     updateView() {
-        if (this.getSelectModel().getEnabled()) {
+        if (this.getModel().getEnabled()) {
             this.nativeElement.disabled = false;
             this.nativeElement.classList.remove('disabled');
             this.nativeElement.classList.add('enabled');
@@ -69,24 +121,41 @@ export default class NobucaSelectView {
         }
     }
 
-    listenSelectModelEvents() {
+    listenModel() {
 
-        this.getSelectModel()
+        this.getModel()
+            .getValueChangedEventEmitter()
+            .subscribe(() => {
+                this.getDivInput().value = this.getModel().getValue();
+            });
+
+        this.getModel()
             .getAddOptionEventEmitter()
             .subscribe((optionModel) => {
                 this.addOption(optionModel.getHiddenValue(), optionModel.getVisibleValue());
             });
 
-        this.getSelectModel()
+        this.getModel()
             .getFocusEventEmitter()
             .subscribe(() => {
                 this.nativeElement.focus();
             });
 
-        this.getSelectModel()
+        this.getModel()
             .getEnabledChangedEventEmitter()
             .subscribe(() => {
                 this.updateView();
             });
     }
 }
+
+document.addEventListener("mousedown", (event) => {
+    if (NobucaSelectView.currentExpandedSelectView != null) {
+        var descendant = event.target;
+        var parent = NobucaSelectView.currentExpandedSelectView.getNativeElement();
+        var clickedInsideSelect = NobucaSelectView.currentExpandedSelectView.isEqualOrDescendant(descendant, parent);
+        if (!clickedInsideSelect) {
+            NobucaSelectView.currentExpandedSelectView.hideOptions();
+        }
+    }
+});

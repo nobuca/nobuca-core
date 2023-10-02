@@ -6,6 +6,9 @@ export default class NobucaLabelView extends NobucaComponentView {
         let label = document.createElement("div");
         label.className = "NobucaLabel";
         label.innerHTML = this.getModel().getText();
+        if(this.getModel().getBold()) {
+            label.style.fontWeight = "bold";
+        }
         this.setNativeElement(label);
     }
 

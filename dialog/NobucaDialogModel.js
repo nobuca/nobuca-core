@@ -1,17 +1,18 @@
 import NobucaAppModel from "../app/NobucaAppModel.js";
 import NobucaButtonModel from "../button/NobucaButtonModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
+import NobucaPanelModel from "../panel/NobucaPanelModel.js";
 
 export default class NobucaDialogModel {
 
-    constructor(width, height, title) {
+    static showDialogEventEmitter = new NobucaEventEmitter();
+
+    constructor(width, height, title, iconSrc) {
         this.width = width;
         this.height = height;
-        if (title == null) {
-            this.title = "Default";
-        } else {
-            this.title = title;
-        }
+        this.title = title;
+        this.iconSrc = iconSrc;
+        this.subheader = new NobucaPanelModel();
         this.children = new Array();
         this.buttons = new Array();
         this.closeEventEmitter = new NobucaEventEmitter();
@@ -19,15 +20,39 @@ export default class NobucaDialogModel {
         this.clearChildrenEventEmitter = new NobucaEventEmitter();
         this.addButtonEventEmitter = new NobucaEventEmitter();
         this.clearButtonsEventEmitter = new NobucaEventEmitter();
-        NobucaAppModel.showDialog(this);
+    }
+
+    static setActiveDialog(activeDialog) {
+        NobucaDialogModel.activeDialog = activeDialog;
+    }
+
+    static getActiveDialog() {
+        return NobucaDialogModel.activeDialog;
+    }
+
+    static showDialog(dialog) {
+        NobucaDialogModel.setActiveDialog(dialog);
+        NobucaDialogModel.getShowDialogEventEmitter().emit(NobucaDialogModel.getActiveDialog());
+    }
+
+    static getShowDialogEventEmitter() {
+        return NobucaDialogModel.showDialogEventEmitter;
     }
 
     getClassName() {
         return "NobucaDialogModel";
     }
 
+    getSubheader() {
+        return this.subheader;
+    }
+
     getTitle() {
         return this.title;
+    }
+
+    getIconSrc() {
+        return this.iconSrc;
     }
 
     getWidth() {
@@ -66,9 +91,14 @@ export default class NobucaDialogModel {
         this.getCloseEventEmitter().emit();
     }
 
+    getChildren() {
+        return this.children;
+    }
+
     addChild(child) {
         this.children.push(child);
         this.getChildAddedEventEmitter().emit(child);
+        return child;
     }
 
     clearChildren() {
@@ -135,4 +165,10 @@ export default class NobucaDialogModel {
     addBackButton() {
         return this.addButton("back", "< Back");
     }
+
+    show() {
+        NobucaDialogModel.setActiveDialog(this);
+        NobucaDialogModel.getShowDialogEventEmitter().emit(this);
+    }
+
 }

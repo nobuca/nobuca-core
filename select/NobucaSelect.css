@@ -1,4 +1,4 @@
-.NobucaSelect {
+.NobucaSelectInput {
     border: 1px solid rgb(68, 68, 68);
     outline: none;
     border-radius: 3px;
@@ -13,12 +13,12 @@
     box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 40%);
 }
 
-.NobucaSelect:hover {
+.NobucaSelectInput:hover {
     border: 1px solid rgb(78, 78, 78);
     background-color: rgb(35, 35, 35);
 }
 
-.NobucaSelect:focus {
+.NobucaSelectInput:focus {
     border: 1px solid rgb(68, 68, 68);
     background-color: rgb(79, 79, 79);
 }

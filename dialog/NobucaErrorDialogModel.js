@@ -2,23 +2,19 @@ import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaDialogModel from './NobucaDialogModel.js';
 import NobucaLabelModel from '../label/NobucaLabelModel.js';
 
-export default class NobucaErrorDialogModel {
+export default class NobucaErrorDialogModel extends NobucaDialogModel {
 
     constructor(message) {
+        super(600, 170, "Error");
 
-        this.dialog = new NobucaDialogModel(600, 170, "Error");
+        this.addChild(new NobucaLabelModel(message));
 
-        let label = new NobucaLabelModel(message);
-        this.getDialog().addChild(label);
-
-        let okButton = this.getDialog().addOkButton();
+        let okButton = this.addOkButton();
         okButton.getClickedEventEmitter().subscribe(() => {
             this.getDialog().close();
         });
         okButton.focus();
-    }
 
-    getDialog() {
-        return this.dialog;
+        this.show();
     }
 }

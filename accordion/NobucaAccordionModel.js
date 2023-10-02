@@ -19,4 +19,12 @@ export default class NobucaAccordionModel extends NobucaComponentModel {
         this.getSections().push(section);
         return section;
     }
+
+    setDraggableSections(draggableSections) {
+        this.draggableSections = draggableSections;
+    }
+
+    getDraggableSections() {
+        return this.draggableSections;
+    }
 }

@@ -4,7 +4,6 @@ export default class NobucaAppModel extends NobucaComponentModel {
 
     constructor() {
         super();
-        this.showDialogEventEmitter = this.createEventEmitter();
         this.titleChangedEventEmitter = this.createEventEmitter();
     }
 
@@ -21,11 +20,4 @@ export default class NobucaAppModel extends NobucaComponentModel {
         return this.titleChangedEventEmitter;
     }
 
-    showDialog(dialog) {
-        this.getShowDialogEventEmitter().emit(dialog);
-    }
-
-    getShowDialogEventEmitter() {
-        return this.showDialogEventEmitter;
-    }
 }

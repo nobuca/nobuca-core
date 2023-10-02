@@ -35,16 +35,29 @@
     padding-left: 5px;
 }
 
-.NobucaAccordionSectionHeaderButtonContainer {
-    display: flex;
-    width: 10px;
-    justify-content: center;
-}
-
 .NobucaAccordionSectionHeaderButton {
     display: flex;
     opacity: .7;
+    color: var(--font-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    text-shadow: var(--text-shadow);
+    min-width: 11px;
+    justify-content: center;
 }
+
+.NobucaAccordionSection
+  > .NobucaAccordionSectionHeader
+  > .NobucaAccordionSectionHeaderButton::before {
+  content: "🞂";
+}
+
+.NobucaAccordionSection.expanded
+  > .NobucaAccordionSectionHeader
+  > .NobucaAccordionSectionHeaderButton::before {
+  content: "🞃";
+}
+
 
 .NobucaAccordionSectionHeaderTitle {
     display: flex;
@@ -74,16 +87,16 @@
 }
 
 .NobucaAccordionSectionBody {
-    display: flex;
+    display: none;
     background-color: rgb(61, 61, 61);
+}
+
+.NobucaAccordionSection.expanded > .NobucaAccordionSectionBody {
+    display: flex;
 }
 
 .NobucaAccordionSectionBody>.NobucaPanel {
     width: 100%;
-}
-
-.NobucaAccordionSectionBody>.NobucaPanel>.NobucaPanel {
-    padding: 8px;
 }
 
 .NobucaAccordionSectionBody .NobucaAccordion {

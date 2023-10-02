@@ -20,6 +20,7 @@ import NobucaHtmlView from "../html/NobucaHtmlView.js";
 import NobucaImageView from "../image/NobucaImageView.js";
 import NobucaAccordionView from "../accordion/NobucaAccordionView.js";
 import NobucaPopoverView from "../popover/NobucaPopoverView.js";
+import NobucaWhitespaceView from "../whitespace/NobucaWhitespaceView.js";
 
 export default class NobucaFactory {
 
@@ -61,6 +62,8 @@ export default class NobucaFactory {
             function (model) { return new NobucaButtonbarView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLabelModel",
             function (model) { return new NobucaLabelView(model); });
+        NobucaFactory.registerViewConstructorForModelClassName("NobucaWhitespaceModel",
+            function (model) { return new NobucaWhitespaceView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaCheckboxModel",
             function (model) { return new NobucaCheckboxView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaLinkModel",

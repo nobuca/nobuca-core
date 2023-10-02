@@ -28,4 +28,12 @@ export default class NobucaLabelModel extends NobucaComponentModel {
     getTextChangedEventEmitter() {
         return this.textChangedEventEmitter;
     }
+
+    setBold(bold) {
+        this.bold = bold;
+    }
+
+    getBold() {
+        return this.bold;
+    }
 }
