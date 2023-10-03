@@ -81,18 +81,17 @@ export default class NobucaSelectView extends NobucaComponentView {
 
     addOption(hiddenValue, visibleValue) {
         let option = document.createElement('option');
-        this.nativeElement.appendChild(option);
+        this.getNativeElement().appendChild(option);
         option.hiddenValue = hiddenValue;
         option.innerHTML = visibleValue;
     }
 
     getValue() {
-        if (this.nativeElement.selectedOptions.length === 0) return null;
-        return this.nativeElement.selectedOptions[0].hiddenValue;
+        return this.getNativeElement().value;
     }
 
     setValue(value) {
-        this.nativeElement.value = value;
+        this.getNativeElement().value = value;
     }
 
     focus() {

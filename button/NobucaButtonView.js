@@ -51,7 +51,7 @@ export default class NobucaButtonView extends NobucaComponentView {
             this.updateView();
         });
         this.getModel().getRequestFocusEventEmitter().subscribe(() => {
-            this.nativeElement.focus();
+            this.getNativeElement().focus();
         });
     }
 }

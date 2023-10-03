@@ -1,6 +1,7 @@
 import NobucaButtonView from "../button/NobucaButtonView.js";
 import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
+import NobucaDialogModel from "./NobucaDialogModel.js";
 
 export default class NobucaDialogView extends NobucaComponentView {
 
@@ -48,10 +49,9 @@ export default class NobucaDialogView extends NobucaComponentView {
         this.divDialog = divDialog;
 
         this.createDivHeader();
-        this.createDivSubheader();
+        
         this.divDialogBody = this.createDivBody();
-        this.divDialogButtons = this.createDivButtons();
-
+        
         return divDialog;
     }
 
@@ -79,11 +79,13 @@ export default class NobucaDialogView extends NobucaComponentView {
     }
 
     createDivHeaderIcon() {
-        if (this.getModel().getIconSrc() == null) return;
+        var iconSrc = this.getModel().getIconSrc();
+        if (iconSrc == null) iconSrc = NobucaDialogModel.getDefaultIconSrc();
+        if (iconSrc == null) return;
         let divDialogHeaderIcon = document.createElement("img");
         this.getDivDialogHeader().appendChild(divDialogHeaderIcon);
         divDialogHeaderIcon.className = "NobucaDialogHeaderIcon";
-        divDialogHeaderIcon.src = this.getModel().getIconSrc();
+        divDialogHeaderIcon.src = iconSrc;
         return divDialogHeaderIcon;
     }
 
@@ -95,15 +97,6 @@ export default class NobucaDialogView extends NobucaComponentView {
         return divDialogHeaderTitle;
     }
 
-    createDivSubheader() {
-        let divDialogSubheader = document.createElement("div");
-        this.getDivDialog().appendChild(divDialogSubheader);
-        divDialogSubheader.className = "NobucaDialogSubheader";
-        this.divDialogSubheader = divDialogSubheader;
-        var subheaderView = NobucaFactory.createNewViewForModel(this.getModel().getSubheader());
-        divDialogSubheader.appendChild(subheaderView.getNativeElement());
-        return divDialogSubheader;
-    }
 
     createDivBody() {
         let divDialogBody = document.createElement("div");
@@ -114,34 +107,6 @@ export default class NobucaDialogView extends NobucaComponentView {
             divDialogBody.appendChild(childView.getNativeElement());
         });
         return divDialogBody;
-    }
-
-    addChild(view) {
-        this.divDialogBody.appendChild(view.getNativeElement());
-    }
-
-    clearChildren() {
-        while (this.divDialogBody.childNodes.length > 0) {
-            this.divDialogBody.removeChild(this.divDialogBody.childNodes[0]);
-        }
-    }
-
-    clearButtons() {
-        while (this.divDialogButtons.childNodes.length > 0) {
-            this.divDialogButtons.removeChild(this.divDialogButtons.childNodes[0]);
-        }
-    }
-
-    createDivButtons() {
-        let divDialogButtons = document.createElement("div");
-        this.divDialog.append(divDialogButtons);
-        divDialogButtons.className = "NobucaDialogButtons";
-
-        if (this.getModel().getButtons().length == 0) {
-            divDialogButtons.style.display = "none";
-        }
-
-        return divDialogButtons;
     }
 
     updateContentsPositionAndSize() {
@@ -155,32 +120,6 @@ export default class NobucaDialogView extends NobucaComponentView {
     }
 
     listenModel() {
-        this.getModel()
-            .getChildAddedEventEmitter()
-            .subscribe((childModel) => {
-                let childView = NobucaFactory.createNewViewForModel(childModel);
-                this.addChild(childView);
-            });
-
-        this.getModel()
-            .getClearChildrenEventEmitter()
-            .subscribe(() => {
-                this.clearChildren();
-            });
-
-        this.getModel()
-            .getAddButtonEventEmitter()
-            .subscribe((buttonModel) => {
-                this.buttonView = new NobucaButtonView(buttonModel);
-                this.divDialogButtons.appendChild(this.buttonView.getNativeElement());;
-            });
-
-        this.getModel()
-            .getClearButtonsEventEmitter()
-            .subscribe(() => {
-                this.clearButtons();
-            });
-
         this.getModel()
             .getCloseEventEmitter()
             .subscribe(() => {
