@@ -3,10 +3,10 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 export default class NobucaTreeNodeExpandCollapseButtonView extends NobucaComponentView {
 F
     createNativeElement() {
-        let img = document.createElement("img");
-        img.className = "NobucaTreeNodeExpandCollapseButton";
+        let div = document.createElement("div");
+        div.className = "NobucaTreeNodeExpandCollapseButton";
 
-        img.addEventListener('click', event => {
+        div.addEventListener('click', event => {
             if (this.getModel().getExpanded()) {
                 this.getModel().collapse();
             } else {
@@ -14,7 +14,7 @@ F
             }
         });
 
-        this.setNativeElement(img);
+        this.setNativeElement(div);
 
         this.updateView();
     }
@@ -25,9 +25,13 @@ F
         } else {
             this.getNativeElement().className = 'NobucaTreeNodeExpandCollapseButton withChildren';
             if (this.getModel().getExpanded()) {
-                this.getNativeElement().src = this.getModel().getTree().getCollapseButtonIconSrc();
+                this.getNativeElement().classList.add("expanded");
+                this.getNativeElement().classList.remove("collapsed");
+                    //this.getNativeElement().src = this.getModel().getTree().getCollapseButtonIconSrc();
             } else {
-                this.getNativeElement().src = this.getModel().getTree().getExpandButtonIconSrc();
+                this.getNativeElement().classList.remove("expanded");
+                this.getNativeElement().classList.add("collapsed");
+                //this.getNativeElement().src = this.getModel().getTree().getExpandButtonIconSrc();
             }
         }
     }

@@ -74,6 +74,12 @@ export default class NobucaComponentView {
         return element.offsetLeft;
     }
 
+    removeChildren(parent) {
+        while(parent.childNodes.length>0) {
+            parent.removeChild(parent.childNodes[0]);
+        }
+    }
+
     isEqualOrDescendant(descendant, ancestor) {
         if (descendant == null) return false;
         if (descendant == ancestor) return true;

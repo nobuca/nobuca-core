@@ -31,6 +31,7 @@ export default class NobucaTreeNodeModel extends NobucaComponentModel {
         this.addNodeEventEmitter = new NobucaEventEmitter();
         this.childNodeAddNodeEventEmitter = new NobucaEventEmitter();
         this.clearNodesEventEmitter = new NobucaEventEmitter();
+        this.componentsChangedEventEmitter = new NobucaEventEmitter();
     }
 
     createContextMenu() {
@@ -54,6 +55,7 @@ export default class NobucaTreeNodeModel extends NobucaComponentModel {
 
     addRightSideComponent(component) {
         this.getRightSideComponents().push(component);
+        this.getComponentsChangedEventEmitter().emit();
         return component;
     }
 
@@ -63,6 +65,7 @@ export default class NobucaTreeNodeModel extends NobucaComponentModel {
 
     addLeftSideComponent(component) {
         this.getLeftSideComponents().push(component);
+        this.getComponentsChangedEventEmitter().emit();
         return component;
     }
 
@@ -118,6 +121,9 @@ export default class NobucaTreeNodeModel extends NobucaComponentModel {
         return this.clearNodesEventEmitter;
     }
 
+    getComponentsChangedEventEmitter() {
+        return this.componentsChangedEventEmitter;
+    }
 
     getExpanded() {
         return this.expanded;

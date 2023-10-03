@@ -8,6 +8,7 @@ import NobucaFactory from '../factory/NobucaFactory.js';
 export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentView {
 
     createNativeElement() {
+
         let div = document.createElement("div");
         div.className = "NobucaTreeNodeWithoutChildren";
 
@@ -52,8 +53,7 @@ export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentVi
         this.createExpandCollapseButton();
         this.createContextMenuView();
 
-        this.createRightSideComponents();
-        this.createLeftSideComponents();
+        this.createComponents()
     }
 
     createIndent() {
@@ -69,12 +69,36 @@ export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentVi
         this.getNativeElement().appendChild(this.nodeExpandCollapseButton.getNativeElement());
     }
 
+    createComponents() {
+        this.createLeftSideComponents();
+        this.createRightSideComponents();
+    }
+
+    recreateComponents() {
+        this.clearComponents();
+        this.addComponents();
+    }
+
+    addComponents() {
+        this.addLeftSideComponents();
+        this.addRightSideComponents();
+    }
+
+    clearComponents() {
+        this.removeChildren(this.getDivLeftSideComponents());
+        this.removeChildren(this.getDivRightSideComponents());
+    }
+
     createRightSideComponents() {
 
         this.divRightSideComponents = document.createElement("div");
         this.divRightSideComponents.className = "NobucaTreeNodeWithoutChildrenRightSideComponents";
         this.getNativeElement().appendChild(this.divRightSideComponents);
 
+        this.addRightSideComponents();
+    }
+
+    addRightSideComponents() {
         this.getModel().getRightSideComponents().forEach(componentModel => this.createRightSideComponent(componentModel));
     }
 
@@ -88,6 +112,10 @@ export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentVi
         this.divLeftSideComponents.className = "NobucaTreeNodeWithoutChildrenLeftSideComponents";
         this.getNativeElement().appendChild(this.divLeftSideComponents);
 
+        this.addLeftSideComponents();
+    }
+
+    addLeftSideComponents() {
         this.getModel().getLeftSideComponents().forEach(componentModel => this.createLeftSideComponent(componentModel));
     }
 
@@ -140,6 +168,13 @@ export default class NobucaTreeNodeWithoutChildrenView extends NobucaComponentVi
             let strNodeData = event.dataTransfer.getData("node/data");
             let nodeData = JSON.parse(strNodeData);
             console.log("drop.nodeData", nodeData);
+        });
+    }
+
+    listenModel() {
+
+        this.getModel().getComponentsChangedEventEmitter().subscribe(() => {
+            this.recreateComponents();
         });
     }
 }
