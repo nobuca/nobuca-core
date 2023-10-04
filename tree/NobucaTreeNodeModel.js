@@ -149,6 +149,10 @@ export default class NobucaTreeNodeModel extends NobucaComponentModel {
         this.getDeselectEventEmitter().emit(this);
     }
 
+    setData(data) {
+        this.data = data;
+    }
+
     getData() {
         return this.data;
     }
