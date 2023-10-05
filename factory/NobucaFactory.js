@@ -5,7 +5,6 @@ import NobucaPanelSplitTopBottomView from "../panel-split/NobucaPanelSplitTopBot
 import NobucaTreeView from "../tree/NobucaTreeView.js";
 import NobucaTreeNodeIconView from "../tree/NobucaTreeNodeIconView.js";
 import NobucaTreeNodeTextView from "../tree/NobucaTreeNodeTextView.js";
-import NobucaTabsView from "../tabs/NobucaTabsView.js";
 import NobucaTabsHeaderView from "../tabs/NobucaTabsHeaderView.js";
 import NobucaFieldsetView from "../fieldset/NobucaFieldsetView.js";
 import NobucaButtonView from "../button/NobucaButtonView.js";
@@ -48,12 +47,8 @@ export default class NobucaFactory {
             function (model) { return new NobucaTreeNodeIconView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTreeNodeTextModel",
             function (model) { return new NobucaTreeNodeTextView(model); });
-        NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
-            function (model) { return new NobucaTabsView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaFieldsetModel",
             function (model) { return new NobucaFieldsetView(model); });
-        NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsModel",
-            function (model) { return new NobucaTabsView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaTabsHeaderModel",
             function (model) { return new NobucaTabsHeaderView(model); });
         NobucaFactory.registerViewConstructorForModelClassName("NobucaButtonModel",
@@ -103,6 +98,7 @@ export default class NobucaFactory {
                 model.getClassName() +
                 "].";
             }
+            model.setView(view);
             return view;
         }
 

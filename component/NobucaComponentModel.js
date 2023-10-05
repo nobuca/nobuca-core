@@ -40,4 +40,12 @@ export default class NobucaComponentModel {
     getParent() {
         return this.parent;
     }
+
+    setView(view) {
+        this.view = view;
+    }
+
+    getView() {
+        return this.view;
+    }
 }

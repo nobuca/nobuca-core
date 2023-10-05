@@ -45,11 +45,15 @@ export default class NobucaTabsHeaderView extends NobucaComponentView {
             tabHeaderView.activate();
         }
 
-        tabHeaderView.getClickedEventEmitter().subscribe((tabModel) => {
+        tabModel.getClickedEventEmitter().subscribe(() => {
             this.getModel().setActiveTab(tabModel);
         });
 
-        tabHeaderView.getCloseEventEmitter().subscribe((tabModel) => {
+        tabModel.getDoubleClickedEventEmitter().subscribe(() => {
+            this.getModel().setActiveTab(tabModel);
+        });
+
+        tabModel.getCloseClickedEventEmitter().subscribe(() => {
             this.getModel().removeTab(tabModel);
         });
 
@@ -102,7 +106,7 @@ export default class NobucaTabsHeaderView extends NobucaComponentView {
             });
 
         this.getModel()
-            .getActiveTabChangeEventEmitter()
+            .getActiveTabChangedEventEmitter()
             .subscribe((tabModel) => {
                 this.activateTab(tabModel);
             });

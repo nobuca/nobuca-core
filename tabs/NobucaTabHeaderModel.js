@@ -1,15 +1,28 @@
 import NobucaComponentModel from "../component/NobucaComponentModel.js";
 import NobucaEventEmitter from '../event/NobucaEventEmitter.js';
 
-export default class NobucaTabModel extends NobucaComponentModel {
+export default class NobucaTabHeaderModel extends NobucaComponentModel {
 
     constructor(id, text) {
         super();
         this.setId(id);
         this.text = text;
         this.closaeable = false;
-        this.textChangeEventEmitter = new NobucaEventEmitter();
-        this.closeableChangeEventEmitter = new NobucaEventEmitter();
+        this.clickedEventEmitter = this.createEventEmitter();
+        this.doubleClickedEventEmitter = this.createEventEmitter();
+        this.closeClickedEventEmitter = this.createEventEmitter();
+    }
+
+    getClickedEventEmitter() {
+        return this.clickedEventEmitter;
+    }
+
+    getDoubleClickedEventEmitter() {
+        return this.doubleClickedEventEmitter;
+    }
+
+    getCloseClickedEventEmitter() {
+        return this.closeClickedEventEmitter;
     }
 
     setIndex(index) {
@@ -26,7 +39,6 @@ export default class NobucaTabModel extends NobucaComponentModel {
 
     setText(text) {
         this.text = text;
-        this.getTextChangeEventEmitter().emit(this.text);
     }
 
     setImageSrc(imageSrc) {
@@ -43,15 +55,8 @@ export default class NobucaTabModel extends NobucaComponentModel {
 
     setCloseable(closeable) {
         this.closeable = closeable;
-        this.getCloseableChangeEventEmitter().emit(closeable);
     }
 
-    getTextChangeEventEmitter() {
-        return this.textChangeEventEmitter;
-    }
-
-    getCloseableChangeEventEmitter() {
-        return this.closeableChangeEventEmitter;
-    }
+    
 
 }
