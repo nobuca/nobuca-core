@@ -15,7 +15,7 @@
 @import "dialog/NobucaDialog.css";
 @import "tree/NobucaTree.css";
 @import "menubar/NobucaMenubar.css";
-@import "panel-split/NobucaPanelSplit.css";
+@import "split/NobucaPanelSplit.css";
 @import "cards/NobucaCards.css";
 @import "accordion/NobucaAccordion.css";
 @import "checkbox/NobucaCheckbox.css";

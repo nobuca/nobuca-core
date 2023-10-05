@@ -1,8 +1,8 @@
-import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeModel.js";
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaTabHeaderModel from "./NobucaTabHeaderModel.js";
 
-export default class NobucaTabsHeaderModel extends NobucaPositionAndSizeModel {
+export default class NobucaTabsHeaderModel extends NobucaComponentModel {
     constructor() {
         super();
         this.tabs = [];

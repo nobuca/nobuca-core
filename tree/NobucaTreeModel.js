@@ -1,8 +1,8 @@
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 import NobucaContextMenuModel from "../context-menu/NobucaContextMenuModel.js";
-import NobucaPositionAndSizeModel from "../size-position/NobucaPositionAndSizeModel.js";
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
 
-export default class NobucaTreeModel extends NobucaPositionAndSizeModel {
+export default class NobucaTreeModel extends NobucaComponentModel {
     constructor() {
         super();
         this.nodes = [];
