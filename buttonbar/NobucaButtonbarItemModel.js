@@ -5,6 +5,7 @@ export default class NobucaButtonbarItemModel extends NobucaPanelModel {
     constructor(imageSrc) {
         super();
         this.imageSrc = imageSrc;
+        this.clickedEventEmitter = this.createEventEmitter();
     }
 
     setImageSrc(imageSrc) {
@@ -15,5 +16,8 @@ export default class NobucaButtonbarItemModel extends NobucaPanelModel {
         return this.imageSrc;
     }
 
+    getClickedEventEmitter() {
+        return this.clickedEventEmitter;
+    }
 
 }

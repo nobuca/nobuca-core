@@ -63,6 +63,11 @@ export default class NobucaComponentView {
     applyLayout() {
         NobucaLayoutView.applyLayout(this);
     }
+    
+    setTooltip(elem, tooltip) {
+        if (tooltip == null) return;
+        elem.setAttribute("title", tooltip);
+    }
 
     getAbsoluteTop(element) {
         if (element.offsetParent != null) return element.offsetTop + this.getAbsoluteTop(element.offsetParent);

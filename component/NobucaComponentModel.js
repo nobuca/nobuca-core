@@ -13,6 +13,7 @@ export default class NobucaComponentModel {
 
     setId(id) {
         this.id = id;
+        return this;
     }
 
     createEventEmitter() {
@@ -23,4 +24,20 @@ export default class NobucaComponentModel {
         return this.layout;
     }
 
+    setTooltip(tooltip) {
+        this.tooltip = tooltip;
+        return this;
+    }
+
+    getTooltip() {
+        return this.tooltip;
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+    }
+
+    getParent() {
+        return this.parent;
+    }
 }

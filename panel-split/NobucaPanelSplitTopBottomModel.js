@@ -5,7 +5,9 @@ export default class NobucaPanelSplitTopBottomModel extends NobucaComponentModel
     constructor(topPanel, bottomPanel, weight) {
         super();
         this.topPanel = topPanel;
+        this.topPanel.setParent(this);
         this.bottomPanel = bottomPanel;
+        this.bottomPanel.setParent(this);
         this.weight = weight;
     }
 
@@ -28,4 +30,5 @@ export default class NobucaPanelSplitTopBottomModel extends NobucaComponentModel
     getWeight() {
         return this.weight;
     }
+
 }

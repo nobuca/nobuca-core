@@ -2,6 +2,7 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
+
     static dragging = null;
 
     createNativeElement() {
@@ -9,24 +10,28 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         divContainer.className = "NobucaPanelSplitTopBottom";
         this.setNativeElement(divContainer);
         this.createContents();
+        this.composeContents();
     }
 
     createContents() {
         let topPanelModel = this.getModel().getTopPanel();
         this.topPanelView = NobucaFactory.createNewViewForModel(topPanelModel);
         this.topPanelView.setParent(this);
-        this.getNativeElement().appendChild(this.topPanelView.getNativeElement());
 
         this.divDivider = document.createElement("div");
         this.divDivider.className = "NobucaPanelSplitTopBottomDivider";
         this.divDivider.addEventListener("mousedown", (event) => {
             this.beginDrag(event.x, event.y);
         });
-        this.getNativeElement().appendChild(this.divDivider);
 
         let bottomPanelModel = this.getModel().getBottomPanel();
         this.bottomPanelView = NobucaFactory.createNewViewForModel(bottomPanelModel);
         this.bottomPanelView.setParent(this);
+    }
+
+    composeContents() {
+        this.getNativeElement().appendChild(this.topPanelView.getNativeElement());
+        this.getNativeElement().appendChild(this.divDivider);
         this.getNativeElement().appendChild(this.bottomPanelView.getNativeElement());
     }
 
@@ -85,31 +90,35 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
         var width = this.getNativeElement().offsetWidth;
 
         var dividerHeight = 3;
+
         var heightWithoutDivider = height - dividerHeight;
         var topPanelHeight = Math.floor(heightWithoutDivider * this.getModel().getWeight());
         var bottomPanelHeight = Math.floor(heightWithoutDivider * (1 - this.getModel().getWeight()));
 
-        var diff = heightWithoutDivider - topPanelHeight - dividerHeight - bottomPanelHeight;
-        if(diff != 0) {
-            bottomPanelHeight -= diff;
+        var diff = height
+            - dividerHeight
+            - (heightWithoutDivider * this.getModel().getWeight())
+            - (heightWithoutDivider * (1 - this.getModel().getWeight()));
+        if (diff < 0) {
+            bottomPanelHeight += Math.floor(diff);
+        } else if (diff > 0) {
+            bottomPanelHeight += Math.ceil(diff);
         }
 
-        if (this.getTopPanelView().getNativeElement().offsetHeight != topPanelHeight ||
-            this.getTopPanelView().getNativeElement().offsetWidth != width) {
-            this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
-            this.getTopPanelView().getNativeElement().style.width = width + "px";
-            this.getTopPanelView().updateContentsPositionAndSize();
-        }
+        this.getTopPanelView().getNativeElement().style.display = "";
+        this.getBottomPanelView().getNativeElement().style.display = "";
+        this.getDivider().style.display = "";
+
+        this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
+        this.getTopPanelView().getNativeElement().style.width = width + "px";
+        this.getTopPanelView().updateContentsPositionAndSize();
 
         this.getDivider().style.height = dividerHeight + "px";
         this.getDivider().style.width = width + "px";
 
-        if (this.getBottomPanelView().getNativeElement().offsetHeight != bottomPanelHeight ||
-            this.getBottomPanelView().getNativeElement().offsetWidth != width) {
-            this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
-            this.getBottomPanelView().getNativeElement().style.width = width + "px";
-            this.getBottomPanelView().updateContentsPositionAndSize();
-        }
+        this.getBottomPanelView().getNativeElement().style.height = bottomPanelHeight + "px";
+        this.getBottomPanelView().getNativeElement().style.width = width + "px";
+        this.getBottomPanelView().updateContentsPositionAndSize();
     }
 }
 

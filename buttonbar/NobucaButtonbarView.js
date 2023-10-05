@@ -12,10 +12,10 @@ export default class NobucaButtonbarView extends NobucaComponentView {
     }
 
     createHandle() {
-        if(!this.getModel().getMoveable()) return;
+        if (!this.getModel().getMoveable()) return;
         var img = document.createElement("img");
         img.className = "NobucaButtonbarHandle";
-        img.src = "/nobuca-core/buttonbar/buttonbar-handle.svg";
+        img.src = "/nobuca-core/buttonbar/buttonbar-handle-vertical.svg";
         this.getNativeElement().appendChild(img);
     }
 
@@ -35,9 +35,16 @@ export default class NobucaButtonbarView extends NobucaComponentView {
         divItem.className = "NobucaButtonbarItem";
         this.getDivItems().appendChild(divItem);
 
+        this.setTooltip(divItem, buttonbarItemModel.getTooltip());
+
         var imgImage = document.createElement("img");
         imgImage.className = "NobucaButtonbarItemImg";
         imgImage.src = buttonbarItemModel.getImageSrc();
         divItem.appendChild(imgImage);
+
+        divItem.addEventListener("mousedown", () => {
+            buttonbarItemModel.getClickedEventEmitter().emit();
+        });
     }
+
 }

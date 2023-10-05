@@ -5,8 +5,11 @@ export default class NobucaPanelSplitLeftRightModel extends NobucaComponentModel
     constructor(leftPanel, rightPanel, weight) {
         super();
         this.leftPanel = leftPanel;
+        this.leftPanel.setParent(this);
         this.rightPanel = rightPanel;
+        this.rightPanel.setParent(this);
         this.weight = weight;
+        this.stateChangedEventEmitter = this.createEventEmitter();
     }
 
     getClassName() {

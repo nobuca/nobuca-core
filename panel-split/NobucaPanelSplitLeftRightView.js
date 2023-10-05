@@ -2,6 +2,7 @@ import NobucaComponentView from "../component/NobucaComponentView.js";
 import NobucaFactory from "../factory/NobucaFactory.js";
 
 export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
+
     static dragging = null;
 
     createNativeElement() {
@@ -9,24 +10,28 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
         divContainer.className = "NobucaPanelSplitLeftRight";
         this.setNativeElement(divContainer);
         this.createContents();
+        this.composeContents();
     }
 
     createContents() {
         let leftPanelModel = this.getModel().getLeftPanel();
         this.leftPanelView = NobucaFactory.createNewViewForModel(leftPanelModel);
         this.leftPanelView.setParent(this);
-        this.getNativeElement().appendChild(this.leftPanelView.getNativeElement());
 
         this.divDivider = document.createElement("div");
         this.divDivider.className = "NobucaPanelSplitLeftRightDivider";
         this.divDivider.addEventListener("mousedown", (event) => {
             this.beginDrag(event.x, event.y);
         });
-        this.getNativeElement().appendChild(this.divDivider);
 
         let righPanelModel = this.getModel().getRightPanel();
         this.rightPanelView = NobucaFactory.createNewViewForModel(righPanelModel);
         this.rightPanelView.setParent(this);
+    }
+
+    composeContents() {
+        this.getNativeElement().appendChild(this.leftPanelView.getNativeElement());
+        this.getNativeElement().appendChild(this.divDivider);
         this.getNativeElement().appendChild(this.rightPanelView.getNativeElement());
     }
 
@@ -82,32 +87,36 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
         var width = this.getNativeElement().offsetWidth;
 
         var dividerWidth = 3;
+
         var widthWithoutDivider = width - dividerWidth;
         var leftPanelWidth = Math.floor(widthWithoutDivider * this.getModel().getWeight());
         var rightPanelWidth = Math.floor(widthWithoutDivider * (1 - this.getModel().getWeight()));
 
-        if (this.getLeftPanelView().getNativeElement().offsetHeight != height ||
-            this.getLeftPanelView().getNativeElement().offsetWidth != leftPanelWidth) {
-            this.getLeftPanelView().getNativeElement().style.height = height + "px";
-            this.getLeftPanelView().getNativeElement().style.width = leftPanelWidth + "px";
-            this.getLeftPanelView().updateContentsPositionAndSize();
+        var diff = width
+            - dividerWidth
+            - (widthWithoutDivider * this.getModel().getWeight())
+            - (widthWithoutDivider * (1 - this.getModel().getWeight()));
+        if (diff < 0) {
+            rightPanelWidth += Math.floor(diff);
+        } else if (diff > 0) {
+            rightPanelWidth += Math.ceil(diff);
         }
+
+        this.getLeftPanelView().getNativeElement().style.display = "";
+        this.getRightPanelView().getNativeElement().style.display = "";
+        this.getDivider().style.display = "";
+
+        this.getLeftPanelView().getNativeElement().style.height = height + "px";
+        this.getLeftPanelView().getNativeElement().style.width = leftPanelWidth + "px";
+        this.getLeftPanelView().updateContentsPositionAndSize();
 
         this.getDivider().style.height = height + "px";
         this.getDivider().style.minWidth = dividerWidth + "px";
 
-        var diff = widthWithoutDivider - leftPanelWidth - dividerWidth - rightPanelWidth;
-        if(diff != 0) {
-            rightPanelWidth -= diff;
-        }
-
-        if (this.getRightPanelView().getNativeElement().offsetHeight != height ||
-            this.getRightPanelView().getNativeElement().offsetWidth != rightPanelWidth) {
-            this.getRightPanelView().getNativeElement().style.height = height + "px";
-            this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";
-            this.getRightPanelView().updateContentsPositionAndSize();
-        }
-    }
+        this.getRightPanelView().getNativeElement().style.height = height + "px";
+        this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";
+        this.getRightPanelView().updateContentsPositionAndSize();
+}
 }
 
 window.addEventListener("mousemove", (event) => {
