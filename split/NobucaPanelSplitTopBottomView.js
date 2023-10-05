@@ -50,18 +50,17 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
     beginDrag(x, y) {
         NobucaPanelSplitTopBottomView.dragging = this;
         this.getNativeElement().classList.add("dragging");
-        this.offsetY = y - this.getTopPanelView().getNativeElement().offsetHeight;
     }
 
-    drag(x, y) {
+    drag(movementY) {
+        
         window.getSelection().removeAllRanges();
 
         var parent = this.getNativeElement().parentNode;
         var parentHeight = parent.offsetHeight;
         var dividerHeight = 3;
         var parentHeightWithoutDivider = parentHeight - dividerHeight;
-        var topPanelHeight = this.getTopPanelView().getNativeElement().offsetHeight;
-        topPanelHeight = y - this.offsetY;
+        var topPanelHeight = this.getTopPanelView().getNativeElement().offsetHeight + movementY;
         var bottomPanelHeight = parentHeightWithoutDivider - topPanelHeight;
 
         this.getTopPanelView().getNativeElement().style.height = topPanelHeight + "px";
@@ -124,12 +123,12 @@ export default class NobucaPanelSplitTopBottomView extends NobucaComponentView {
 
 window.addEventListener("mousemove", (event) => {
     if (NobucaPanelSplitTopBottomView.dragging != null) {
-        NobucaPanelSplitTopBottomView.dragging.drag(event.x, event.y);
+        NobucaPanelSplitTopBottomView.dragging.drag(event.movementY);
     }
 });
 
 window.addEventListener("mouseup", (event) => {
     if (NobucaPanelSplitTopBottomView.dragging != null) {
-        NobucaPanelSplitTopBottomView.dragging.endDrag(event.x, event.y);
+        NobucaPanelSplitTopBottomView.dragging.endDrag();
     }
 });

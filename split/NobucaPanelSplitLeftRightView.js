@@ -50,18 +50,17 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
     beginDrag(x, y) {
         NobucaPanelSplitLeftRightView.dragging = this;
         this.getNativeElement().classList.add("dragging");
-        this.beginDragX = x;
-        this.beginDragY = y;
     }
 
-    drag(x, y) {
+    drag(movementX) {
+
         window.getSelection().removeAllRanges();
 
         var parent = this.getNativeElement().parentNode;
         var parentWidth = parent.offsetWidth;
         var dividerWidth = 3;
         var parentWidthWithoutDivider = parentWidth - dividerWidth;
-        var leftPanelWidth = x;
+        var leftPanelWidth = this.getLeftPanelView().getNativeElement().offsetWidth + movementX;
         var rightPanelWidth = parentWidthWithoutDivider - leftPanelWidth;
 
         this.getLeftPanelView().getNativeElement().style.width = leftPanelWidth + "px";
@@ -69,9 +68,12 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
 
         this.getRightPanelView().getNativeElement().style.width = rightPanelWidth + "px";
         this.getRightPanelView().updateContentsPositionAndSize();
+
+        var newWeight = leftPanelWidth / parentWidthWithoutDivider;
+        this.getModel().setWeight(newWeight);
     }
 
-    endDrag(x, y) {
+    endDrag() {
         this.getNativeElement().classList.remove("dragging");
         NobucaPanelSplitLeftRightView.dragging = null;
     }
@@ -121,12 +123,12 @@ export default class NobucaPanelSplitLeftRightView extends NobucaComponentView {
 
 window.addEventListener("mousemove", (event) => {
     if (NobucaPanelSplitLeftRightView.dragging != null) {
-        NobucaPanelSplitLeftRightView.dragging.drag(event.x, event.y);
+        NobucaPanelSplitLeftRightView.dragging.drag(event.movementX);
     }
 });
 
 window.addEventListener("mouseup", (event) => {
     if (NobucaPanelSplitLeftRightView.dragging != null) {
-        NobucaPanelSplitLeftRightView.dragging.endDrag(event.x, event.y);
+        NobucaPanelSplitLeftRightView.dragging.endDrag();
     }
 });
