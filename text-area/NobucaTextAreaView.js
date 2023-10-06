@@ -1,17 +1,8 @@
-export default class NobucaTextView {
+import NobucaComponentView from "../component/NobucaComponentView.js";
 
-    constructor(textAreaModel) {
-        this.textAreaModel = textAreaModel;
-        this.nativeElement = this.createInput();
-        this.updateView();
-        this.listenTextModelEvents();
-    }
+export default class NobucaTextView extends NobucaComponentView{
 
-    getTextAreaModel() {
-        return this.textAreaModel;
-    }
-
-    createInput() {
+    createNativeElement() {
         let textarea = document.createElement('textarea');
         textarea.className = 'NobucaTextArea';
 
@@ -20,64 +11,64 @@ export default class NobucaTextView {
         });
 
         textarea.addEventListener('input', event => {
-            this.getTextAreaModel().setValue(textarea.value);
+            this.getModel().setValue(textarea.value);
         });
 
-        return textarea;
+        this.setNativeElement(textarea);
     }
 
     getValue() {
-        return this.nativeElement.value;
+        return this.getNativeElement().value;
     }
 
     setValue(value) {
-        this.nativeElement.value = value;
+        this.getNativeElement().value = value;
     }
 
     focus() {
-        this.nativeElement.focus();
+        this.getNativeElement().focus();
     }
 
     updateView() {
-        if (this.getTextAreaModel().getEnabled()) {
-            this.nativeElement.removeAttribute('readonly');
-            this.nativeElement.classList.remove('disabled');
-            this.nativeElement.classList.add('enabled');
+        if (this.getModel().getEnabled()) {
+            this.getNativeElement().removeAttribute('readonly');
+            this.getNativeElement().classList.remove('disabled');
+            this.getNativeElement().classList.add('enabled');
         } else {
-            this.nativeElement.setAttribute('readonly', true);
-            this.nativeElement.classList.remove('enabled');
-            this.nativeElement.classList.add('disabled');
+            this.getNativeElement().setAttribute('readonly', true);
+            this.getNativeElement().classList.remove('enabled');
+            this.getNativeElement().classList.add('disabled');
         }
     }
 
     disable() {
-        this.nativeElement.setAttribute('readonly', '');
+        this.getNativeElement().setAttribute('readonly', '');
     }
 
-    listenTextModelEvents() {
+    listenModel() {
 
-        this.getTextAreaModel()
+        this.getModel()
             .getFocusEventEmitter()
             .subscribe(() => {
-                this.nativeElement.focus();
+                this.getNativeElement().focus();
             });
 
-        this.getTextAreaModel()
+        this.getModel()
             .getValueChangeEventEmitter()
             .subscribe(value => {
                 this.setValue(value);
             });
 
-        this.getTextAreaModel()
+        this.getModel()
             .getEnabledChangedEventEmitter()
             .subscribe(() => {
                 this.updateView();
             });
 
-        this.getTextAreaModel()
+        this.getModel()
             .getSelectEventEmitter()
             .subscribe(() => {
-                this.nativeElement.select();
+                this.getNativeElement().select();
             });
     }
 }

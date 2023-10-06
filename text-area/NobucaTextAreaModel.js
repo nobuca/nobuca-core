@@ -1,8 +1,10 @@
+import NobucaComponentModel from "../component/NobucaComponentModel.js";
 import NobucaEventEmitter from "../event/NobucaEventEmitter.js";
 
-export default class NobucaTextAreaModel {
+export default class NobucaTextAreaModel extends NobucaComponentModel {
 
     constructor() {
+        super();
         this.enabled = true;
         this.value = null;
         this.focusEventEmitter = new NobucaEventEmitter();

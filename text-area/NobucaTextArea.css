@@ -8,7 +8,6 @@
     padding: 8px;
     min-height: 24px;
     box-sizing: border-box;
-    margin-left: -1px;
     box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 40%);
     resize: none;
 }
