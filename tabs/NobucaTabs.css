@@ -20,10 +20,6 @@
   align-items: center;
   cursor: default;
   user-select: none;
-  padding-top: 4px;
-  padding-bottom: 5px;
-  padding-left: 6px;
-  padding-right: 6px;
   border-width: 1px;
   border-style: solid;
   border-color: var(--component-border-color);
@@ -53,7 +49,8 @@
 }
 
 .NobucaTabHeaderIcon {
-  padding-right: 6px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .NobucaTabHeaderText {
@@ -64,6 +61,10 @@
   font-size: var(--font-size);
   text-shadow: var(--text-shadow);
   user-select: none;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  padding-right: 6px;
 }
 
 .NobucaTabHeaderCloseButton {
@@ -88,4 +89,24 @@
 
 .NobucaTabHeaderCloseButton:hover {
   background-color: rgb(112, 112, 112);
+}
+
+.NobucaTabHeaderInsertPointLeft {
+  display: flex;
+  width: 3px;
+  height: 100%;
+}
+
+.NobucaTabHeaderInsertPointLeft.visible {
+  background-color: rgb(176, 176, 176);
+}
+
+.NobucaTabHeaderInsertPointRight {
+  display: flex;
+  width: 3px;
+  height: 100%;
+}
+
+.NobucaTabHeaderInsertPointRight.visible {
+  background-color: rgb(176, 176, 176);
 }

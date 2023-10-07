@@ -8,12 +8,53 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
         this.deactivate();
     }
 
+    startDragging() {
+        console.log("startDragging");
+        NobucaTabHeaderView.draggingTabHeaderView = this;
+    }
+
+    stopDragging() {
+        console.log("stopDragging");
+        if (NobucaTabHeaderView.visibleInsertPoint != null) {
+            NobucaTabHeaderView.visibleInsertPoint.classList.remove("visible");
+        }
+        NobucaTabHeaderView.visibleInsertPoint = null;
+        NobucaTabHeaderView.draggingTabHeaderView = null;
+    }
+
+    ifDraggingShowInsertPoint(divTabHeader, event) {
+        if (NobucaTabHeaderView.visibleInsertPoint != null) {
+            NobucaTabHeaderView.visibleInsertPoint.classList.remove("visible");
+        }
+        if (NobucaTabHeaderView.draggingTabHeaderView == null) return;
+        var divTabHeaderLeft = this.getAbsoluteLeft(divTabHeader);
+        var mouseX = event.x - divTabHeaderLeft;
+        var tabHeaderWidth = divTabHeader.offsetWidth;
+        if (mouseX < tabHeaderWidth / 2) {
+            NobucaTabHeaderView.visibleInsertPoint = divTabHeader.divTabHeaderInsertPointLeft;
+            NobucaTabHeaderView.visibleInsertPoint.classList.add("visible");
+        } else {
+            NobucaTabHeaderView.visibleInsertPoint = divTabHeader.divTabHeaderInsertPointRight;
+            NobucaTabHeaderView.visibleInsertPoint.classList.add("visible");
+        }
+    }
+
     createNativeElement() {
+
         let divTabHeader = document.createElement("div");
         divTabHeader.className = "NobucaTabHeader";
-        
-        divTabHeader.addEventListener('click', (event) => {
+
+        divTabHeader.addEventListener('mouseup', (event) => {
+            this.stopDragging();
             this.getModel().getClickedEventEmitter().emit();
+        });
+
+        divTabHeader.addEventListener('mousedown', (event) => {
+            this.startDragging();
+        });
+
+        divTabHeader.addEventListener('mousemove', (event) => {
+            this.ifDraggingShowInsertPoint(divTabHeader, event);
         });
 
         divTabHeader.addEventListener('dblclick', (event) => {
@@ -22,11 +63,18 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
 
         divTabHeader.classList.add('inactive');
 
+        let divTabHeaderInsertPointLeft = document.createElement("div");
+        divTabHeaderInsertPointLeft.className = "NobucaTabHeaderInsertPointLeft";
+        divTabHeader.appendChild(divTabHeaderInsertPointLeft);
+
+        divTabHeader.divTabHeaderInsertPointLeft = divTabHeaderInsertPointLeft;
+
         if (this.getModel().getImageSrc() != null) {
             let imgTabHeaderIcon = document.createElement("img");
             divTabHeader.appendChild(imgTabHeaderIcon);
             imgTabHeaderIcon.className = "NobucaTabHeaderIcon";
             imgTabHeaderIcon.src = this.getModel().getImageSrc();
+            imgTabHeaderIcon.draggable = false;
         }
 
         let divTabHeaderText = document.createElement("div");
@@ -39,6 +87,7 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
         let divTabHeaderCloseButton = document.createElement("div");
         divTabHeader.appendChild(divTabHeaderCloseButton);
         divTabHeaderCloseButton.className = "NobucaTabHeaderCloseButton";
+        divTabHeaderCloseButton.draggable = false;
 
         divTabHeader.divTabHeaderCloseButton = divTabHeaderCloseButton;
 
@@ -51,6 +100,12 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
         if (this.getModel().getCloseable()) {
             divTabHeaderCloseButton.style.display = "";
         }
+
+        let divTabHeaderInsertPointRight = document.createElement("div");
+        divTabHeaderInsertPointRight.className = "NobucaTabHeaderInsertPointRight";
+        divTabHeader.appendChild(divTabHeaderInsertPointRight);
+
+        divTabHeader.divTabHeaderInsertPointRight = divTabHeaderInsertPointRight;
 
         this.setNativeElement(divTabHeader);
     }
@@ -75,6 +130,20 @@ export default class NobucaTabHeaderView extends NobucaComponentView {
         this.getNativeElement().classList.add('active');
         this.getNativeElement().classList.remove('inactive');
     }
-
- 
 }
+
+document.addEventListener("mousemove", event => {
+    if ((event.buttons & 1) == 0) {
+        if (NobucaTabHeaderView.draggingTabHeaderView != null) {
+            NobucaTabHeaderView.draggingTabHeaderView.stopDragging();
+        }
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if(event.key == "Escape") {
+        if (NobucaTabHeaderView.draggingTabHeaderView != null) {
+            NobucaTabHeaderView.draggingTabHeaderView.stopDragging();
+        }
+    }
+});
